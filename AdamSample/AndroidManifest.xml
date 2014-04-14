@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="net.daum.adam.publisher.sample"
+          android:versionCode="2"
+          android:versionName="1.5">
+
+    <uses-sdk
+            android:minSdkVersion="8"
+            android:targetSdkVersion="17"/>
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <application
+            android:icon="@drawable/icon"
+            android:label="@string/appName">
+        <activity
+                android:name=".TestAppActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:label="@string/appName">
+           
+
+        </activity>
+        <activity android:name=".AboutActivity"/>
+        <activity android:name=".BannerActivity"/>
+        <activity android:name=".InterstitialActivity"/>
+        <activity
+                android:name=".BannerTypeXML1"
+                android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
+                android:name=".BannerTypeXML2"
+                android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity
+                android:name=".BannerTypeJava"
+                android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <activity
+                android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize">
+        </activity>
+    </application>
+
+</manifest>
