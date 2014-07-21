@@ -1,5 +1,16 @@
-
+# System dependent files
 .DS_Store
 
-**/target/
-**/build/
+# IDE dependent files
+.idea/
+**/*.iml
+**/.project
+**/.classpath
+
+# VCS depencent files
+.svn/
+
+# Gradle dependent files
+local.properties
+**/build
+.gradle/

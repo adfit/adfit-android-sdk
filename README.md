@@ -1,6 +1,6 @@
 # Ad@m Android Publisher SDK Guide
 
-**VER 2.2.3.3**
+**VER 2.3.0**
 
 이 가이드는 Android Application 에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
   

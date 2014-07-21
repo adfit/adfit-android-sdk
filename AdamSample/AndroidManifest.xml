@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="net.daum.adam.publisher.sample"
-          android:versionCode="2"
-          android:versionName="1.5">
+          android:versionCode="3"
+          android:versionName="1.6">
 
     <uses-sdk
-            android:minSdkVersion="8"
+            android:minSdkVersion="7"
             android:targetSdkVersion="17"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
@@ -19,8 +18,11 @@
                 android:name=".TestAppActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
                 android:label="@string/appName">
-           
 
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".BannerActivity"/>
