@@ -1,6 +1,12 @@
 # 변경이력
 
-## v2.3
+## v2.3.1
+
+### Bugfix 
+
+* 일부 앱에서 TransactionTooLargeException 가 발생하는 오류를 수정
+
+## v2.3.0
 
 ### New
 

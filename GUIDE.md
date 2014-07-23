@@ -38,7 +38,7 @@ Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 
 
 이에 따라, SDK 2.3.0 부터는 App에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었다.
 
-만약 앱에 Ad@m 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0을 사용**해야 한다.
+만약 앱에 Ad@m 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0 이후 버전을 사용**해야 한다.
 
 Google Play Service SDK를 사용하기 위해서는 아래 경로에 있는 JAR 파일을 프로젝트 내 libs/ 경로에 복사해야 한다.
 
