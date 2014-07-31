@@ -1,5 +1,11 @@
 # 변경이력
 
+## v2.3.2
+
+### Bugfix 
+
+* 일부 앱에서 ConnectException/IllegalStateException가 발생하는 오류를 수정
+
 ## v2.3.1
 
 ### Bugfix 
