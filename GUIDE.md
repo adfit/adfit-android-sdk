@@ -49,6 +49,8 @@ Google Play Service SDK를 사용하기 위해서는 아래 경로에 있는 JAR
 App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가로 넣어주어야 한다.
 
 ```
+-keep class net.daum.adam.publisher.* { public *; }
+
 -keep class * extends java.util.ListResourceBundle {
     protected Object[][] getContents();
 }
@@ -81,6 +83,7 @@ Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Goog
 
 - 광고를 넣을 Activity 에 반드시 android:configChanges=”orientation” 을 설정해준다.
 - Interstitial(전면형) 광고를 추가하기 위해서는 반드시 아래 명시된 Activity 를 추가해야 한다.
+- Google Play Service SDK를 사용한다면 반드시 application 태그 아래 meta-data 태그를 추가해줘야 한다.
 
 	**AndroidManifest.xml**
 
@@ -124,7 +127,7 @@ Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Goog
 
 ##### 4-a. Xml 방식
 * Layout 의 main.xml 에서 광고가 노출되고자 하는 곳에 AdView 객체를 추가한다.  
-* _광고를 노출 가능한 최소크기(320x50)보다 작게 광고 뷰가 할당되는 경우에는 광고가 노출되지 않을 수 있다._
+* _광고를 노출 가능한 최소크기(320DIP x 50DIP)보다 작게 광고 뷰가 할당되는 경우에는 광고가 노출되지 않을 수 있다._
 * 그 이외의 속성 값은 어플리케이션의 특성에 따라 자유롭게 변경 가능하다.
 
 **res/layout/main.xml**

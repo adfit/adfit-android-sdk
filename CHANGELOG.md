@@ -1,5 +1,11 @@
 # 변경이력
 
+## v2.3.3
+
+### Bugfix 
+
+* Google Advertising ID 추출 로직 개선
+
 ## v2.3.2
 
 ### Bugfix 
