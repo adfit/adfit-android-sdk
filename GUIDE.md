@@ -41,7 +41,7 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 ```
 
 #### 3 단계 : AndroidManifest.xml 설정
-- 아래 세 가지 필수 권한을 AndroidManifist.xml 에 추가한다.
+- 아래 두 가지 필수 권한을 AndroidManifist.xml 에 추가한다.
 
 	```
 	<uses-permission android:name="android.permission.INTERNET" />
