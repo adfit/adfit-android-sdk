@@ -34,42 +34,11 @@ Ad@mPublisherSDK 를 프로젝트 내에 라이브러리로 Import 한다.
 
 ![](http://i1.daumcdn.net/svc/image/U03/adam/53C888DC022B170002)
 
-Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 [반드시 Google Advertising ID를 사용하도록 규정이 변경](https://play.google.com/about/developer-content-policy.html#ADID)되었다.
-
-이에 따라, SDK 2.3.0 부터는 App에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었다.
-
-만약 앱에 Ad@m 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0 이후 버전을 사용**해야 한다.
-
-Google Play Service SDK를 사용하기 위해서는 아래 경로에 있는 JAR 파일을 프로젝트 내 libs/ 경로에 복사해야 한다.
-
-```
- <android-sdk>/extras/google/google_play_services/libproject/google-play-services_lib/libs/google-play-services.jar
-``` 
-
 App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가로 넣어주어야 한다.
 
 ```
 -keep class net.daum.adam.publisher.* { public *; }
-
--keep class * extends java.util.ListResourceBundle {
-    protected Object[][] getContents();
-}
-
--keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-    public static final *** NULL;
-}
-
--keepnames @com.google.android.gms.common.annotation.KeepName class *
--keepclassmembernames class * {
-    @com.google.android.gms.common.annotation.KeepName *;
-}
-
--keepnames class * implements android.os.Parcelable {
-    public static final ** CREATOR;
-}
 ```
-
-Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Google Play Services][^2] 링크를 참고하기 바란다.
 
 #### 3 단계 : AndroidManifest.xml 설정
 - 아래 세 가지 필수 권한을 AndroidManifist.xml 에 추가한다.
@@ -83,9 +52,119 @@ Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Goog
 
 - 광고를 넣을 Activity 에 반드시 android:configChanges=”orientation” 을 설정해준다.
 - Interstitial(전면형) 광고를 추가하기 위해서는 반드시 아래 명시된 Activity 를 추가해야 한다.
-- Google Play Service SDK를 사용한다면 반드시 application 태그 아래 meta-data 태그를 추가해줘야 한다.
-
 	**AndroidManifest.xml**
+
+		<application
+			android:icon="@drawable/icon"
+			android:label="@string/appName" >
+			
+			<activity
+				android:name=".TestAppActivity"
+				android:configChanges="orientation|keyboardHidden"
+				android:label="@string/appName" >
+				<intent-filter>
+					<action android:name="android.intent.action.MAIN" />
+					<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+			</activity>
+	
+			<!-- Interstitial 광고를 사용하기 위해서는 반드시 이 부분을 추가해야한다. -->
+			<activity 
+				android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
+				android:configChanges="orientation|keyboardHidden"
+				android:screenOrientation="portrait" />
+	
+			<!-- 광고를 노출할 Activity 에 android:configChanges=”orientation”을 반드시 추가해야 한다. -->
+			<activity 
+				android:name=".BannerActivity"
+				android:configChanges="orientation|keyboardHidden" />
+		</application>
+
+		<!-- 아래 권한을 반드시 추가해야 한다. -->
+		<uses-permission android:name="android.permission.INTERNET" />
+		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+#### 3-1 단계 : Google Play Service SDK 설정
+Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 [반드시 Google Advertising ID를 사용하도록 규정이 변경](https://play.google.com/about/developer-content-policy.html#ADID)되었다.
+
+이에 따라, SDK 2.3.0 부터는 App에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었다.
+
+만약 앱에 Ad@m 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0 이후 버전을 사용**해야 한다.
+
+##### 3-1a. 라이브러리 Import
+
+**Eclipse에서 설정하기**
+
+Google Play Service SDK를 사용하기 위해서는 아래 경로에 있는 프로젝트를 Eclipse에서 Google Play Service Library Project를 Import를 시켜야 한다. 경로는 아래와 같다.
+
+&lt;android-sdk&gt;/extras/google/google_play_services/libproject/google-play-services_lib/
+
+![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DB72020C410001)
+
+Import를 눌러서 위 경로에 해당하는 프로젝트를 Android > Existing Android Code into Workspace를 눌러서 Import 한다.
+
+![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DCD7032E990002)
+
+라이브러리를 Import 한 다음에는 실제 프로젝트에 Library를 지정해줘야 한다.
+
+![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DCF2035D740003)
+
+프로젝트의 Properties를 눌러서 왼편에 Android 설정으로 들어간다.
+
+![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DC7F024F150001)
+
+이때, 하단에 Library란이 있는데 여기에 앞에서 Import한 프로젝트를 지정한다.
+
+![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DBD90245A40003)
+
+지정 하고 난 뒤, 녹색 체크 아이콘이 보이면 된다.
+
+![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DF92061DE90001)
+
+
+**Android Studio(Gradle)에서 설정하기**
+
+Gradle로 App을 빌드하실 경우, build.gradle을 다음과 같이 수정한다.
+
+```
+apply plugin: 'android'
+...
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:+'
+    compile 'com.google.android.gms:play-services:5.0.77'
+}
+```
+
+그 다음 Sync Project with Gradle Files를 눌러서 프로젝트를 업데이트 한다.
+
+**IDE 없이 수동으로 설정하기**
+
+App 내에 project.properties 파일을 수정하는 방법을 사용하면 된다.
+
+만약, 앱에서 사용하는 라이브러리가 없다면 아래와 같이 사용하면 된다. 
+
+이때 &lt;android-sdk&gt;는 사용자마다 다를 수 있으므로 꼭 절대 경로를 적어주어야 한다.
+
+```
+android.library.reference.1=<android-sdk>/extras/google/google_play_services/libproject/google-play-services_lib/
+```
+
+만약, 기존에 사용하고 있는 라이브러리가 있다면 맨 하단에 추가를 하되, android.library.reference 다음에 있는 숫자를 바꿔주면 된다.
+
+```
+android.library.reference.1= ...
+android.library.reference.2=<android-sdk>/extras/google/google_play_services/libproject/google-play-services_lib/
+```
+
+관련해 보다 자세한 사항은 [Referencing Library Project](http://developer.android.com/tools/projects/projects-cmdline.html#ReferencingLibraryProject
+) 페이지를 참고하기 바란다.
+
+##### 3-1c. AndroidManifest.xml에 meta-data 태그 추가
+
+Google Play Service SDK를 사용한다면 반드시 AndroidManifest.xml의 application 태그 아래 meta-data 태그를 추가해줘야 한다.
+
+**AndroidManifest.xml**
 
 		<application
 			android:icon="@drawable/icon"
@@ -122,6 +201,32 @@ Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Goog
 		<!-- 아래 권한을 반드시 추가해야 한다. -->
 		<uses-permission android:name="android.permission.INTERNET" />
 		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+##### 3-1d. Proguard 설정(선택사항)
+App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가로 넣어주어야 한다.
+
+```
+-keep class * extends java.util.ListResourceBundle {
+    protected Object[][] getContents();
+}
+
+-keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
+    public static final *** NULL;
+}
+
+-keepnames @com.google.android.gms.common.annotation.KeepName class *
+-keepclassmembernames class * {
+    @com.google.android.gms.common.annotation.KeepName *;
+}
+
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+```
+
+위 내용은 AdamSample 프로젝트에 적용되어 있으니 참고하기 바란다.
+
+또한, Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Google Play Services][^2] 링크를 참고하기 바란다.
 
 #### 4 단계 : 광고 요청을 위한 UI 구성 및 설정
 
