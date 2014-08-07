@@ -6,6 +6,9 @@
 **/*.iml
 **/.project
 **/.classpath
+.settings/
+bin/
+gen/
 
 # VCS depencent files
 .svn/
