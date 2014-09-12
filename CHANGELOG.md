@@ -1,20 +1,29 @@
 # 변경이력
 
+## v2.3.4
+
+### Bugfix
+* 전면형 광고 상품 노출 기능 개선
+
+### Change
+* Google Play Service SDK를 반드시 넣도록 변경
+* OS 지원을 기존 Android OS 2.1(Level 7)에서 2.3(Level 9)로 변경
+
 ## v2.3.3
 
-### Bugfix 
+### Bugfix
 
 * Google Advertising ID 추출 로직 개선
 
 ## v2.3.2
 
-### Bugfix 
+### Bugfix
 
 * 일부 앱에서 ConnectException/IllegalStateException가 발생하는 오류를 수정
 
 ## v2.3.1
 
-### Bugfix 
+### Bugfix
 
 * 일부 앱에서 TransactionTooLargeException 가 발생하는 오류를 수정
 
@@ -105,7 +114,7 @@
 	* `void setThreadPriority()`
 	* `int getThreadPriority(int priority)`
 
-	
+
 ## v2.0
 
 * ACCESS_NETWORK_STATE 권한을 필수 권한 추가
