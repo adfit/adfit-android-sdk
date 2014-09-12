@@ -1,7 +1,7 @@
 # Ad@m Android Publisher SDK Guide
 
 이 가이드는 Android Application 에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
-  
+
 사이트/앱 운영정책에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
 
 * 문의 고객센터 [http://cs.daum.net/mail/form/256.html](http://cs.daum.net/mail/form/256.html)
@@ -30,7 +30,7 @@ Copyright © Daum Communications. All Rights Reserved.
 
 #### 2 단계 : 라이브러리 import
 Ad@mPublisherSDK 를 프로젝트 내에 라이브러리로 Import 한다.
-(Ad@m Publisher SDK 2.0 부터는 **Android 2.1(API Level 7)** 이상의 환경에서 동작한다.)
+(Ad@m Publisher SDK 2.3.4 부터는 **Android 2.3(API Level 9)** 이상의 환경에서 동작한다.)
 
 ![](http://i1.daumcdn.net/svc/image/U03/adam/53C888DC022B170002)
 
@@ -57,7 +57,7 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 		<application
 			android:icon="@drawable/icon"
 			android:label="@string/appName" >
-			
+
 			<activity
 				android:name=".TestAppActivity"
 				android:configChanges="orientation|keyboardHidden"
@@ -67,15 +67,15 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 					<category android:name="android.intent.category.LAUNCHER" />
 				</intent-filter>
 			</activity>
-	
+
 			<!-- Interstitial 광고를 사용하기 위해서는 반드시 이 부분을 추가해야한다. -->
-			<activity 
+			<activity
 				android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
 				android:configChanges="orientation|keyboardHidden"
 				android:screenOrientation="portrait" />
-	
+
 			<!-- 광고를 노출할 Activity 에 android:configChanges=”orientation”을 반드시 추가해야 한다. -->
-			<activity 
+			<activity
 				android:name=".BannerActivity"
 				android:configChanges="orientation|keyboardHidden" />
 		</application>
@@ -90,6 +90,10 @@ Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 
 이에 따라, SDK 2.3.0 부터는 App에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었다.
 
 만약 앱에 Ad@m 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0 이후 버전을 사용**해야 한다.
+
+참고로, Google Play Service SDK를 사용하지 않은 앱에 대해서는 _"광고가 Google Advertising ID를 사용하지 않았다"_ 는 이유로 Google Play Store에서 임의로 Reject 당할 수도 있다.
+
+이에 따라, **<span style="color:red">SDK 2.3.4부터는 Google Play Service SDK가 없이는 라이브러리를 사용할 수 없도록 변경</span>되었다.**
 
 ##### 3-1a. 라이브러리 Import
 
@@ -142,7 +146,7 @@ dependencies {
 
 App 내에 project.properties 파일을 수정하는 방법을 사용하면 된다.
 
-만약, 앱에서 사용하는 라이브러리가 없다면 아래와 같이 사용하면 된다. 
+만약, 앱에서 사용하는 라이브러리가 없다면 아래와 같이 사용하면 된다.
 
 이때 &lt;android-sdk&gt;는 사용자마다 다를 수 있으므로 꼭 절대 경로를 적어주어야 한다.
 
@@ -175,7 +179,7 @@ Google Play Service SDK를 사용한다면 반드시 AndroidManifest.xml의 appl
 			<!-- (https://developer.android.com/google/play-services/setup.html) -->
 			<meta-data android:name="com.google.android.gms.version"
 			        android:value="@integer/google_play_services_version" />
-			
+
 			<activity
 				android:name=".TestAppActivity"
 				android:configChanges="orientation|keyboardHidden"
@@ -185,15 +189,15 @@ Google Play Service SDK를 사용한다면 반드시 AndroidManifest.xml의 appl
 					<category android:name="android.intent.category.LAUNCHER" />
 				</intent-filter>
 			</activity>
-	
+
 			<!-- Interstitial 광고를 사용하기 위해서는 반드시 이 부분을 추가해야한다. -->
-			<activity 
+			<activity
 				android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
 				android:configChanges="orientation|keyboardHidden"
 				android:screenOrientation="portrait" />
-	
+
 			<!-- 광고를 노출할 Activity 에 android:configChanges=”orientation”을 반드시 추가해야 한다. -->
-			<activity 
+			<activity
 				android:name=".BannerActivity"
 				android:configChanges="orientation|keyboardHidden" />
 		</application>
@@ -237,8 +241,8 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 
 **res/layout/main.xml**
 
-<pre><code>&lt;RelativeLayout 
-	xmlns:app="http://schemas.android.com/apk/res/[APP_PACKAGENAME]" 
+<pre><code>&lt;RelativeLayout
+	xmlns:app="http://schemas.android.com/apk/res/[APP_PACKAGENAME]"
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
@@ -246,8 +250,8 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 	&lt;net.daum.adam.publisher.AdView
 		android:id="@+id/adview"
 		android:visibility="invisible"
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		clientId=”TestClientId”
 		requestInterval=”60”/>
@@ -264,19 +268,19 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 	public class BannerTypeXML1 extends Activity {
 		private static final String LOGTAG = "BannerTypeXML1";
 		private AdView adView = null;
-	
+
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.adam_sample_1);
 			initAdam();
 		}
-	
-		
+
+
 		@Override
 		public void onDestroy() {
 			super.onDestroy();  
-	
+
 			if (adView != null) {
 				adView.destroy();
 				adView = null;
@@ -286,9 +290,9 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 		private void initAdam() {
 			// Ad@m sdk 초기화 시작
 			adView = (AdView) findViewById(R.id.adview);
-  
+
 			// 광고 리스너 설정
-	  
+
 			// 1. 광고 클릭시 실행할 리스너
 			adView.setOnAdClickedListener(new OnAdClickedListener() {  
 				@Override
@@ -296,7 +300,7 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 					Log.i(LOGTAG, "광고를 클릭했습니다.");
 				}
 			});
-	  
+
 			// 2. 광고 내려받기 실패했을 경우에 실행할 리스너
 			adView.setOnAdFailedListener(new OnAdFailedListener() {
 				@Override
@@ -304,7 +308,7 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 					Log.w(LOGTAG, message);
 				}
 			});
-	  
+
 			// 3. 광고를 정상적으로 내려받았을 경우에 실행할 리스너  
 			adView.setOnAdLoadedListener(new OnAdLoadedListener() {
 				@Override
@@ -313,7 +317,7 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 				}  
 			});  
 
-			// 4. 광고를 불러올때 실행할 리스너   
+			// 4. 광고를 불러올때 실행할 리스너
 			adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
 				@Override
 				public void OnAdWillLoad(String url) {
@@ -321,7 +325,7 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 				}
 			});
 
-			
+
 			// 5. 전면형 광고를 닫았을때 실행할 리스너
 			adView.setOnAdClosedListener(new OnAdClosedListener() {
 				@Override
@@ -330,18 +334,18 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 				}
 			});
 
-			
+
 			// 할당 받은 clientId 설정
 			// adView.setClientId(“TestClientId”);
-			
+
 
 			// 광고 갱신 주기를 12초로 설정
 			// adView.setRequestInterval(12);
-			
+
 
 			// 광고 영역에 캐시 사용 여부 : 기본 값은 true
 			adView.setAdCache(false);
-			
+
 			// Animation 효과 : 기본 값은 AnimationType.NONE
 			adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
 			adView.setVisibility(View.VISIBLE);
@@ -440,7 +444,7 @@ public class BannerTypeJava extends Activity {
 
         // 위에서 만든 레이아웃을 광고 뷰에 적용함.
         adView.setLayoutParams(params);
- 
+
 		setContentView(relativeLayout);
 	}
 
@@ -454,7 +458,7 @@ public class BannerTypeJava extends Activity {
 		}
 	}
 }</code></pre>
-	
+
 ##### 선택 : Interstitial (전면형) 광고 요청을 위한 설정
 
 **Interstitial(전면형) 광고는 당분간 Ad@m 의 네트워크 파트너를 대상으로 노출된다. Ad@m 의 네트워크 파트너가 아닐 경우에도 Expandable(확장형), Animated Banner (애니메이션형)형의 Rich Media 광고가 노출된다.**
@@ -538,7 +542,7 @@ Android Tools 버전 17 부터는 libs 폴더에 있는 라이브러리는 앱�
 
 ### Q6. 2.3.0 sdk로 변경만 하면 구글 광고 ID 를 sdk 내에서 생성해주는건지 답변부탁드립니다.
 
-SDK 내에서 Google 광고 ID를 생성해주지는 않습니다. 
+SDK 내에서 Google 광고 ID를 생성해주지는 않습니다.
 
 앱에서 Google 광고 ID를 추출할 수 있으면 해당 ID를 사용하는 것 뿐입니다.
 
