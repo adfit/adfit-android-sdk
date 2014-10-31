@@ -1,5 +1,7 @@
 # Ad@m Android Publisher SDK Guide
 
+**Ver 2.3.4**
+
 이 가이드는 Android Application 에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
 
 사이트/앱 운영정책에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
@@ -7,9 +9,9 @@
 * 문의 고객센터 [http://cs.daum.net/mail/form/256.html](http://cs.daum.net/mail/form/256.html)
 * 사이트/앱 운영 정책 [http://mobile.biz.daum.net/guide/guide_siteapp_policy.jsp](http://mobile.biz.daum.net/guide/guide_siteapp_policy.jsp)
 
-이 문서는 Daum 신디케이션 제휴 당사자에 한해 제공되는 자료로 가이드 라인을 포함한 모든 자료의 지적재산권은 주식회사 다음커뮤니케이션이 보유합니다.
+이 문서는 Daum Kakao 신디케이션 제휴 당사자에 한해 제공되는 자료로 가이드 라인을 포함한 모든 자료의 지적재산권은 주식회사 다음카카오가 보유합니다.
 
-Copyright © Daum Communications. All Rights Reserved.
+Copyright (c)2014 Daum Kakao Corp. All rights reserved.
 
 ---
 
@@ -135,8 +137,8 @@ apply plugin: 'android'
 ...
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:+'
-    compile 'com.google.android.gms:play-services:5.0.77'
+		compile 'com.android.support:appcompat-v7:+'
+		compile 'com.google.android.gms:play-services:5.0.77'
 }
 ```
 
@@ -178,7 +180,7 @@ Google Play Service SDK를 사용한다면 반드시 AndroidManifest.xml의 appl
 			<!-- Google Play Service SDK를 사용하는 App에 한해 아래 meta-data 테그를 추가한다. -->
 			<!-- (https://developer.android.com/google/play-services/setup.html) -->
 			<meta-data android:name="com.google.android.gms.version"
-			        android:value="@integer/google_play_services_version" />
+							android:value="@integer/google_play_services_version" />
 
 			<activity
 				android:name=".TestAppActivity"
@@ -211,20 +213,20 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 
 ```
 -keep class * extends java.util.ListResourceBundle {
-    protected Object[][] getContents();
+		protected Object[][] getContents();
 }
 
 -keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-    public static final *** NULL;
+		public static final *** NULL;
 }
 
 -keepnames @com.google.android.gms.common.annotation.KeepName class *
 -keepclassmembernames class * {
-    @com.google.android.gms.common.annotation.KeepName *;
+		@com.google.android.gms.common.annotation.KeepName *;
 }
 
 -keepnames class * implements android.os.Parcelable {
-    public static final ** CREATOR;
+		public static final ** CREATOR;
 }
 ```
 
@@ -438,12 +440,12 @@ public class BannerTypeJava extends Activity {
 
 		adView.setVisibility(View.VISIBLE);
 
-        // XML상에 android:layout_alignParentBottom="true" 와 같은 역할을 함
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+				// XML상에 android:layout_alignParentBottom="true" 와 같은 역할을 함
+				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+				params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
-        // 위에서 만든 레이아웃을 광고 뷰에 적용함.
-        adView.setLayoutParams(params);
+				// 위에서 만든 레이아웃을 광고 뷰에 적용함.
+				adView.setLayoutParams(params);
 
 		setContentView(relativeLayout);
 	}
@@ -487,7 +489,7 @@ Interstitial(전면형) 광고를 넣고자 하는 Activity 가 생성될 때 Ad
 			@Override
 			public void OnAdFailed(AdError error, String errorMessage) {
 				Toast.makeText(InterstitialActivity.this,
- errorMessage, Toast.LENGTH_LONG).show();
+errorMessage, Toast.LENGTH_LONG).show();
 			}
 		});
 		// 5. (선택)전면형 광고를 닫을 시에 실행할 리스너
