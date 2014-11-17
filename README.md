@@ -1,4 +1,4 @@
-# Ad@m Android Publisher SDK Guide
+# AdFit(Ad@m) Android Publisher SDK Guide
 
 **Ver 2.3.4**
 
@@ -15,11 +15,11 @@ Copyright (c)2014 Daum Kakao Corp. All rights reserved.
 
 ---
 
-## Ad@m 광고 삽입 방법
+## AdFit(Ad@m) 광고 삽입 방법
 
-### Ad@m SDK 구성
+### AdFit(Ad@m) SDK 구성
 
-* Ad@mPublisherSDK.jar : Ad@m 광고를 삽입해주는 라이브러리
+* AdamPublisherSDK.jar : AdFit(Ad@m) 광고를 삽입해주는 라이브러리
 * Sample/AdamSample/src/net/daum/adam/publisher/sample/
 	- BannerTypeXML1.java : 광고를 xml 로 붙인 샘플
 	- BannerTypeXML2.java : 광고 Visible 처리 및 pause, resume 처리 예시 샘플
@@ -31,8 +31,9 @@ Copyright (c)2014 Daum Kakao Corp. All rights reserved.
 [http://mobile.biz.daum.net/guide/guide_siteapp1.jsp](http://mobile.biz.daum.net/guide/guide_siteapp1.jsp)
 
 #### 2 단계 : 라이브러리 import
-Ad@mPublisherSDK 를 프로젝트 내에 라이브러리로 Import 한다.
-(Ad@m Publisher SDK 2.3.4 부터는 **Android 2.3(API Level 9)** 이상의 환경에서 동작한다.)
+AdamPublisherSDK 를 프로젝트 내에 라이브러리로 Import 한다.
+
+AdFit(Ad@m) Publisher SDK 2.3.4 부터는 **Android 2.3(API Level 9)** 이상의 환경에서 동작한다.
 
 ![](http://i1.daumcdn.net/svc/image/U03/adam/53C888DC022B170002)
 
@@ -91,7 +92,7 @@ Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 
 
 이에 따라, SDK 2.3.0 부터는 App에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었다.
 
-만약 앱에 Ad@m 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0 이후 버전을 사용**해야 한다.
+만약 앱에 AdFit(Ad@m) 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0 이후 버전을 사용**해야 한다.
 
 참고로, Google Play Service SDK를 사용하지 않은 앱에 대해서는 _"광고가 Google Advertising ID를 사용하지 않았다"_ 는 이유로 Google Play Store에서 임의로 Reject 당할 수도 있다.
 
@@ -290,7 +291,7 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 		}  
 
 		private void initAdam() {
-			// Ad@m sdk 초기화 시작
+			// AdFit(Ad@m) sdk 초기화 시작
 			adView = (AdView) findViewById(R.id.adview);
 
 			// 광고 리스너 설정
@@ -383,7 +384,7 @@ public class BannerTypeJava extends Activity {
 
 		relativeLayout = new RelativeLayout(this);
 
-		// Ad@m 광고 뷰 생성 및 설정
+		// AdFit(Ad@m) 광고 뷰 생성 및 설정
 		adView = new AdView(this);
 
 		// 광고 클릭시 실행할 리스너
@@ -463,7 +464,7 @@ public class BannerTypeJava extends Activity {
 
 ##### 선택 : Interstitial (전면형) 광고 요청을 위한 설정
 
-**Interstitial(전면형) 광고는 당분간 Ad@m 의 네트워크 파트너를 대상으로 노출된다. Ad@m 의 네트워크 파트너가 아닐 경우에도 Expandable(확장형), Animated Banner (애니메이션형)형의 Rich Media 광고가 노출된다.**
+**Interstitial(전면형) 광고는 당분간 AdFit(Ad@m) 의 네트워크 파트너를 대상으로 노출된다. AdFit(Ad@m) 의 네트워크 파트너가 아닐 경우에도 Expandable(확장형), Animated Banner (애니메이션형)형의 Rich Media 광고가 노출된다.**
 
 Interstitial(전면형) 광고를 넣고자 하는 Activity 가 생성될 때 AdInterstitial 객체를 생성하고 광고 요청을 위해 필요한 리스너와 할당 받은 ClientId 를 설정한다. 이때, 반드시 3 단계에 명시한 XML 코드를 AndroidManifest.xml 에 반드시 추가해야 한다.
 
@@ -516,9 +517,7 @@ errorMessage, Toast.LENGTH_LONG).show();
 
 ### Q1. 광고 수신이 되지 않을때는 어떻게 하나요?
 
-Ad@m 은 유효 광고의 100% 노출을 보장하지 않습니다. 유효 광고 노출율은 송출 가능한 광고의 총 수량과 광고 호출수에 따라 달라지게 됩니다. 광고의 총 수량은 한정되어 있으나, 이에 비해 광고의 호출수가 많기 때문에 유효 광고의 수신에 실패하는 경우가 자주 발생할 수 있습니다. 또한 시간대나 앱의 종류, 날짜에 따라서도 노출 가능한 광고의 수가 달라질 수 있습니다.
-
-배너 광고의 경우 [http://mobile.biz.daum.net](http://mobile.biz.daum.net) 에서 ‘사이트/앱 등록’ 메뉴에 접속하면 ‘하우스애드’를 등록할 수 있습니다. 하우스애드란 자신의 애플리케이션에 자체 광고를 노출할 수 있는 기능으로, 광고 서버에서 유효 광고를 보내줄 수 없는 경우 자신이 등록한 하우스애드가 수신됩니다.
+AdFit(Ad@m) 은 유효 광고의 100% 노출을 보장하지 않습니다. 유효 광고 노출율은 송출 가능한 광고의 총 수량과 광고 호출수에 따라 달라지게 됩니다. 광고의 총 수량은 한정되어 있으나, 이에 비해 광고의 호출수가 많기 때문에 유효 광고의 수신에 실패하는 경우가 자주 발생할 수 있습니다. 또한 시간대나 앱의 종류, 날짜에 따라서도 노출 가능한 광고의 수가 달라질 수 있습니다.
 
 Interstitial 광고의 경우에는 하우스 애드가 지원되지 않으므로, 일정 시간 이후 다시 호출해야 합니다.
 
