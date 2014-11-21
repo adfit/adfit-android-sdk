@@ -26,9 +26,10 @@ Copyright (c)2014 Daum Kakao Corp. All rights reserved.
 	- BannerTypeJava.java : 광고를 java 코드로 붙인 샘플
 	- InterstitialActivity.java : Interstitial(전면형) 광고를 java 코드로 붙인 샘플
 
-#### 1 단계 : client ID 발급받기
-실제 광고를 다운로드 받고, 수익창출을 위해서 mobile.biz.daum.net 에서 사이트/앱 등록 후 client ID 를 발급받아야 한다. 아래 URL 을 통해 애플리케이션을 등록할 수 있다.
-[http://mobile.biz.daum.net/guide/guide_siteapp1.jsp](http://mobile.biz.daum.net/guide/guide_siteapp1.jsp)
+#### 1 단계 : client ID (광고단위 ID) 발급받기
+실제 광고를 다운로드 받고, 수익창출을 위해서 http://adfit.biz.daum.net/ 에서 사이트/앱 등록 후 client ID (광고단위 ID) 를 발급받아야 한다.
+아래 URL 을 통해 애플리케이션을 등록할 수 있다.
+[http://adfit.biz.daum.net/](http://adfit.biz.daum.net/)
 
 #### 2 단계 : 라이브러리 import
 AdamPublisherSDK 를 프로젝트 내에 라이브러리로 Import 한다.
