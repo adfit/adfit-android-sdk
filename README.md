@@ -1,4 +1,4 @@
-# AdFit(Ad@m) Android Publisher SDK Guide
+# AdFit(Ad@m) Android SDK Guide
 
 **Ver 2.3.4**
 
@@ -6,7 +6,7 @@
 
 사이트/앱 운영정책에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
 
-* 문의 고객센터 [http://cs.daum.net/mail/form/256.html](http://cs.daum.net/mail/form/256.html)
+* 문의 고객센터 [https://cs.daum.net/question/256.html](https://cs.daum.net/question/256.html)
 * 사이트/앱 운영 정책 [http://adfit.biz.daum.net/html/use.html](http://adfit.biz.daum.net/html/use.html)
 
 이 문서는 Daum Kakao 신디케이션 제휴 당사자에 한해 제공되는 자료로 가이드 라인을 포함한 모든 자료의 지적재산권은 주식회사 다음카카오가 보유합니다.
@@ -26,8 +26,8 @@ Copyright (c)2014 Daum Kakao Corp. All rights reserved.
 	- BannerTypeJava.java : 광고를 java 코드로 붙인 샘플
 	- InterstitialActivity.java : Interstitial(전면형) 광고를 java 코드로 붙인 샘플
 
-#### 1 단계 : client ID (광고단위 ID) 발급받기
-실제 광고를 다운로드 받고, 수익창출을 위해서 http://adfit.biz.daum.net/ 에서 사이트/앱 등록 후 client ID (광고단위 ID) 를 발급받아야 한다.
+#### 1 단계 : 광고단위ID(Client ID) 발급받기
+실제 광고를 다운로드 받고, 수익창출을 위해서 http://adfit.biz.daum.net/ 에서 매체 등록 후 광고단위ID(Client ID)를 발급받아야 한다.
 아래 URL 을 통해 애플리케이션을 등록할 수 있다.
 [http://adfit.biz.daum.net/](http://adfit.biz.daum.net/)
 
@@ -250,14 +250,14 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 	android:layout_width="fill_parent"
 	android:layout_height="fill_parent">
 
-	&lt;!-- 광고를 사용하기 위해서는 반드시 Client ID 를 발급받아 사용해야 한다. -->
+	&lt;!-- 광고를 사용하기 위해서는 반드시 광고단위ID를 발급받아 사용해야 한다. -->
 	&lt;net.daum.adam.publisher.AdView
 		android:id="@+id/adview"
 		android:visibility="invisible"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
-		clientId=”TestClientId”
+		clientId=”광고단위ID”
 		requestInterval=”60”/>
 &lt;/RelativeLayout></code></pre>
 
@@ -339,8 +339,8 @@ SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필�
 			});
 
 
-			// 할당 받은 clientId 설정
-			// adView.setClientId(“TestClientId”);
+			// 할당 받은 광고단위ID 설정
+			// adView.setClientId(“광고단위ID”);
 
 
 			// 광고 갱신 주기를 12초로 설정
@@ -371,7 +371,7 @@ AdView 클래스에는 위와 같이 5 개의 리스너를 제공하고 있다.
 
 
 ##### 4-b. Java 방식
-광고를 넣고자 하는 view 가 들어 있는 Activity 가 생성될 때 AdView 객체를 생성하고 광고 요청을 위해 광고 View 에 필요한 리스너와 할당 받은 ClientId 를 설정 한다. XML 레이아웃을 이용해 광고 생성할 때와 거의 동일하다.
+광고를 넣고자 하는 view 가 들어 있는 Activity 가 생성될 때 AdView 객체를 생성하고 광고 요청을 위해 광고 View 에 필요한 리스너와 할당 받은 광고단위ID를 설정 한다. XML 레이아웃을 이용해 광고 생성할 때와 거의 동일하다.
 
 <pre><code>
 public class BannerTypeJava extends Activity {
@@ -431,8 +431,8 @@ public class BannerTypeJava extends Activity {
 			}
 		});
 
-		// 할당 받은 clientId 설정
-		adView.setClientId("TestClientId");
+		// 할당 받은 광고단위ID 설정
+		adView.setClientId("광고단위ID");
 
 		// 광고 갱신 시간 : 기본 60초
 		adView.setRequestInterval(12);
@@ -467,7 +467,7 @@ public class BannerTypeJava extends Activity {
 
 **Interstitial(전면형) 광고는 당분간 AdFit(Ad@m) 의 네트워크 파트너를 대상으로 노출된다. AdFit(Ad@m) 의 네트워크 파트너가 아닐 경우에도 Expandable(확장형), Animated Banner (애니메이션형)형의 Rich Media 광고가 노출된다.**
 
-Interstitial(전면형) 광고를 넣고자 하는 Activity 가 생성될 때 AdInterstitial 객체를 생성하고 광고 요청을 위해 필요한 리스너와 할당 받은 ClientId 를 설정한다. 이때, 반드시 3 단계에 명시한 XML 코드를 AndroidManifest.xml 에 반드시 추가해야 한다.
+Interstitial(전면형) 광고를 넣고자 하는 Activity 가 생성될 때 AdInterstitial 객체를 생성하고 광고 요청을 위해 필요한 리스너와 할당 받은 광고단위ID 를 설정한다. 이때, 반드시 3 단계에 명시한 XML 코드를 AndroidManifest.xml 에 반드시 추가해야 한다.
 
 <pre><code>public class InterstitialActivity extends Activity {
 	/** 전면형 광고 선언 */
@@ -477,8 +477,8 @@ Interstitial(전면형) 광고를 넣고자 하는 Activity 가 생성될 때 Ad
 		super.onCreate(savedInstanceState);
 		// 1. 전면형 광고 객체 생성
 		mAdInterstitial = new AdInterstitial(this);
-		// 2. 전면형 광고 클라이언트 ID를 설정한다.
-		mAdInterstitial.setClientId(“InterstitialTestClientId”);
+		// 2. 전면형 광고 광고단위ID를 설정한다.
+		mAdInterstitial.setClientId(“광고단위ID”);
 		// 3. (선택)전면형 광고 다운로드시에 실행할 리스너
 		mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {
 			@Override
