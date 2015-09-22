@@ -9,9 +9,9 @@
 * 문의 고객센터 [https://cs.daum.net/question/256.html](https://cs.daum.net/question/256.html)
 * 사이트/앱 운영 정책 [http://adfit.biz.daum.net/html/use.html](http://adfit.biz.daum.net/html/use.html)
 
-이 문서는 Daum Kakao 신디케이션 제휴 당사자에 한해 제공되는 자료로 가이드 라인을 포함한 모든 자료의 지적재산권은 주식회사 다음카카오가 보유합니다.
+이 문서는 Kakao 신디케이션 제휴 당사자에 한해 제공되는 자료로 가이드 라인을 포함한 모든 자료의 지적재산권은 주식회사 카카오가 보유합니다.
 
-Copyright (c)2014 Daum Kakao Corp. All rights reserved.
+Copyright © Kakao Corp. All rights reserved.
 
 ---
 
