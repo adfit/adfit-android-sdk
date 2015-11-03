@@ -1,5 +1,10 @@
 # 변경이력
 
+## v2.3.5
+
+### Change
+* Apache HttpClient 코드를 HttpURLConnection Wrapper 유틸로 교체
+
 ## v2.3.4
 
 ### Bugfix
