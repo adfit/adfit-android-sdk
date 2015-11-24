@@ -38,7 +38,7 @@ public class InterstitialActivity extends Activity {
         mAdInterstitial = new AdInterstitial(this);
 
         // Interstitial(전면형) 광고 클라이언트 아이디 설정
-        mAdInterstitial.setClientId("InterstitialTestClientId");
+        mAdInterstitial.setClientId("DAN-tocwl5lu39dc");
 
         // Interstitial(전면형) 광고 로딩시 사용할 Callback 설정
         mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {

@@ -105,7 +105,7 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
         });
 
         // 할당 받은 clientId 설정
-        adView.setClientId("TestClientId");
+        adView.setClientId("DAN-s164c5nwco54");
 
         // 광고 갱신 시간 : 기본 60초
         adView.setRequestInterval(12);

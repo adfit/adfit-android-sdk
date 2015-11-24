@@ -79,7 +79,7 @@ public class BannerTypeXML1 extends Activity {
         });
 
         // 할당 받은 clientId 설정
-        adView.setClientId("TestClientId");
+        adView.setClientId("DAN-s164c5nwco54");
 
         adView.setRequestInterval(12);
 
