@@ -1,5 +1,8 @@
 # 변경이력
 
+## v2.3.7
+* Thread 이슈 수정
+
 ## v2.3.6
 * 전면형 광고가 가운데로 재배치되지 않는 이슈 수정
 
@@ -55,16 +58,25 @@
 * 테스트 앱의 빌드 SDK 범위를 8에서 7로 변경.
 
 ## v2.2.3.3
-* UDID 키 생성 로직 개선* 일부 기기에서 광고를 제대로 받아오지 못하는 버그 수정
+* UDID 키 생성 로직 개선
+* 일부 기기에서 광고를 제대로 받아오지 못하는 버그 수정
 
 ## v2.2.3
-* 광고 효율 관련 로직 개선* 필수 권한 대상에서 android.permission.WRITE_EXTERNAL_STORAGE 제외
+* 광고 효율 관련 로직 개선
+* 필수 권한 대상에서 android.permission.WRITE_EXTERNAL_STORAGE 제외
 
 ## v2.2.1
-* 앱에서 광고 업데이트 시에 간헐적으로 발생하는 NullPointerException 문제 수정* 광고 레이아웃 높이와 관련된 기능 수정 및 관련 API 추가 * setAdUnitSize* Android SDK 2.1(Level 7) 지원
+* 앱에서 광고 업데이트 시에 간헐적으로 발생하는 NullPointerException 문제 수정
+* 광고 레이아웃 높이와 관련된 기능 수정 및 관련 API 추가
+ * setAdUnitSize
+* Android SDK 2.1(Level 7) 지원
 
 ## v2.2
-* 리치미디어 노출 관련 추가 기능 탑재* 필수 권한으로 android.permission.WRITE_EXTERNAL_STORAGE 추가* Android SDK 지원 레벨을 2.1(Level 7)에서 2.2(Level 8)로 변경* AdInterstitial 사용시 가이드 수정
+* 리치미디어 노출 관련 추가 기능 탑재
+* 필수 권한으로 android.permission.WRITE_EXTERNAL_STORAGE 추가
+* Android SDK 지원 레벨을 2.1(Level 7)에서 2.2(Level 8)로 변경
+* AdInterstitial 사용시 가이드 수정
+
 ## v2.1.2
 
 * 간헐적으로 발생하는 NullPointerException 오류 수정
