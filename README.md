@@ -140,7 +140,7 @@ apply plugin: 'android'
 
 dependencies {
 		compile 'com.android.support:appcompat-v7:+'
-		compile 'com.google.android.gms:play-services:5.0.77'
+		compile 'com.google.android.gms:play-services-ads:+'
 }
 ```
 
