@@ -1,8 +1,8 @@
 # AdFit(Ad@m) Android SDK Guide
 
-**Ver 2.3.7**
+**Ver 2.4.0**
 
-이 가이드는 Android Application 에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
+이 가이드는 Android Application에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
 
 사이트/앱 운영정책에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
 
@@ -19,40 +19,54 @@ Copyright © Kakao Corp. All rights reserved.
 
 ### AdFit(Ad@m) SDK 구성
 
-* AdamPublisherSDK.jar : AdFit(Ad@m) 광고를 삽입해주는 라이브러리
-* Sample/AdamSample/src/net/daum/adam/publisher/sample/
+* AdfitSDK-X.X.X.aar : AdFit(Ad@m) 광고를 삽입해주는 라이브러리
+* AdfitSample/src/com/kakao/adfit/publisher/sample/
 	- BannerTypeXML1.java : 광고를 xml 로 붙인 샘플
 	- BannerTypeXML2.java : 광고 Visible 처리 및 pause, resume 처리 예시 샘플
 	- BannerTypeJava.java : 광고를 java 코드로 붙인 샘플
 	- InterstitialActivity.java : Interstitial(전면형) 광고를 java 코드로 붙인 샘플
 
-#### 1 단계 : 광고단위ID(Client ID) 발급받기
+### 1 단계 : 광고단위ID(Client ID) 발급받기
 실제 광고를 다운로드 받고, 수익창출을 위해서 http://adfit.biz.daum.net/ 에서 매체 등록 후 광고단위ID(Client ID)를 발급받아야 한다.
 아래 URL 을 통해 애플리케이션을 등록할 수 있다.
 [http://adfit.biz.daum.net/](http://adfit.biz.daum.net/)
 
-#### 2 단계 : 라이브러리 import
-AdamPublisherSDK 를 프로젝트 내에 라이브러리로 Import 한다.
+### 2 단계 : Adfit 라이브러리 추가 (Android Studio 기준)
+AdFit 라이브러리를 프로젝트 build.gradle에 추가한다.
 
-AdFit(Ad@m) Publisher SDK 2.3.4 부터는 **Android 2.3(API Level 9)** 이상의 환경에서 동작한다.
+![](http://t1.daumcdn.net/adfit/image/guide/include_sdk.png)
 
-![](http://i1.daumcdn.net/svc/image/U03/adam/53C888DC022B170002)
+**build.gradle**
+
+	allprojects {
+    	repositories {
+        	jcenter()
+	        flatDir {
+    	        dirs 'libs'
+        	}
+        
+	    }
+	}
+	
+	dependencies {
+    	compile(name:'AdfitSDK-2.4.0', ext:'aar')
+	}
+
 
 App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가로 넣어주어야 한다.
 
 ```
--keep class net.daum.adam.publisher.* { public *; }
+-keep class com.kakao.adfit.publisher.* { public *; }
 ```
 
-#### 3 단계 : AndroidManifest.xml 설정
+### 3 단계 : AndroidManifest.xml 설정
 - 아래 두 가지 필수 권한을 AndroidManifist.xml 에 추가한다.
 
 	```
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	```
-
-	**SDK 2.3.0 부터는 최소한의 권한으로 INTERNET, ACCESS_NETWORK_STATE 권한을 설정해야 한다. 필수 권한 미 설정시 정상적 광고 노출 되지 않는다.**
+	**최소한의 권한으로 INTERNET, ACCESS_NETWORK_STATE 권한을 설정해야 한다. 필수 권한 미 설정시 정상적 광고 노출 되지 않는다.**
 
 - 광고를 넣을 Activity 에 반드시 android:configChanges=”orientation” 을 설정해준다.
 - Interstitial(전면형) 광고를 추가하기 위해서는 반드시 아래 명시된 Activity 를 추가해야 한다.
@@ -74,7 +88,7 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 
 			<!-- Interstitial 광고를 사용하기 위해서는 반드시 이 부분을 추가해야한다. -->
 			<activity
-				android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
+				android:name="com.kakao.adfit.publisher.impl.AdInterstitialActivity"
 				android:configChanges="orientation|keyboardHidden"
 				android:screenOrientation="portrait" />
 
@@ -88,87 +102,39 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 		<uses-permission android:name="android.permission.INTERNET" />
 		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-#### 3-1 단계 : Google Play Service SDK 설정
+### 4 단계 : Google Play Service SDK 설정
 Google Play Store에 App을 개시하는 경우, App 내에 광고가 있다면 [반드시 Google Advertising ID를 사용하도록 규정이 변경](https://play.google.com/about/developer-content-policy.html#ADID)되었다.
 
-이에 따라, SDK 2.3.0 부터는 App에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었다.
-
-만약 앱에 AdFit(Ad@m) 광고를 넣어서 Google Play Store에 개시하고 있다면 **반드시 SDK 2.3.0 이후 버전을 사용**해야 한다.
+이에 따라, SDK에서 Google Play Service SDK를 사용할 수 있는 경우에 한해 Google Advertising ID를 사용할 수 있도록 기능이 추가되었다.
 
 참고로, Google Play Service SDK를 사용하지 않은 앱에 대해서는 _"광고가 Google Advertising ID를 사용하지 않았다"_ 는 이유로 Google Play Store에서 임의로 Reject 당할 수도 있다.
 
-이에 따라, **<span style="color:red">SDK 2.3.4부터는 Google Play Service SDK가 없이는 라이브러리를 사용할 수 없도록 변경</span>되었다.**
+이에 따라, **<span style="color:red">SDK에서 Google Play Service SDK가 없이는 라이브러리를 사용할 수 없도록 변경</span>되었다.**
 
-##### 3-1a. 라이브러리 Import
-
-**Eclipse에서 설정하기**
-
-Google Play Service SDK를 사용하기 위해서는 아래 경로에 있는 프로젝트를 Eclipse에서 Google Play Service Library Project를 Import를 시켜야 한다. 경로는 아래와 같다.
-
-&lt;android-sdk&gt;/extras/google/google_play_services/libproject/google-play-services_lib/
-
-![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DB72020C410001)
-
-Import를 눌러서 위 경로에 해당하는 프로젝트를 Android > Existing Android Code into Workspace를 눌러서 Import 한다.
-
-![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DCD7032E990002)
-
-라이브러리를 Import 한 다음에는 실제 프로젝트에 Library를 지정해줘야 한다.
-
-![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DCF2035D740003)
-
-프로젝트의 Properties를 눌러서 왼편에 Android 설정으로 들어간다.
-
-![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DC7F024F150001)
-
-이때, 하단에 Library란이 있는데 여기에 앞에서 Import한 프로젝트를 지정한다.
-
-![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DBD90245A40003)
-
-지정 하고 난 뒤, 녹색 체크 아이콘이 보이면 된다.
-
-![](http://i1.daumcdn.net/svc/image/U03/adam/53E2DF92061DE90001)
-
-
-**Android Studio(Gradle)에서 설정하기**
+#### 4-a. Android Studio(Gradle)에서 설정하기
 
 Gradle로 App을 빌드하실 경우, build.gradle을 다음과 같이 수정한다.
 
 ```
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 ...
 
 dependencies {
-		compile 'com.android.support:appcompat-v7:+'
 		compile 'com.google.android.gms:play-services-ads:+'
 }
 ```
 
 그 다음 Sync Project with Gradle Files를 눌러서 프로젝트를 업데이트 한다.
 
-**IDE 없이 수동으로 설정하기**
 
-App 내에 project.properties 파일을 수정하는 방법을 사용하면 된다.
+#### 4-b 기타 환경에서 설정하기
+##### 4-b-1. 라이브러리 추가하기
 
-만약, 앱에서 사용하는 라이브러리가 없다면 아래와 같이 사용하면 된다.
+** <android-sdk>/extras/google/google_play_services/libproject/google-play-services_lib/ **에서 라이브러리 프로젝트를 App내의 프로젝트로 복사 후 해당 프로젝트를 연결한다.
+ 
+프로젝트 연결에 대한 보다 자세한 사항은 [Referencing Library Project](http://developer.android.com/tools/projects/projects-cmdline.html#ReferencingLibraryProject) 페이지를 참고하기 바란다.
 
-이때 &lt;android-sdk&gt;는 사용자마다 다를 수 있으므로 꼭 절대 경로를 적어주어야 한다.
-
-```
-android.library.reference.1=<android-sdk>/extras/google/google_play_services/libproject/google-play-services_lib/
-```
-
-만약, 기존에 사용하고 있는 라이브러리가 있다면 맨 하단에 추가를 하되, android.library.reference 다음에 있는 숫자를 바꿔주면 된다.
-
-```
-android.library.reference.1= ...
-android.library.reference.2=<android-sdk>/extras/google/google_play_services/libproject/google-play-services_lib/
-```
-
-관련해 보다 자세한 사항은 [Referencing Library Project](http://developer.android.com/tools/projects/projects-cmdline.html#ReferencingLibraryProject
-) 페이지를 참고하기 바란다.
-
-##### 3-1c. AndroidManifest.xml에 meta-data 태그 추가
+##### 4-b-2. AndroidManifest.xml에 meta-data 태그 추가
 
 Google Play Service SDK를 사용한다면 반드시 AndroidManifest.xml의 application 태그 아래 meta-data 태그를 추가해줘야 한다.
 
@@ -178,67 +144,59 @@ Google Play Service SDK를 사용한다면 반드시 AndroidManifest.xml의 appl
 			android:icon="@drawable/icon"
 			android:label="@string/appName" >
 
-			<!-- Google Play Service SDK 설정 -->
 			<!-- Google Play Service SDK를 사용하는 App에 한해 아래 meta-data 테그를 추가한다. -->
 			<!-- (https://developer.android.com/google/play-services/setup.html) -->
 			<meta-data android:name="com.google.android.gms.version"
 							android:value="@integer/google_play_services_version" />
 
-			<activity
-				android:name=".TestAppActivity"
-				android:configChanges="orientation|keyboardHidden"
-				android:label="@string/appName" >
-				<intent-filter>
-					<action android:name="android.intent.action.MAIN" />
-					<category android:name="android.intent.category.LAUNCHER" />
-				</intent-filter>
-			</activity>
+			...
 
-			<!-- Interstitial 광고를 사용하기 위해서는 반드시 이 부분을 추가해야한다. -->
-			<activity
-				android:name="net.daum.adam.publisher.impl.AdInterstitialActivity"
-				android:configChanges="orientation|keyboardHidden"
-				android:screenOrientation="portrait" />
 
-			<!-- 광고를 노출할 Activity 에 android:configChanges=”orientation”을 반드시 추가해야 한다. -->
-			<activity
-				android:name=".BannerActivity"
-				android:configChanges="orientation|keyboardHidden" />
-		</application>
 
-		<!-- 아래 권한을 반드시 추가해야 한다. -->
-		<uses-permission android:name="android.permission.INTERNET" />
-		<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
-##### 3-1d. Proguard 설정(선택사항)
+##### 4-b-3. Proguard 설정
 App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가로 넣어주어야 한다.
 
 ```
--keep class * extends java.util.ListResourceBundle {
-		protected Object[][] getContents();
-}
-
 -keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-		public static final *** NULL;
+    public static final *** NULL;
 }
 
+-keepnames class * implements android.os.Parcelable
+-keepclassmembers class * implements android.os.Parcelable {
+  public static final *** CREATOR;
+}
+
+-keep @interface android.support.annotation.Keep
+-keep @android.support.annotation.Keep class *
+-keepclasseswithmembers class * {
+  @android.support.annotation.Keep <fields>;
+}
+-keepclasseswithmembers class * {
+  @android.support.annotation.Keep <methods>;
+}
+
+-keep @interface com.google.android.gms.common.annotation.KeepName
 -keepnames @com.google.android.gms.common.annotation.KeepName class *
 -keepclassmembernames class * {
-		@com.google.android.gms.common.annotation.KeepName *;
+  @com.google.android.gms.common.annotation.KeepName *;
 }
 
--keepnames class * implements android.os.Parcelable {
-		public static final ** CREATOR;
+-keep @interface com.google.android.gms.common.util.DynamiteApi
+-keep public @com.google.android.gms.common.util.DynamiteApi class * {
+  public <fields>;
+  public <methods>;
 }
+
+-dontwarn android.security.NetworkSecurityPolicy
 ```
 
-위 내용은 AdamSample 프로젝트에 적용되어 있으니 참고하기 바란다.
+위 내용은 AdfitSample 프로젝트에 적용되어 있으니 참고하기 바란다.
 
-또한, Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Google Play Services][^2] 링크를 참고하기 바란다.
+또한, Google Play Service SDK와 관련해 보다 자세한 사항은 [Setting Up Google Play Services](https://developers.google.com/android/guides/setup) 링크를 참고하기 바란다.
 
-#### 4 단계 : 광고 요청을 위한 UI 구성 및 설정
+### 5 단계 : 광고 요청을 위한 UI 구성 및 설정
 
-##### 4-a. Xml 방식
+#### 5-a. Xml 방식
 * Layout 의 main.xml 에서 광고가 노출되고자 하는 곳에 AdView 객체를 추가한다.  
 * _광고를 노출 가능한 최소크기(320DIP x 50DIP)보다 작게 광고 뷰가 할당되는 경우에는 광고가 노출되지 않을 수 있다._
 * 그 이외의 속성 값은 어플리케이션의 특성에 따라 자유롭게 변경 가능하다.
@@ -251,7 +209,7 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 	android:layout_height="fill_parent">
 
 	&lt;!-- 광고를 사용하기 위해서는 반드시 광고단위ID를 발급받아 사용해야 한다. -->
-	&lt;net.daum.adam.publisher.AdView
+	&lt;com.kakao.adfit.publisher.AdView
 		android:id="@+id/adview"
 		android:visibility="invisible"
 		android:layout_width="wrap_content"
@@ -263,7 +221,6 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 
 위 레이아웃에 설정한 AdView 객체를 Activity 에서 사용하는 방법을 아래 예를 통해 살펴보도록 하자.
 
-SDK 2.0 부터는 AdHttpListener 를 반드시 구현할 필요가 없고, 필요한 경우에 해당 Listener 를 구현해서 설정해주면 된다.
 
 현재 5 개의 Listener 를 지원하고 있으며, 자세한 내역은 아래 예제 코드와 Class Reference 를 통해 살펴보도록 하자.
 
@@ -370,7 +327,7 @@ AdView 클래스에는 위와 같이 5 개의 리스너를 제공하고 있다.
 위 예제에서는 현재 5 개의 리스너를 설정하고 있지만, 리스너가 필요가 없으면 굳이 설정하지 않아도 된다. 리스너와 관련된 자세한 내역은 클래스 레퍼런스를 통해 살펴보도록 하자.
 
 
-##### 4-b. Java 방식
+#### 5-b. Java 방식
 광고를 넣고자 하는 view 가 들어 있는 Activity 가 생성될 때 AdView 객체를 생성하고 광고 요청을 위해 광고 View 에 필요한 리스너와 할당 받은 광고단위ID를 설정 한다. XML 레이아웃을 이용해 광고 생성할 때와 거의 동일하다.
 
 <pre><code>
@@ -463,9 +420,7 @@ public class BannerTypeJava extends Activity {
 	}
 }</code></pre>
 
-##### 선택 : Interstitial (전면형) 광고 요청을 위한 설정
-
-**Interstitial(전면형) 광고는 당분간 AdFit(Ad@m) 의 네트워크 파트너를 대상으로 노출된다. AdFit(Ad@m) 의 네트워크 파트너가 아닐 경우에도 Expandable(확장형), Animated Banner (애니메이션형)형의 Rich Media 광고가 노출된다.**
+#### 선택 : Interstitial (전면형) 광고 요청을 위한 설정
 
 Interstitial(전면형) 광고를 넣고자 하는 Activity 가 생성될 때 AdInterstitial 객체를 생성하고 광고 요청을 위해 필요한 리스너와 할당 받은 광고단위ID 를 설정한다. 이때, 반드시 3 단계에 명시한 XML 코드를 AndroidManifest.xml 에 반드시 추가해야 한다.
 

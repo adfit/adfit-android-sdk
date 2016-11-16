@@ -1,5 +1,11 @@
 # 변경이력
 
+## v2.4.0
+* in App Browser 추가. 
+* https 지원.
+* aar 지원.
+* 기타 버그 픽스.
+
 ## v2.3.7
 * Thread 이슈 수정
 

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="appName">Ad@m Sample</string>
-    <string name="version">Publisher SDK dev</string>
-    <string name="adRequestPause">요청 중지</string>
-    <string name="adRequestResume">요청 재개</string>
-    <string name="adRequestForce">강제 요청</string>
-</resources>
