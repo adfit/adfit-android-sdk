@@ -24,7 +24,6 @@ Copyright © Kakao Corp. All rights reserved.
 	- BannerTypeXML1.java : 광고를 xml 로 붙인 샘플
 	- BannerTypeXML2.java : 광고 Visible 처리 및 pause, resume 처리 예시 샘플
 	- BannerTypeJava.java : 광고를 java 코드로 붙인 샘플
-	- InterstitialActivity.java : Interstitial(전면형) 광고를 java 코드로 붙인 샘플
 
 ### 1 단계 : 광고단위ID(Client ID) 발급받기
 실제 광고를 다운로드 받고, 수익창출을 위해서 http://adfit.biz.daum.net/ 에서 매체 등록 후 광고단위ID(Client ID)를 발급받아야 한다.
@@ -69,7 +68,6 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 	**최소한의 권한으로 INTERNET, ACCESS_NETWORK_STATE 권한을 설정해야 한다. 필수 권한 미 설정시 정상적 광고 노출 되지 않는다.**
 
 - 광고를 넣을 Activity 에 반드시 android:configChanges=”orientation” 을 설정해준다.
-- Interstitial(전면형) 광고를 추가하기 위해서는 반드시 아래 명시된 Activity 를 추가해야 한다.
 	**AndroidManifest.xml**
 
 		<application
@@ -85,12 +83,6 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 					<category android:name="android.intent.category.LAUNCHER" />
 				</intent-filter>
 			</activity>
-
-			<!-- Interstitial 광고를 사용하기 위해서는 반드시 이 부분을 추가해야한다. -->
-			<activity
-				android:name="com.kakao.adfit.publisher.impl.AdInterstitialActivity"
-				android:configChanges="orientation|keyboardHidden"
-				android:screenOrientation="portrait" />
 
 			<!-- 광고를 노출할 Activity 에 android:configChanges=”orientation”을 반드시 추가해야 한다. -->
 			<activity
@@ -287,7 +279,7 @@ App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가�
 			});
 
 
-			// 5. 전면형 광고를 닫았을때 실행할 리스너
+			// 5. 광고를 닫았을때 실행할 리스너
 			adView.setOnAdClosedListener(new OnAdClosedListener() {
 				@Override
 				public void OnAdClosed() {
@@ -322,7 +314,7 @@ AdView 클래스에는 위와 같이 5 개의 리스너를 제공하고 있다.
 * AdView.OnAdFailedListener : 광고 내려받기 실패할 경우 실행할 리스너
 * AdView.OnAdLoadedListener : 광고가 내려받았을 경우 실행할 리스너
 * AdView.OnAdWillLoadListener : 광고를 불러오기 전에 실행할 리스너
-* AdView.OnAdClosedListener : 전면형 광고를 닫을 때 실행할 리스너
+* AdView.OnAdClosedListener : 광고를 닫을 때 실행할 리스너
 
 위 예제에서는 현재 5 개의 리스너를 설정하고 있지만, 리스너가 필요가 없으면 굳이 설정하지 않아도 된다. 리스너와 관련된 자세한 내역은 클래스 레퍼런스를 통해 살펴보도록 하자.
 
@@ -420,53 +412,6 @@ public class BannerTypeJava extends Activity {
 	}
 }</code></pre>
 
-#### 선택 : Interstitial (전면형) 광고 요청을 위한 설정
-
-Interstitial(전면형) 광고를 넣고자 하는 Activity 가 생성될 때 AdInterstitial 객체를 생성하고 광고 요청을 위해 필요한 리스너와 할당 받은 광고단위ID 를 설정한다. 이때, 반드시 3 단계에 명시한 XML 코드를 AndroidManifest.xml 에 반드시 추가해야 한다.
-
-<pre><code>public class InterstitialActivity extends Activity {
-	/** 전면형 광고 선언 */
-	AdInterstitial mAdInterstitial = null;
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		// 1. 전면형 광고 객체 생성
-		mAdInterstitial = new AdInterstitial(this);
-		// 2. 전면형 광고 광고단위ID를 설정한다.
-		mAdInterstitial.setClientId(“광고단위ID”);
-		// 3. (선택)전면형 광고 다운로드시에 실행할 리스너
-		mAdInterstitial.setOnAdLoadedListener(new OnAdLoadedListener() {
-			@Override
-			public void OnAdLoaded() {
-				Log.i("InterstitialTab", "광고가 로딩되었습니다.");
-			}
-		});
-		// 4. (선택)전면형 광고 다운로드 실패시에 실행할 리스너
-		mAdInterstitial.setOnAdFailedListener(new OnAdFailedListener() {
-			@Override
-			public void OnAdFailed(AdError error, String errorMessage) {
-				Toast.makeText(InterstitialActivity.this,
-errorMessage, Toast.LENGTH_LONG).show();
-			}
-		});
-		// 5. (선택)전면형 광고를 닫을 시에 실행할 리스너
-		mAdInterstitial.setOnAdClosedListener (new OnAdClosedListener() {
-			@Override
-			public void OnAdClosed() {
-				Log.i("InterstitialTab", "광고를 닫았습니다. ");
-			}
-		});
-		// 6. 전면형 광고를 불러온다.
-		mAdInterstitial.loadAd();
-	}
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		if (mAdInterstitial != null) {
-			mAdInterstitial = null;
-		}
-	}
-}</code></pre>
 
 ## 추가정보(FAQ)
 
@@ -474,8 +419,6 @@ errorMessage, Toast.LENGTH_LONG).show();
 ### Q1. 광고 수신이 되지 않을때는 어떻게 하나요?
 
 AdFit(Ad@m) 은 유효 광고의 100% 노출을 보장하지 않습니다. 유효 광고 노출율은 송출 가능한 광고의 총 수량과 광고 호출수에 따라 달라지게 됩니다. 광고의 총 수량은 한정되어 있으나, 이에 비해 광고의 호출수가 많기 때문에 유효 광고의 수신에 실패하는 경우가 자주 발생할 수 있습니다. 또한 시간대나 앱의 종류, 날짜에 따라서도 노출 가능한 광고의 수가 달라질 수 있습니다.
-
-Interstitial 광고의 경우에는 하우스 애드가 지원되지 않으므로, 일정 시간 이후 다시 호출해야 합니다.
 
 ### Q2. 인터넷(3G 또는 WIFI)이 연결되지 않을 경우에 어떻게 하나요?
 
