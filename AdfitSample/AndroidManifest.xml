@@ -28,7 +28,6 @@
         </activity>
         <activity android:name=".AboutActivity"/>
         <activity android:name=".BannerActivity"/>
-        <activity android:name=".InterstitialActivity"/>
         <activity
                 android:name=".BannerTypeXML1"
                 android:configChanges="orientation|keyboardHidden|screenSize"/>

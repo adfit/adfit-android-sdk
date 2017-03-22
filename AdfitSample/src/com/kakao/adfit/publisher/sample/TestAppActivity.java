@@ -19,7 +19,6 @@ public class TestAppActivity extends Activity implements
 
     public void setService() {
         serviceList.add(new ServiceActivity("Banner", BannerActivity.class));
-        serviceList.add(new ServiceActivity("Interstitial", InterstitialActivity.class));
         serviceList.add(new ServiceActivity("SDK 정보", AboutActivity.class));
     }
 
