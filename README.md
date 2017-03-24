@@ -112,7 +112,8 @@ apply plugin: 'com.android.application'
 ...
 
 dependencies {
-		compile 'com.google.android.gms:play-services-ads:+'
+        compile 'com.google.android.gms:play-services-base:+'
+	compile 'com.google.android.gms:play-services-ads:+'
 }
 ```
 
