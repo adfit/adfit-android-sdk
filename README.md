@@ -1,6 +1,6 @@
 # AdFit(Ad@m) Android SDK Guide
 
-**Ver 2.4.1**
+**Ver 2.4.2**
 
 이 가이드는 Android Application에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
 
@@ -48,7 +48,7 @@ AdFit 라이브러리를 프로젝트 build.gradle에 추가한다.
 	}
 	
 	dependencies {
-    	compile(name:'AdfitSDK-2.4.1', ext:'aar')
+    	compile(name:'AdfitSDK-2.4.2', ext:'aar')
 	}
 
 
@@ -112,7 +112,7 @@ apply plugin: 'com.android.application'
 ...
 
 dependencies {
-        compile 'com.google.android.gms:play-services-base:+'
+    compile 'com.google.android.gms:play-services-base:+'
 	compile 'com.google.android.gms:play-services-ads:+'
 }
 ```
