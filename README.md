@@ -16,6 +16,8 @@ Copyright © Kakao Corp. All rights reserved.
 ---
 
 ## AdFit(Ad@m) 광고 삽입 방법
+* SDK 설치에 관한 가이드는 Android Studio 기준이며, Eclipse에 대한 기술지원은 하지 않습니다. 
+* Android Studio 사용을 권장합니다.
 
 ### AdFit(Ad@m) SDK 구성
 
@@ -118,70 +120,6 @@ dependencies {
 ```
 
 그 다음 Sync Project with Gradle Files를 눌러서 프로젝트를 업데이트 한다.
-
-
-#### 4-b 기타 환경에서 설정하기
-##### 4-b-1. 라이브러리 추가하기
-
-** <android-sdk>/extras/google/google_play_services/libproject/google-play-services_lib/ **에서 라이브러리 프로젝트를 App내의 프로젝트로 복사 후 해당 프로젝트를 연결한다.
- 
-프로젝트 연결에 대한 보다 자세한 사항은 [Referencing Library Project](http://developer.android.com/tools/projects/projects-cmdline.html#ReferencingLibraryProject) 페이지를 참고하기 바란다.
-
-##### 4-b-2. AndroidManifest.xml에 meta-data 태그 추가
-
-Google Play Service SDK를 사용한다면 반드시 AndroidManifest.xml의 application 태그 아래 meta-data 태그를 추가해줘야 한다.
-
-**AndroidManifest.xml**
-
-		<application
-			android:icon="@drawable/icon"
-			android:label="@string/appName" >
-
-			<!-- Google Play Service SDK를 사용하는 App에 한해 아래 meta-data 테그를 추가한다. -->
-			<!-- (https://developer.android.com/google/play-services/setup.html) -->
-			<meta-data android:name="com.google.android.gms.version"
-							android:value="@integer/google_play_services_version" />
-
-			...
-
-
-
-##### 4-b-3. Proguard 설정
-App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가로 넣어주어야 한다.
-
-```
--keep public class com.google.android.gms.common.internal.safeparcel.SafeParcelable {
-    public static final *** NULL;
-}
-
--keepnames class * implements android.os.Parcelable
--keepclassmembers class * implements android.os.Parcelable {
-  public static final *** CREATOR;
-}
-
--keep @interface android.support.annotation.Keep
--keep @android.support.annotation.Keep class *
--keepclasseswithmembers class * {
-  @android.support.annotation.Keep <fields>;
-}
--keepclasseswithmembers class * {
-  @android.support.annotation.Keep <methods>;
-}
-
--keep @interface com.google.android.gms.common.annotation.KeepName
--keepnames @com.google.android.gms.common.annotation.KeepName class *
--keepclassmembernames class * {
-  @com.google.android.gms.common.annotation.KeepName *;
-}
-
--keep @interface com.google.android.gms.common.util.DynamiteApi
--keep public @com.google.android.gms.common.util.DynamiteApi class * {
-  public <fields>;
-  public <methods>;
-}
-
--dontwarn android.security.NetworkSecurityPolicy
-```
 
 위 내용은 AdfitSample 프로젝트에 적용되어 있으니 참고하기 바란다.
 
