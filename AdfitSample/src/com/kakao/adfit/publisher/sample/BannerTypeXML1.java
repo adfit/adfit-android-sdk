@@ -22,7 +22,7 @@ public class BannerTypeXML1 extends Activity {
         setContentView(R.layout.banner_type_1);
 
         adWrapper = (LinearLayout) findViewById(R.id.adWrapper);
-        initAdam();
+        initAdFit();
 
     }
 
@@ -36,7 +36,7 @@ public class BannerTypeXML1 extends Activity {
         }
     }
 
-    private void initAdam() {
+    private void initAdFit() {
         // AdFit sdk 초기화 시작
         adView = (AdView) findViewById(R.id.adview);
         adView.setRequestInterval(5);

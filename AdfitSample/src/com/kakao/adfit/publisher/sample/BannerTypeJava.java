@@ -21,7 +21,7 @@ public class BannerTypeJava extends Activity {
 
         relativeLayout = new RelativeLayout(this);
 
-        initAdam();
+        initAdFit();
 
         relativeLayout.addView(adView);
 
@@ -35,7 +35,7 @@ public class BannerTypeJava extends Activity {
         adView.setLayoutParams(params);
     }
 
-    public void initAdam() {
+    public void initAdFit() {
         // AdFit 광고 뷰 생성 및 설정
         adView = new AdView(this);
 

@@ -1,4 +1,4 @@
-# AdFit(Ad@m) Android SDK Guide
+# AdFit Android SDK Guide
 
 **Ver 2.4.2**
 
@@ -15,13 +15,13 @@ Copyright © Kakao Corp. All rights reserved.
 
 ---
 
-## AdFit(Ad@m) 광고 삽입 방법
+## AdFit 광고 삽입 방법
 * SDK 설치에 관한 가이드는 Android Studio 기준이며, Eclipse에 대한 기술지원은 하지 않습니다. 
 * Android Studio 사용을 권장합니다.
 
-### AdFit(Ad@m) SDK 구성
+### AdFit SDK 구성
 
-* AdfitSDK-X.X.X.aar : AdFit(Ad@m) 광고를 삽입해주는 라이브러리
+* AdfitSDK-X.X.X.aar : AdFit 광고를 삽입해주는 라이브러리
 * AdfitSample/src/com/kakao/adfit/publisher/sample/
 	- BannerTypeXML1.java : 광고를 xml 로 붙인 샘플
 	- BannerTypeXML2.java : 광고 Visible 처리 및 pause, resume 처리 예시 샘플
@@ -164,8 +164,8 @@ dependencies {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.adam_sample_1);
-			initAdam();
+			setContentView(R.layout.banner_type_1);
+			initAdFit();
 		}
 
 
@@ -179,8 +179,8 @@ dependencies {
 			}
 		}  
 
-		private void initAdam() {
-			// AdFit(Ad@m) sdk 초기화 시작
+		private void initAdFit() {
+			// AdFit sdk 초기화 시작
 			adView = (AdView) findViewById(R.id.adview);
 
 			// 광고 리스너 설정
@@ -273,7 +273,7 @@ public class BannerTypeJava extends Activity {
 
 		relativeLayout = new RelativeLayout(this);
 
-		// AdFit(Ad@m) 광고 뷰 생성 및 설정
+		// AdFit 광고 뷰 생성 및 설정
 		adView = new AdView(this);
 
 		// 광고 클릭시 실행할 리스너
@@ -357,7 +357,7 @@ public class BannerTypeJava extends Activity {
 
 ### Q1. 광고 수신이 되지 않을때는 어떻게 하나요?
 
-AdFit(Ad@m) 은 유효 광고의 100% 노출을 보장하지 않습니다. 유효 광고 노출율은 송출 가능한 광고의 총 수량과 광고 호출수에 따라 달라지게 됩니다. 광고의 총 수량은 한정되어 있으나, 이에 비해 광고의 호출수가 많기 때문에 유효 광고의 수신에 실패하는 경우가 자주 발생할 수 있습니다. 또한 시간대나 앱의 종류, 날짜에 따라서도 노출 가능한 광고의 수가 달라질 수 있습니다.
+AdFit은 유효 광고의 100% 노출을 보장하지 않습니다. 유효 광고 노출율은 송출 가능한 광고의 총 수량과 광고 호출수에 따라 달라지게 됩니다. 광고의 총 수량은 한정되어 있으나, 이에 비해 광고의 호출수가 많기 때문에 유효 광고의 수신에 실패하는 경우가 자주 발생할 수 있습니다. 또한 시간대나 앱의 종류, 날짜에 따라서도 노출 가능한 광고의 수가 달라질 수 있습니다.
 
 ### Q2. 인터넷(3G 또는 WIFI)이 연결되지 않을 경우에 어떻게 하나요?
 

@@ -22,7 +22,7 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
         setContentView(R.layout.banner_type_2);
 
         // initialize AdFit
-        initAdam();
+        initAdFit();
 
         // UI
         TabHost mTabHost = getTabHost();
@@ -64,7 +64,7 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
         }
     }
 
-    private void initAdam() {
+    private void initAdFit() {
 
         // AdFit sdk 초기화 시작
         adView = (AdView) findViewById(R.id.adview);
