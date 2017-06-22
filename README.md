@@ -18,6 +18,7 @@ Copyright © Kakao Corp. All rights reserved.
 ## AdFit 광고 삽입 방법
 * SDK 설치에 관한 가이드는 Android Studio 기준이며, Eclipse에 대한 기술지원은 하지 않습니다. 
 * Android Studio 사용을 권장합니다.
+* Android API 14 이상에서 사용가능합니다.
 
 ### AdFit SDK 구성
 
