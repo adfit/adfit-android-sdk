@@ -110,6 +110,9 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
         // 광고 갱신 시간 : 기본 60초
         adView.setRequestInterval(12);
 
+        // 광고 사이즈 설정
+        adView.setAdUnitSize("320x50");
+
         // Animation 효과 : 기본 값은 AnimationType.NONE
         adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
 

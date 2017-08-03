@@ -81,7 +81,11 @@ public class BannerTypeXML1 extends Activity {
         // 할당 받은 clientId 설정
         adView.setClientId("DAN-s164c5nwco54");
 
+        // 광고 갱신 시간 : 기본 60초
         adView.setRequestInterval(12);
+
+        // 광고 사이즈 설정
+        adView.setAdUnitSize("320x50");
 
         // Animation 효과 : 기본 값은 AnimationType.NONE
         adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);

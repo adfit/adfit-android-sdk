@@ -1,6 +1,14 @@
 # AdFit Android SDK Guide
 
-**Ver 2.4.2**
+**Ver 2.4.3**
+
+```
+2.4.3버전부터 아래와 같이 광고 사이즈 설정을 해주셔야 광고가 노출됩니다.
+
+// 광고 사이즈 설정
+adView.setAdUnitSize("320x50");
+```
+
 
 이 가이드는 Android Application에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
 
@@ -51,7 +59,7 @@ AdFit 라이브러리를 프로젝트 build.gradle에 추가한다.
 	}
 	
 	dependencies {
-    	compile(name:'AdfitSDK-2.4.2', ext:'aar')
+    	compile(name:'AdfitSDK-2.4.3', ext:'aar')
 	}
 
 
@@ -227,14 +235,14 @@ dependencies {
 				}
 			});
 
-
 			// 할당 받은 광고단위ID 설정
 			// adView.setClientId(“광고단위ID”);
 
-
 			// 광고 갱신 주기를 12초로 설정
 			// adView.setRequestInterval(12);
-
+            
+            // 광고 사이즈 설정
+            adView.setAdUnitSize("320x50");
 
 			// 광고 영역에 캐시 사용 여부 : 기본 값은 true
 			adView.setAdCache(false);
