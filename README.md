@@ -1,6 +1,6 @@
 # AdFit Android SDK Guide
 
-**Ver 2.4.3**
+**Ver 2.4.4**
 
 ```
 2.4.3버전부터 아래와 같이 광고 사이즈 설정을 해주셔야 광고가 노출됩니다.
@@ -59,7 +59,7 @@ AdFit 라이브러리를 프로젝트 build.gradle에 추가한다.
 	}
 	
 	dependencies {
-    	compile(name:'AdfitSDK-2.4.3', ext:'aar')
+    	compile(name:'AdfitSDK-2.4.4', ext:'aar')
 	}
 
 
