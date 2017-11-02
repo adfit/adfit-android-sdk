@@ -3,7 +3,8 @@ package com.kakao.adfit.publisher.sample;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
-import com.kakao.adfit.publisher.impl.AdCommon;
+
+import com.kakao.adfit.AdfitSdk;
 
 public class AboutActivity extends Activity {
     @Override
@@ -12,6 +13,7 @@ public class AboutActivity extends Activity {
         setContentView(R.layout.about);
 
         TextView version = (TextView) findViewById(R.id.version);
-        version.setText("Publisher SDK v" + AdCommon.SDK_VERSION);
+        version.setText("Publisher SDK v" + AdfitSdk.SDK_VERSION);
+
     }
 }

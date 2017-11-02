@@ -8,13 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 import android.widget.TabHost.OnTabChangeListener;
-import com.kakao.adfit.publisher.AdView;
-import com.kakao.adfit.publisher.AdView.*;
-import com.kakao.adfit.publisher.impl.AdError;
+
+import com.kakao.adfit.ads.AdListener;
+import com.kakao.adfit.ads.ba.BannerAdView;
 
 public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
     private static final String LOGTAG = "BannerTypeXML2";
-    private AdView adView = null;
+    private BannerAdView adView = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,8 +37,7 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
         pauseBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if ( adView != null ) {
-                    // 서버로부터 광고 요청 중단
-                    adView.pause();
+                    adView.setRequestInterval(0);
                 }
             }
         });
@@ -46,8 +45,8 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
         resumeBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if ( adView != null ) {
-                    // 서버로부터 광고 요청 재개
-                    adView.resume();
+                    adView.setRequestInterval(30);
+                    adView.loadAd();
                 }
 
             }
@@ -58,7 +57,7 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
     public void onDestroy() {
         super.onDestroy();
 
-        if ( adView != null ) {
+        if (adView != null) {
             adView.destroy();
             adView = null;
         }
@@ -67,65 +66,43 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
     private void initAdFit() {
 
         // AdFit sdk 초기화 시작
-        adView = (AdView) findViewById(R.id.adview);
-
-        // 광고 클릭시 실행할 리스너
-        adView.setOnAdClickedListener(new OnAdClickedListener() {
-            public void OnAdClicked() {
-                Log.i(LOGTAG, "광고를 클릭했습니다.");
+        adView = (BannerAdView) findViewById(R.id.adview);
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                Log.d(LOGTAG, "onAdLoaded");
             }
-        });
 
-        // 광고 내려받기 실패했을 경우에 실행할 리스너
-        adView.setOnAdFailedListener(new OnAdFailedListener() {
-            public void OnAdFailed(AdError arg0, String arg1) {
-                Log.w(LOGTAG, arg1);
+            @Override
+            public void onAdFailed(int code) {
+                Log.d(LOGTAG, "onAdFailed : " + code);
             }
-        });
 
-        // 광고를 정상적으로 내려받았을 경우에 실행할 리스너
-        adView.setOnAdLoadedListener(new OnAdLoadedListener() {
-            public void OnAdLoaded() {
-                Log.i(LOGTAG, "광고가 정상적으로 로딩되었습니다.");
-            }
-        });
-
-        // 광고를 불러올때 실행할 리스너
-        adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
-            public void OnAdWillLoad(String arg1) {
-                Log.i(LOGTAG, "광고를 불러옵니다. : " + arg1);
-            }
-        });
-
-        // 광고를 닫았을때 실행할 리스너
-        adView.setOnAdClosedListener(new OnAdClosedListener() {
-            public void OnAdClosed() {
-                Log.i(LOGTAG, "광고를 닫았습니다.");
+            @Override
+            public void onAdClicked() {
+                Log.d(LOGTAG, "onAdClicked");
             }
         });
 
         // 할당 받은 clientId 설정
-        adView.setClientId("DAN-s164c5nwco54");
-
+        //adView.setClientId("DAN-s164c5nwco54");
         // 광고 갱신 시간 : 기본 60초
-        adView.setRequestInterval(12);
+        //adView.setRequestInterval(120);
 
         // 광고 사이즈 설정
         adView.setAdUnitSize("320x50");
 
-        // Animation 효과 : 기본 값은 AnimationType.NONE
-        adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
-
-        adView.setVisibility(View.VISIBLE);
+        adView.loadAd();
     }
 
     public void onTabChanged(String tabId) {
 
         // 광고 View가 보이지 않을 때는 내부적으로 서버에 광고 요청을 하지 않는다.
-        if ( tabId.equals("tab1") ) {
-            adView.setVisibility(View.VISIBLE);
-        } else if ( tabId.equals("tab2") ) {
-            adView.setVisibility(View.INVISIBLE);
+        if (tabId.equals("tab1")) {
+            adView.setRequestInterval(30);
+            adView.loadAd();
+        } else if (tabId.equals("tab2")) {
+            adView.setRequestInterval(0);
         }
 
     }

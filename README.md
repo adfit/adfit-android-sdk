@@ -1,6 +1,6 @@
 # AdFit Android SDK Guide
 
-**Ver 2.4.4**
+** Ver 3.0.0 **
 
 ```
 2.4.3버전부터 아래와 같이 광고 사이즈 설정을 해주셔야 광고가 노출됩니다.
@@ -66,7 +66,8 @@ AdFit 라이브러리를 프로젝트 build.gradle에 추가한다.
 App에서 Proguard를 사용하고 있다면, 반드시 아래 내용을 추가로 넣어주어야 한다.
 
 ```
--keep class com.kakao.adfit.publisher.* { public *; }
+-keep class com.kakao.adfit.ads.* { public *; }
+-keep class com.kakao.adfit.ads.ba.* { public *; }
 ```
 
 ### 3 단계 : AndroidManifest.xml 설정
@@ -124,7 +125,7 @@ apply plugin: 'com.android.application'
 
 dependencies {
     compile 'com.google.android.gms:play-services-base:+'
-	compile 'com.google.android.gms:play-services-ads:+'
+    compile 'com.google.android.gms:play-services-ads:+'
 }
 ```
 
@@ -149,7 +150,7 @@ dependencies {
 	android:layout_height="fill_parent">
 
 	&lt;!-- 광고를 사용하기 위해서는 반드시 광고단위ID를 발급받아 사용해야 한다. -->
-	&lt;com.kakao.adfit.publisher.AdView
+	&lt;com.kakao.adfit.ads.ba.BannerAdView
 		android:id="@+id/adview"
 		android:visibility="invisible"
 		android:layout_width="wrap_content"
@@ -159,7 +160,7 @@ dependencies {
 		requestInterval=”60”/>
 &lt;/RelativeLayout></code></pre>
 
-위 레이아웃에 설정한 AdView 객체를 Activity 에서 사용하는 방법을 아래 예를 통해 살펴보도록 하자.
+위 레이아웃에 설정한 BannerAdView 객체를 Activity 에서 사용하는 방법을 아래 예를 통해 살펴보도록 하자.
 
 
 현재 5 개의 Listener 를 지원하고 있으며, 자세한 내역은 아래 예제 코드와 Class Reference 를 통해 살펴보도록 하자.
@@ -168,7 +169,7 @@ dependencies {
 
 	public class BannerTypeXML1 extends Activity {
 		private static final String LOGTAG = "BannerTypeXML1";
-		private AdView adView = null;
+		private BannerAdView adView = null;
 
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
@@ -189,92 +190,58 @@ dependencies {
 		}  
 
 		private void initAdFit() {
-			// AdFit sdk 초기화 시작
-			adView = (AdView) findViewById(R.id.adview);
+            // AdFit sdk 초기화 시작
+            adView = (BannerAdView) findViewById(R.id.adview);
 
-			// 광고 리스너 설정
+            adView.setAdListener(new AdListener() {
+                @Override
+                public void onAdLoaded() {
+                    Log.d(LOGTAG, "onAdLoaded");
+                }
 
-			// 1. 광고 클릭시 실행할 리스너
-			adView.setOnAdClickedListener(new OnAdClickedListener() {  
-				@Override
-				public void OnAdClicked() {
-					Log.i(LOGTAG, "광고를 클릭했습니다.");
-				}
-			});
+                @Override
+                public void onAdFailed(int code) {
+                    Log.d(LOGTAG, "onAdFailed : " + code);
+                }
 
-			// 2. 광고 내려받기 실패했을 경우에 실행할 리스너
-			adView.setOnAdFailedListener(new OnAdFailedListener() {
-				@Override
-				public void OnAdFailed(AdError error, String message) {
-					Log.w(LOGTAG, message);
-				}
-			});
+                @Override
+                public void onAdClicked() {
+                    Log.d(LOGTAG, "onAdClicked");
+                }
+            });
 
-			// 3. 광고를 정상적으로 내려받았을 경우에 실행할 리스너  
-			adView.setOnAdLoadedListener(new OnAdLoadedListener() {
-				@Override
-				public void OnAdLoaded() {
-					Log.i(LOGTAG, "광고가 정상적으로 로딩되었습니다.");
-				}  
-			});  
+            // 할당 받은 clientId 설정
+            adView.setClientId("DAN-s164c5nwco54");
 
-			// 4. 광고를 불러올때 실행할 리스너
-			adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
-				@Override
-				public void OnAdWillLoad(String url) {
-					Log.i(LOGTAG, "광고를 불러옵니다. : " + url);
-				}
-			});
+            // 광고 갱신 시간 : 기본 60초
+            // 0 으로 설정할 경우, 갱신하지 않음.
+            adView.setRequestInterval(30);
 
-
-			// 5. 광고를 닫았을때 실행할 리스너
-			adView.setOnAdClosedListener(new OnAdClosedListener() {
-				@Override
-				public void OnAdClosed() {
-					Log.i(LOGTAG, "광고를 닫았습니다.");
-				}
-			});
-
-			// 할당 받은 광고단위ID 설정
-			// adView.setClientId(“광고단위ID”);
-
-			// 광고 갱신 주기를 12초로 설정
-			// adView.setRequestInterval(12);
-            
             // 광고 사이즈 설정
             adView.setAdUnitSize("320x50");
 
-			// 광고 영역에 캐시 사용 여부 : 기본 값은 true
-			adView.setAdCache(false);
-
-			// Animation 효과 : 기본 값은 AnimationType.NONE
-			adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
-			adView.setVisibility(View.VISIBLE);
+            adView.loadAd();
 		}
 	}
 
-광고 영역은 웹뷰를 사용하고 있고, 기본적으로 캐시를 사용하고 있다. 만약 캐시를 사용하지 않을 경우에는 위 예제와 같이 `adView.setAdCache(false);` 를 호출해 캐시를 사용하지 않도록 설정할 수 있다. 이 경우에는 기존에 캐시 영역의 데이터를 모두 삭제한다.
 
+BannerAdView 클래스에는 아래와 같이 리스너를 제공하고 있다.
 
-AdView 클래스에는 위와 같이 5 개의 리스너를 제공하고 있다.
+* AdListener.onAdLoaded : 광고가 내려받았을 경우
+* AdListener.onAdFailed : 광고 내려받기 실패할 경우
+* AdListener.onAdClicked : 광고 클릭할 경우
 
-* AdView.OnAdClickedListener : 광고 클릭할 경우 실행할 리스너
-* AdView.OnAdFailedListener : 광고 내려받기 실패할 경우 실행할 리스너
-* AdView.OnAdLoadedListener : 광고가 내려받았을 경우 실행할 리스너
-* AdView.OnAdWillLoadListener : 광고를 불러오기 전에 실행할 리스너
-* AdView.OnAdClosedListener : 광고를 닫을 때 실행할 리스너
-
-위 예제에서는 현재 5 개의 리스너를 설정하고 있지만, 리스너가 필요가 없으면 굳이 설정하지 않아도 된다. 리스너와 관련된 자세한 내역은 클래스 레퍼런스를 통해 살펴보도록 하자.
+위 예제에서는 현재 리스너를 설정하고 있지만, 리스너가 필요가 없으면 굳이 설정하지 않아도 된다. 리스너와 관련된 자세한 내역은 클래스 레퍼런스를 통해 살펴보도록 하자.
 
 
 #### 5-b. Java 방식
-광고를 넣고자 하는 view 가 들어 있는 Activity 가 생성될 때 AdView 객체를 생성하고 광고 요청을 위해 광고 View 에 필요한 리스너와 할당 받은 광고단위ID를 설정 한다. XML 레이아웃을 이용해 광고 생성할 때와 거의 동일하다.
+광고를 넣고자 하는 view 가 들어 있는 Activity 가 생성될 때 BannerAdView 객체를 생성하고 광고 요청을 위해 광고 View 에 필요한 리스너와 할당 받은 광고단위ID를 설정 한다. XML 레이아웃을 이용해 광고 생성할 때와 거의 동일하다.
 
 <pre><code>
 public class BannerTypeJava extends Activity {
 	private static final String LOGTAG = "BannerTypeJava";
 	private RelativeLayout relativeLayout = null;
-	private AdView adView = null;
+	private BannerAdView adView = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -282,69 +249,38 @@ public class BannerTypeJava extends Activity {
 
 		relativeLayout = new RelativeLayout(this);
 
-		// AdFit 광고 뷰 생성 및 설정
-		adView = new AdView(this);
+        // AdFit 광고 뷰 생성 및 설정
+        adView = new BannerAdView(this);
 
-		// 광고 클릭시 실행할 리스너
-		adView.setOnAdClickedListener(new OnAdClickedListener() {
-			@Override
-			public void OnAdClicked() {
-				Log.i(LOGTAG, "광고를 클릭했습니다.");
-			}
-		});
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                Log.d(LOGTAG, "onAdLoaded");
+            }
 
-		// 광고 내려받기 실패했을 경우에 실행할 리스너
-		adView.setOnAdFailedListener(new OnAdFailedListener() {
-			@Override
-			public void OnAdFailed(AdError arg0, String arg1) {
-				Log.w(LOGTAG, arg1);
-			}
-		});
+            @Override
+            public void onAdFailed(int code) {
+                Log.d(LOGTAG, "onAdFailed " + code);
+            }
 
-		// 광고를 정상적으로 내려받았을 경우에 실행할 리스너
-		adView.setOnAdLoadedListener(new OnAdLoadedListener() {
+            @Override
+            public void onAdClicked() {
+                Log.d(LOGTAG, "onAdClicked");
+            }
+        });
 
-			@Override
-			public void OnAdLoaded() {
-				Log.i(LOGTAG, "광고가 정상적으로 로딩되었습니다.");
-			}
-		});
+        // 할당 받은 clientId 설정
+        adView.setClientId("DAN-s164c5nwco54");
 
-		// 광고를 불러올때 실행할 리스너
-		adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
+        // 광고 갱신 시간 : 기본 60초
+        // 0 으로 설정할 경우, 갱신하지 않음.
+        adView.setRequestInterval(30);
 
-			@Override
-			public void OnAdWillLoad(String arg1) {
-				Log.i(LOGTAG, "광고를 불러옵니다. : " + arg1);
-			}
-		});
+        // 광고 사이즈 설정
+        adView.setAdUnitSize("320x50");
 
-		// 광고를 닫았을때 실행할 리스너
-		adView.setOnAdClosedListener(new OnAdClosedListener() {
-
-			@Override
-			public void OnAdClosed() {
-				Log.i(LOGTAG, "광고를 닫았습니다.");
-			}
-		});
-
-		// 할당 받은 광고단위ID 설정
-		adView.setClientId("광고단위ID");
-
-		// 광고 갱신 시간 : 기본 60초
-		adView.setRequestInterval(12);
-
-		// Animation 효과 : 기본 값은 AnimationType.NONE
-		adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
-
-		adView.setVisibility(View.VISIBLE);
-
-				// XML상에 android:layout_alignParentBottom="true" 와 같은 역할을 함
-				RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-				params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-				// 위에서 만든 레이아웃을 광고 뷰에 적용함.
-				adView.setLayoutParams(params);
+        // 광고 불러오기
+        adView.loadAd();
 
 		setContentView(relativeLayout);
 	}
@@ -374,9 +310,9 @@ AdFit은 유효 광고의 100% 노출을 보장하지 않습니다. 유효 광�
 
 ### Q3. 광고 영역이 텅 비어보입니다. 아담 버그 아닌가요?
 
-최초 광고를 내려받기 전 까지는 광고 요청에 시간이 걸리기 때문에 잠시 비어있을 수 있습니다. SDK 2.0 부터는 기본적으로 광고를 감싸고 있는 영역이 View.GONE 상태였다가, 광고가 완전히 내려받은 후에 View.VISIBLE 로 바꾸고 있습니다. 한번 View.VISIBLE 로 바뀐 영역은 광고 내려받기가 실패할 지라도 다시 가리지 않습니다.
+최초 광고를 내려받기 전 까지는 광고 요청에 시간이 걸리기 때문에 잠시 비어있을 수 있습니다.
 
-어떠한 사유로 광고 내려받기가 실패할 경우에는 AdView 객체의 OnAdFailedListener 리스너를 설정해 필요한 기능을 앱에 맞게 설정하시면 됩니다.
+어떠한 사유로 광고 내려받기가 실패할 경우에는 AdListener 인터페이스의 onAdFailed 를 설정해 필요한 기능을 앱에 맞게 설정하시면 됩니다.
 
 ### Q4. 시스템 앱에서 Expandable 광고가 보이지 않습니다. 왜 그런건가요?
 

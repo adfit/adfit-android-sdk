@@ -63,14 +63,14 @@
         </LinearLayout>
     </TabHost>
 
-    <com.kakao.adfit.publisher.AdView
+    <com.kakao.adfit.ads.ba.BannerAdView
             android:id="@+id/adview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
-            clientId="TestClientId"
-            requestInterval="60"
-            android:visibility="invisible"/>
+            clientId="DAN-s164c5nwco54"
+            requestInterval="30"
+            />
 
 </FrameLayout>

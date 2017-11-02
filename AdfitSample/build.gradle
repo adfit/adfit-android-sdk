@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.3.3'
     }
 }
 
@@ -20,7 +20,7 @@ allprojects {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.3'
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.kakao.adfit.publisher.sample"
@@ -45,5 +45,5 @@ android {
 dependencies {
     compile 'com.google.android.gms:play-services-base:+'
     compile 'com.google.android.gms:play-services-ads:+'
-    compile(name:'AdfitSDK-2.4.4', ext:'aar')
+    compile(name: 'AdfitSDK-3.0.0', ext: 'aar')
 }

@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.RelativeLayout;
-import com.kakao.adfit.publisher.AdView;
-import com.kakao.adfit.publisher.AdView.*;
-import com.kakao.adfit.publisher.impl.AdError;
+
+import com.kakao.adfit.ads.AdListener;
+import com.kakao.adfit.ads.ba.BannerAdView;
 
 public class BannerTypeJava extends Activity {
     private static final String LOGTAG = "BannerTypeJava";
     private RelativeLayout relativeLayout = null;
-    private AdView adView = null;
+    private BannerAdView adView = null;
+    private BannerAdView b = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,40 +37,22 @@ public class BannerTypeJava extends Activity {
 
     public void initAdFit() {
         // AdFit 광고 뷰 생성 및 설정
-        adView = new AdView(this);
+        adView = new BannerAdView(this);
 
-        // 광고 클릭시 실행할 리스너
-        adView.setOnAdClickedListener(new OnAdClickedListener() {
-            public void OnAdClicked() {
-                Log.i(LOGTAG, "광고를 클릭했습니다.");
+        adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                Log.d(LOGTAG, "onAdLoaded");
             }
-        });
 
-        // 광고 내려받기 실패했을 경우에 실행할 리스너
-        adView.setOnAdFailedListener(new OnAdFailedListener() {
-            public void OnAdFailed(AdError arg0, String arg1) {
-                Log.w(LOGTAG, arg1);
+            @Override
+            public void onAdFailed(int code) {
+                Log.d(LOGTAG, "onAdFailed " + code);
             }
-        });
 
-        // 광고를 정상적으로 내려받았을 경우에 실행할 리스너
-        adView.setOnAdLoadedListener(new OnAdLoadedListener() {
-            public void OnAdLoaded() {
-                Log.i(LOGTAG, "광고가 정상적으로 로딩되었습니다.");
-            }
-        });
-
-        // 광고를 불러올때 실행할 리스너
-        adView.setOnAdWillLoadListener(new OnAdWillLoadListener() {
-            public void OnAdWillLoad(String arg1) {
-                Log.i(LOGTAG, "광고를 불러옵니다. : " + arg1);
-            }
-        });
-
-        // 광고를 닫았을때 실행할 리스너
-        adView.setOnAdClosedListener(new OnAdClosedListener() {
-            public void OnAdClosed() {
-                Log.i(LOGTAG, "광고를 닫았습니다.");
+            @Override
+            public void onAdClicked() {
+                Log.d(LOGTAG, "onAdClicked");
             }
         });
 
@@ -78,21 +60,21 @@ public class BannerTypeJava extends Activity {
         adView.setClientId("DAN-s164c5nwco54");
 
         // 광고 갱신 시간 : 기본 60초
-        adView.setRequestInterval(12);
+        // 0 으로 설정할 경우, 갱신하지 않음.
+        adView.setRequestInterval(30);
 
         // 광고 사이즈 설정
         adView.setAdUnitSize("320x50");
 
-        // Animation 효과 : 기본 값은 AnimationType.NONE
-        adView.setAnimationType(AnimationType.FLIP_HORIZONTAL);
-        adView.setVisibility(View.VISIBLE);
+        // 광고 불러오기
+        adView.loadAd();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        if ( adView != null ) {
+        if (adView != null) {
             adView.destroy();
             adView = null;
         }
