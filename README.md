@@ -1,11 +1,11 @@
 # AdFit Android SDK Guide
 
-** Ver 3.0.0 **
+** Ver 3.0.1 **
 
 
 ### 꼭 읽어주세요!
 
-AdFit SDK `v3.0.0` 은 기존 버전에 비해 클래스명, 내부 API 등 많은 부분이 변경되었습니다.
+AdFit SDK `v3.0.1` 은 기존 버전(v2.x.x)에 비해 클래스명, 내부 API 등 많은 부분이 변경되었습니다.
 
 반드시 [SDK 연동 가이드](https://github.com/adfit/adfit-android-sdk/wiki)를 참고해 주시기를 부탁드립니다.
 

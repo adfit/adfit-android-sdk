@@ -1,5 +1,8 @@
 # 변경이력
 ## v3.0.0
+* 버그 픽스 및 안정화.
+
+## v3.0.0
 * AdView 객체 BannerAdView 로 변경 및 AdListener 로 간소화
 
 ## v2.4.4

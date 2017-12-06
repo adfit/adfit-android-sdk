@@ -45,5 +45,5 @@ android {
 dependencies {
     compile 'com.google.android.gms:play-services-base:+'
     compile 'com.google.android.gms:play-services-ads:+'
-    compile(name: 'AdfitSDK-3.0.0', ext: 'aar')
+    compile(name: 'AdfitSDK-3.0.1', ext: 'aar')
 }
