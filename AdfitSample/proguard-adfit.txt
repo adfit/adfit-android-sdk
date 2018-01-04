@@ -31,4 +31,7 @@
   public <methods>;
 }
 
+# Add
+-keep class com.kakao.adfit.** { *; }
+
 -dontwarn android.security.NetworkSecurityPolicy

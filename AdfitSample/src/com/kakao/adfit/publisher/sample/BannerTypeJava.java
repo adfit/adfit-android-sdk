@@ -71,6 +71,22 @@ public class BannerTypeJava extends Activity {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+        if (adView != null) {
+            adView.resume();
+        }
+    }
+
+    @Override
+    public void onPause(){
+        super.onPause();
+        if (adView != null) {
+            adView.pause();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
 

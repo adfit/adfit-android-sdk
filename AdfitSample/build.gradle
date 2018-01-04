@@ -12,6 +12,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven{ url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/'}
         flatDir {
             dirs 'libs'
         }
@@ -29,6 +30,29 @@ android {
         targetSdkVersion 23
     }
 
+    signingConfigs {
+        release {
+            storeFile file('adfit.jks')
+            storePassword 'adfitadfit'
+            keyAlias 'key'
+            keyPassword 'keykey'
+        }
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+        }
+
+        release {
+            debuggable true
+
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-adfit.txt'
+        }
+    }
+
     sourceSets {
         main {
             manifest.srcFile 'AndroidManifest.xml'
@@ -44,6 +68,5 @@ android {
 
 dependencies {
     compile 'com.google.android.gms:play-services-base:+'
-    compile 'com.google.android.gms:play-services-ads:+'
-    compile(name: 'AdfitSDK-3.0.1', ext: 'aar')
+    compile 'com.kakao.adfit:ads-base:3.0.2'
 }
