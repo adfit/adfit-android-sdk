@@ -9,6 +9,8 @@ AdFit SDK `v3.0.2` 은 기존 버전(v2.x.x)에 비해 클래스명, 내부 API 
 
 반드시 [SDK 연동 가이드](https://github.com/adfit/adfit-android-sdk/wiki)를 참고해 주시기를 부탁드립니다.
 
+- `v3.0.2` 에서 **proguard** 옵션이 변경되었습니다. 업데이트 시 [변경된 옵션](https://github.com/adfit/adfit-android-sdk/wiki/%EC%8B%9C%EC%9E%91%ED%95%98%EA%B8%B0#2-%EB%8B%A8%EA%B3%84--adfit-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EC%B6%94%EA%B0%80-android-studio-%EA%B8%B0%EC%A4%80)을 반드시 확인해주세요.
+
 ---
 이 가이드는 Android Application에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
 
