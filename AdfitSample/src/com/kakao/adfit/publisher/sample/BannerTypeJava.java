@@ -20,24 +20,10 @@ public class BannerTypeJava extends Activity {
         super.onCreate(savedInstanceState);
 
         relativeLayout = new RelativeLayout(this);
-
-        initAdFit();
-
-        relativeLayout.addView(adView);
-
         setContentView(relativeLayout);
 
-        // XML상에 android:layout_alignParentBottom="true" 와 같은 역할을 함
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-        params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-
-        // 위에서 만든 레이아웃을 광고 뷰에 적용함.
-        adView.setLayoutParams(params);
-    }
-
-    public void initAdFit() {
-        // AdFit 광고 뷰 생성 및 설정
         adView = new BannerAdView(this);
+        relativeLayout.addView(adView);
 
         adView.setAdListener(new AdListener() {
             @Override
