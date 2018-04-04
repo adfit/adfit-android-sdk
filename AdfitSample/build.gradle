@@ -68,5 +68,6 @@ android {
 
 dependencies {
     compile 'com.google.android.gms:play-services-base:+'
-    compile 'com.kakao.adfit:ads-base:3.0.2'
+    compile 'com.kakao.adfit:ads-base:3.0.3'
+    //compile(name:'AdfitSDK-3.0.3', ext:'aar')
 }

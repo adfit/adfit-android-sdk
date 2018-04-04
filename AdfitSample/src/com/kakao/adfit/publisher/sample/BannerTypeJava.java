@@ -13,7 +13,6 @@ public class BannerTypeJava extends Activity {
     private static final String LOGTAG = "BannerTypeJava";
     private RelativeLayout relativeLayout = null;
     private BannerAdView adView = null;
-    private BannerAdView b = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
