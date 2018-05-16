@@ -2,15 +2,17 @@ apply plugin: 'com.android.application'
 
 buildscript {
     repositories {
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.1.2'
     }
 }
 
 allprojects {
     repositories {
+        google()
         jcenter()
         maven{ url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/'}
         flatDir {
@@ -21,7 +23,7 @@ allprojects {
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.kakao.adfit.publisher.sample"
@@ -67,7 +69,7 @@ android {
 }
 
 dependencies {
-    compile 'com.google.android.gms:play-services-base:+'
-    compile 'com.kakao.adfit:ads-base:3.0.3'
-    //compile(name:'AdfitSDK-3.0.3', ext:'aar')
+    implementation 'com.kakao.adfit:ads-base:3.0.4'
+    //implementation(name:'AdfitSDK-3.0.4', ext:'aar')
+    implementation "com.google.android.gms:play-services-ads-identifier:15.+"
 }

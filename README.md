@@ -1,6 +1,6 @@
 # AdFit Android SDK Guide
 
-** Ver 3.0.3 **
+** Ver 3.0.4 **
 
 
 ### 꼭 읽어주세요!
@@ -10,8 +10,6 @@ AdFit SDK `v3.0.x` 은 기존 버전(v2.x.x)에 비해 클래스명, 내부 API 
 반드시 [SDK 연동 가이드](https://github.com/adfit/adfit-android-sdk/wiki)를 참고해 주시기를 부탁드립니다.
 
 ## Activity `onPause/onResume/onDestroy` 호출시, BannerAdView 의 `pause/resume/destroy` api 를 반드시 호출하지 않을 경우, 광고 수신에 있어 불이익을 받을 수 있습니다.
-
-## Activity Context 이외의 Context 를 이용하여 BannerAdView 를 생성할 경우, 광고 SDK 가 이상동작을 할 수 있습니다.
 
 ---
 이 가이드는 Android Application에 모바일 광고를 노출하기 위한 광고 데이터요청과 처리 방법을 설명합니다.
