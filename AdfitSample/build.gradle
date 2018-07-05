@@ -51,7 +51,7 @@ android {
 
             minifyEnabled true
             signingConfig signingConfigs.release
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-adfit.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
 
@@ -69,7 +69,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.kakao.adfit:ads-base:3.0.4'
-    //implementation(name:'AdfitSDK-3.0.4', ext:'aar')
+    implementation 'com.kakao.adfit:ads-base:3.0.5'
+//    implementation(name:'AdfitSDK-3.0.5', ext:'aar')
     implementation "com.google.android.gms:play-services-ads-identifier:15.+"
 }
