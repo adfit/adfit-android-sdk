@@ -22,14 +22,14 @@ allprojects {
 }
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 27
     buildToolsVersion '27.0.3'
 
     defaultConfig {
         applicationId "com.kakao.adfit.publisher.sample"
 
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 27
     }
 
     signingConfigs {
@@ -69,7 +69,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.kakao.adfit:ads-base:3.0.5'
-//    implementation(name:'AdfitSDK-3.0.5', ext:'aar')
+    implementation 'com.kakao.adfit:ads-base:3.0.6'
     implementation "com.google.android.gms:play-services-ads-identifier:15.+"
 }

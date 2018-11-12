@@ -30,27 +30,6 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
         mTabHost.addTab(mTabHost.newTabSpec("tab2").setIndicator("광고가 없는 탭").setContent(R.id.tab2));
 
         mTabHost.setOnTabChangedListener(this);
-
-        Button pauseBtn = (Button) findViewById(R.id.pause);
-        Button resumeBtn = (Button) findViewById(R.id.resume);
-
-        pauseBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if ( adView != null ) {
-                    adView.setRequestInterval(0);
-                }
-            }
-        });
-
-        resumeBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if ( adView != null ) {
-                    adView.setRequestInterval(30);
-                    adView.loadAd();
-                }
-
-            }
-        });
     }
 
     @Override
@@ -102,25 +81,11 @@ public class BannerTypeXML2 extends TabActivity implements OnTabChangeListener {
 
         // 할당 받은 clientId 설정
         //adView.setClientId("DAN-s164c5nwco54");
-        // 광고 갱신 시간 : 기본 60초
-        //adView.setRequestInterval(120);
-
-        // 광고 사이즈 설정
-        adView.setAdUnitSize("320x50");
 
         adView.loadAd();
     }
 
     public void onTabChanged(String tabId) {
-
-        // 광고 View가 보이지 않을 때는 내부적으로 서버에 광고 요청을 하지 않는다.
-        if (tabId.equals("tab1")) {
-            adView.setRequestInterval(30);
-            adView.loadAd();
-        } else if (tabId.equals("tab2")) {
-            adView.setRequestInterval(0);
-        }
-
     }
 
     @Override
