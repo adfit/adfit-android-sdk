@@ -69,6 +69,6 @@ android {
 }
 
 dependencies {
-    implementation 'com.kakao.adfit:ads-base:3.0.6'
+    implementation 'com.kakao.adfit:ads-base:3.0.7'
     implementation "com.google.android.gms:play-services-ads-identifier:15.+"
 }
