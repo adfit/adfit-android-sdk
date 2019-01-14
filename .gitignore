@@ -1,19 +1,8 @@
-# System dependent files
-.DS_Store
-
-# IDE dependent files
-.idea/
-**/*.iml
-**/.project
-**/.classpath
-.settings/
-bin/
-gen/
-
-# VCS depencent files
-.svn/
-
-# Gradle dependent files
+.gradle
+.idea
+/build
+/captures
 local.properties
-**/build
-.gradle/
+.DS_Store
+.externalNativeBuild
+*.iml
