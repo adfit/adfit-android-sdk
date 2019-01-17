@@ -27,8 +27,8 @@ android {
 dependencies {
     // required
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "com.google.android.gms:play-services-ads-identifier:16.0.0"
-    implementation 'com.kakao.adfit:ads-base:3.0.7'
+    implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
+    implementation "com.kakao.adfit:ads-base:$adfit_version"
 
     // optional
     implementation 'androidx.appcompat:appcompat:1.0.2'
