@@ -8,7 +8,7 @@ BannerAdView의 `pause/resume/destroy` API를 호출하지 않을 경우,
 
 [사이트/앱 운영정책](https://adfit.biz.daum.net/html/use.html)에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
 
-* SDK 연동 가이드 [Wiki](https://github.com/adfit/adfit-android-sdk/wiki)
+* SDK 연동 가이드 [Guide](GUIDE.md)
 * SDK 변경 이력 [Change Log](CHANGELOG.md)
 * 문의 고객센터 [https://cs.daum.net/question/1440.html](https://cs.daum.net/question/1440.html)
 * 사이트/앱 운영 정책 [http://adfit.biz.daum.net/html/use.html](http://adfit.biz.daum.net/html/use.html)
