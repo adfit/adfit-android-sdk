@@ -6,11 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import com.kakao.adfit.ads.AdListener;
 import com.kakao.adfit.ads.ba.BannerAdView;
-//import androidx.lifecycle.Lifecycle;
-//import androidx.lifecycle.LifecycleObserver;
-//import androidx.lifecycle.OnLifecycleEvent;
 
-public class BannerJavaSampleActivity extends AppCompatActivity {
+public class BannerJava300x250Activity extends AppCompatActivity {
 
     private BannerAdView adView;
 
@@ -21,7 +18,7 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_banner_sample);
 
         adView = findViewById(R.id.adView);  // 배너 광고 뷰
-        adView.setClientId("DAN-s164c5nwco54");  // 할당 받은 광고 단위(clientId) 설정
+        adView.setClientId("DAN-qe3w1ipit1dk");  // 할당 받은 광고 단위(clientId) 설정
         adView.setAdListener(new AdListener() {  // 광고 수신 리스너 설정
 
             @Override
@@ -40,31 +37,6 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
             }
 
         });
-
-        // lifecycle 사용 가능한 경우
-        // 참조 :: https://developer.android.com/topic/libraries/architecture/lifecycle
-//        getLifecycle().addObserver(new LifecycleObserver() {
-//
-//            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-//            public void onResume() {
-//                if (adView == null) return;
-//                adView.resume();
-//            }
-//
-//            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-//            public void onPause() {
-//                if (adView == null) return;
-//                adView.pause();
-//            }
-//
-//            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-//            public void onDestroy() {
-//                if (adView == null) return;
-//                adView.destroy();
-//                adView = null;
-//            }
-//
-//        });
 
         adView.loadAd();  // 광고 요청
     }

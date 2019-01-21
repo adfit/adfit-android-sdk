@@ -17,7 +17,7 @@ class BannerSampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_banner_sample)
 
         val adView = adView!!  // 배너 광고 뷰
-        adView.setClientId("DAN-s164c5nwco54")  // 할당 받은 광고 단위(clientId) 설정
+        adView.setClientId("DAN-1h82js7czjqsj")  // 할당 받은 광고 단위(clientId) 설정
         adView.setAdListener(object : AdListener {  // 광고 수신 리스너 설정
 
             override fun onAdLoaded() {
@@ -36,7 +36,7 @@ class BannerSampleActivity : AppCompatActivity() {
 
         // lifecycle 사용 가능한 경우
         // 참조 :: https://developer.android.com/topic/libraries/architecture/lifecycle
-        // 사용 불가능한 경우는 BannerJavaSampleActivity 참조
+        // 사용 불가능한 경우는 BannerJava320x50Activity 참조
         lifecycle.addObserver(object : LifecycleObserver {
 
             @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)

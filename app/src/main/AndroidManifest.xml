@@ -14,7 +14,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".BannerSampleActivity" />
-        <activity android:name=".BannerJavaSampleActivity" />
+        <activity android:name=".BannerJava320x50Activity" />
+        <activity android:name=".BannerJava320x100Activity" />
+        <activity android:name=".BannerJava300x250Activity" />
         <activity android:name=".AboutActivity" />
     </application>
 </manifest>
