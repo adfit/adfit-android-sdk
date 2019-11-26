@@ -6,9 +6,9 @@
 
 
 ### 1 단계 : 광고단위ID(Client ID) 발급받기
-광고를 수신하기 위해서는 먼저 [AdFit 플랫폼](http://adfit.biz.daum.net)에서 앱을 등록하고 광고단위 ID(Client ID)를 발급받아야 합니다.
+광고를 수신하기 위해서는 먼저 [AdFit 플랫폼](http://adfit.kakao.com)에서 앱을 등록하고 광고단위 ID(Client ID)를 발급받아야 합니다.
 아래의 웹 사이트에서 앱을 등록하고 광고단위 ID를 발급 받을 수 있습니다.
-AdFit 플랫폼 : [http://adfit.biz.daum.net](http://adfit.biz.daum.net)
+AdFit 플랫폼 : [http://adfit.kakao.com](http://adfit.kakao.com)
 
 
 ### 2 단계 : 프로젝트에 Adfit SDK 추가하기
@@ -84,7 +84,7 @@ Adfit SDK를 추가하는 방법은 다음과 같습니다.
     android:layout_height="wrap_content" />
 ```
 
-* 뷰의 크기는 광고를 노출하는 시점에 [AdFit 플랫폼](http://adfit.biz.daum.net)에서 설정한 크기에 맞춰 자동 조절됩니다.
+* 뷰의 크기는 광고를 노출하는 시점에 [AdFit 플랫폼](http://adfit.kakao.com)에서 설정한 크기에 맞춰 자동 조절됩니다.
 * 수신한 광고가 없을 경우 뷰는 0x0 사이즈를 갖습니다.
 * 뷰가 설정한 크기보다 작을 경우, 광고로 인한 **_수익이 발생하지 않습니다!!_**
 * ex. 320x50 사이즈를 설정한 경우, 뷰는 320dp x 50dp 보다 커야 합니다.
@@ -141,7 +141,7 @@ adView.loadAd()  // 광고 요청
 
 * 모든 api는 메인 스레드(UI 스레드)에서 호출하시기 바랍니다.
 * 광고 요청에 실패한 경우, 이전 광고가 계속 노출됩니다.
-* 광고 갱신 주기는 [AdFit 플랫폼](http://adfit.biz.daum.net)에서 설정 가능합니다.
+* 광고 갱신 주기는 [AdFit 플랫폼](http://adfit.kakao.com)에서 설정 가능합니다.
 * Java 코드는 [BannerJava320x50Activity.java](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/BannerJava320x50Activity.java) 파일을 참조하시기 바랍니다.
 * [Lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle#lc)에 따라
 BannerAdView의 pause/resume/destroy API를 호출하지 않을 경우,  **광고 수신에 불이익을 받을 수 있습니다.**
@@ -155,7 +155,7 @@ BannerAdView의 pause/resume/destroy API를 호출하지 않을 경우,  **광�
 ### Q1. 광고 영역이 비어보입니다. 버그 아닌가요?
 
 최초 광고를 서버로부터 수신하여 로딩하기 전 까지는 시간이 걸리기 때문에 잠시 비어있을 수 있습니다.
-광고를 노출하는 시점에 [AdFit 플랫폼](http://adfit.biz.daum.net)에서 설정한 크기에 맞춰 영역의 크기가 조절되며,
+광고를 노출하는 시점에 [AdFit 플랫폼](http://adfit.kakao.com)에서 설정한 크기에 맞춰 영역의 크기가 조절되며,
 최초 광고를 수신한 이후에는 새로운 광고를 요청 중이거나 로딩에 실패해도 이전 광고를 계속 보여주게 됩니다.
 광고 로딩 완료 또는 로딩 실패할 때에 대한 처리가 필요한 경우, AdListener를 등록하여 각 시점에 맞게 처리하시면 됩니다.
 
