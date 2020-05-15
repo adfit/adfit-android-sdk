@@ -15,6 +15,7 @@ AdFit 플랫폼 : [http://adfit.kakao.com](http://adfit.kakao.com)
 Adfit SDK를 사용하기 위해서는 Kotlin과 Google Play Service SDK에 대한 설정이 필요합니다.
 Kotlin과 Google Play Service SDK 설정 방법에 대해서는 아래 사이트와 샘플 프로젝트를 참고 부탁드립니다.
 * Kotlin 설정 방법: [http://kotlinlang.org/docs/tutorials/kotlin-android.html](http://kotlinlang.org/docs/tutorials/kotlin-android.html)
+* 기존 앱에 Kotlin 설정 방법: [https://developer.android.com/kotlin/add-kotlin](https://developer.android.com/kotlin/add-kotlin)
 * Google Play Service SDK 설정 방법: [https://developers.google.com/android/guides/setup](https://developers.google.com/android/guides/setup)
 
 Adfit SDK를 추가하는 방법은 다음과 같습니다.
