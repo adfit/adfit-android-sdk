@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
             Item("Banner Java 320x50", BannerJava320x50Activity::class.java),
             Item("Banner Java 320x100", BannerJava320x100Activity::class.java),
             Item("Banner Java 300x250", BannerJava300x250Activity::class.java),
+            Item("Native AD Sample (Test)", NativeAdSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
         )
 
