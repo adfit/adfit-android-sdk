@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_native_ad.view.*
 
 class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadListener {
 
-    private val adUnitId: String = "발급받은 광고단위 ID"
+    private val adUnitId: String = "발급받은 광고단위 ID" // FIXME: 발급받은 광고단위 ID를 입력해주세요.
 
     private var nativeAdLoader: AdFitNativeAdLoader? = null
     private var nativeAdBinder: AdFitNativeAdBinder? = null
@@ -23,7 +23,7 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
 
         setContentView(R.layout.activity_native_ad_smaple)
         loadAdButton.setOnClickListener {
-            loadAdButton.isEnabled = false // 광고 요청 버튼 비활성화
+            loadAdButton.isEnabled = false // 광고 요청 버튼 비활성화 (동시 요청 방지)
             loadNativeAd()
         }
 

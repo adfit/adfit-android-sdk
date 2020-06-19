@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             Item("Banner Java 320x100", BannerJava320x100Activity::class.java),
             Item("Banner Java 300x250", BannerJava300x250Activity::class.java),
             Item("Native AD Sample (Test)", NativeAdSampleActivity::class.java),
+            Item("Native AD Sample (java, Test)", NativeAdJavaSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
         )
 
@@ -74,6 +75,6 @@ class MainActivity : AppCompatActivity() {
 
     class LayoutManager(context: Context) : LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-    class ItemDecoration(context: Context) : DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+    class ItemDecoration(context: Context) : DividerItemDecoration(context, VERTICAL)
 
 }
