@@ -1,4 +1,4 @@
-# AdFit Android SDK Guide (Ver 3.4.0)
+# AdFit Android SDK Guide (Ver 3.5.2)
 
 ## 꼭 읽어주세요!
 
