@@ -1,12 +1,8 @@
 # AdFit Android SDK Guide (Ver 3.7.1)
 
-## 꼭 읽어주세요!
-
-**[Activity Lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle#lc)에 따라
-BannerAdView의 `pause/resume/destroy` API를 호출하지 않을 경우,
-광고 수신에 있어 불이익을 받을 수 있습니다.**
-
 [사이트/앱 운영정책](https://adfit.kakao.com/web/html/use_kakao.html)에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
+
+## 지원
 
 * SDK 연동 가이드 [Guide](GUIDE.md)
 * SDK 변경 이력 [Change Log](CHANGELOG.md)
@@ -15,7 +11,7 @@ BannerAdView의 `pause/resume/destroy` API를 호출하지 않을 경우,
 
 ## License
 
-This software is licensed under the [Apache 2 license](https://github.com/adfit/adfit-android-sdk/edit/master/LICENSE), quoted below.
+This software is licensed under the [Apache 2 license](https://github.com/adfit/adfit-android-sdk/blob/master/LICENSE), quoted below.
 
 Copyright 2017 Kakao Corp. <http://www.kakaocorp.com>
 
