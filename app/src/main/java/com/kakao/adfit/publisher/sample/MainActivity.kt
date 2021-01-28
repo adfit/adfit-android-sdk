@@ -19,10 +19,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val items = listOf(
-            Item("Banner Sample", BannerSampleActivity::class.java),
-            Item("Banner Java 320x50", BannerJava320x50Activity::class.java),
-            Item("Banner Java 320x100", BannerJava320x100Activity::class.java),
-            Item("Banner Java 300x250", BannerJava300x250Activity::class.java),
+            Item("Banner Sample (Kotlin)", BannerSampleActivity::class.java),
+            Item("Banner Sample (Java)", BannerJavaSampleActivity::class.java),
             Item("Native AD Sample (Test)", NativeAdSampleActivity::class.java),
             Item("Native AD Sample (java, Test)", NativeAdJavaSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         fun onClick(context: Context) {
             context.startActivity(Intent(context, activityClass))
         }
-
     }
 
     class ViewHolder(val textView: TextView) : RecyclerView.ViewHolder(textView)
@@ -70,11 +67,9 @@ class MainActivity : AppCompatActivity() {
             textView.text = item.text
             textView.setOnClickListener { item.onClick(it.context) }
         }
-
     }
 
     class LayoutManager(context: Context) : LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-    class ItemDecoration(context: Context) : DividerItemDecoration(context, VERTICAL)
-
+    class ItemDecoration(context: Context) : DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
 }
