@@ -2,12 +2,17 @@ package com.kakao.adfit.publisher.sample;
 
 import android.os.Bundle;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.OnLifecycleEvent;
+
 import com.kakao.adfit.ads.AdListener;
 import com.kakao.adfit.ads.ba.BannerAdView;
 
-public class BannerJava300x250Activity extends AppCompatActivity {
+public class BannerJavaSampleActivity extends AppCompatActivity {
 
     private BannerAdView adView;
 
@@ -18,7 +23,7 @@ public class BannerJava300x250Activity extends AppCompatActivity {
         setContentView(R.layout.activity_banner_sample);
 
         adView = findViewById(R.id.adView);  // 배너 광고 뷰
-        adView.setClientId("DAN-qe3w1ipit1dk");  // 할당 받은 광고 단위(clientId) 설정
+        adView.setClientId("input-your-clientId");  // 할당 받은 광고단위 ID 설정
         adView.setAdListener(new AdListener() {  // 광고 수신 리스너 설정
 
             @Override
@@ -38,6 +43,33 @@ public class BannerJava300x250Activity extends AppCompatActivity {
 
         });
 
+        // lifecycle 사용 가능한 경우
+        // 참조 :: https://developer.android.com/topic/libraries/architecture/lifecycle
+        getLifecycle().addObserver(new LifecycleObserver() {
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+            public void onResume() {
+                if (adView != null) {
+                    adView.resume();
+                }
+            }
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
+            public void onPause() {
+                if (adView != null) {
+                    adView.pause();
+                }
+            }
+
+            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+            public void onDestroy() {
+                if (adView != null) {
+                    adView.destroy();
+                    adView = null;
+                }
+            }
+        });
+
         adView.loadAd();  // 광고 요청
     }
 
@@ -46,8 +78,9 @@ public class BannerJava300x250Activity extends AppCompatActivity {
         super.onResume();
 
         // lifecycle 사용이 불가능한 경우
-        if (adView == null) return;
-        adView.resume();
+        if (adView != null) {
+            adView.resume();
+        }
     }
 
     @Override
@@ -55,8 +88,9 @@ public class BannerJava300x250Activity extends AppCompatActivity {
         super.onPause();
 
         // lifecycle 사용이 불가능한 경우
-        if (adView == null) return;
-        adView.pause();
+        if (adView != null) {
+            adView.pause();
+        }
     }
 
     @Override
@@ -64,13 +98,13 @@ public class BannerJava300x250Activity extends AppCompatActivity {
         super.onDestroy();
 
         // lifecycle 사용이 불가능한 경우
-        if (adView == null) return;
-        adView.destroy();
+        if (adView != null) {
+            adView.destroy();
+            adView = null;
+        }
     }
 
     private void toast(String message) {
-        if (adView == null) return;
-        Toast.makeText(adView.getContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
-
 }

@@ -99,7 +99,7 @@ BannerAdView를 설정하고 광고를 요청하는 코드는 다음과 같습�
 [**BannerSampleActivity.kt**](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/BannerSampleActivity.kt)
 ```kotlin
 val adView: BannerAdView
-adView.setClientId("your-clientId")  // 할당 받은 광고 단위(clientId) 설정
+adView.setClientId("input-your-clientId")  // 할당 받은 광고단위 ID 설정
 adView.setAdListener(object : AdListener {  // optional :: 광고 수신 리스너 설정
 
     override fun onAdLoaded() {
@@ -143,7 +143,7 @@ adView.loadAd()  // 광고 요청
 * 모든 api는 메인 스레드(UI 스레드)에서 호출하시기 바랍니다.
 * 광고 요청에 실패한 경우, 이전 광고가 계속 노출됩니다.
 * 광고 갱신 주기는 [AdFit 플랫폼](http://adfit.kakao.com)에서 설정 가능합니다.
-* Java 코드는 [BannerJava320x50Activity.java](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/BannerJava320x50Activity.java) 파일을 참조하시기 바랍니다.
+* Java 코드는 [BannerJava320x50Activity.java](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/BannerJavaSampleActivity.java) 파일을 참조하시기 바랍니다.
 * [Lifecycle](https://developer.android.com/guide/components/activities/activity-lifecycle#lc)에 따라
 BannerAdView의 pause/resume/destroy API를 호출하지 않을 경우,  **광고 수신에 불이익을 받을 수 있습니다.**
 * [Lifecycle 라이브러리](https://developer.android.com/topic/libraries/architecture/lifecycle) 사용이 불가능한 경우,
