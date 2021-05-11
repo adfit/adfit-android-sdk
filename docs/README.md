@@ -1,4 +1,4 @@
-# AdFit Android SDK Guide (Ver 3.7.1)
+# AdFit Android SDK Guide (Ver 3.8.5)
 
 [사이트/앱 운영정책](https://adfit.kakao.com/web/html/use_kakao.html)에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
 
