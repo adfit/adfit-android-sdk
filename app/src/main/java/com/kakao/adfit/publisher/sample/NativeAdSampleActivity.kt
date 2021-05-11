@@ -125,7 +125,6 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
         val nativeAdLayout: AdFitNativeAdLayout =
             AdFitNativeAdLayout.Builder(nativeAdView.containerView) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
                 .setTitleView(nativeAdView.titleTextView) // 광고 타이틀 문구 (필수)
-                .setBodyView(nativeAdView.bodyTextView) // 광고 본문 텍스트
                 .setProfileIconView(nativeAdView.profileIconView) // 광고주(브랜드) 이름
                 .setProfileNameView(nativeAdView.profileNameTextView) // // 광고주 아이콘 (브랜드 로고)
                 .setMediaView(nativeAdView.mediaView) // 광고 이미지 소재 또는 비디오 소재 (필수)

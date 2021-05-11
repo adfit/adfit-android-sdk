@@ -156,7 +156,6 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
         AdFitNativeAdLayout nativeAdLayout =
                 new AdFitNativeAdLayout.Builder((AdFitNativeAdView) nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
                         .setTitleView((TextView) nativeAdView.findViewById(R.id.titleTextView)) // 광고 타이틀 문구 (필수)
-                        .setBodyView((TextView) nativeAdView.findViewById(R.id.bodyTextView)) // 광고 본문 텍스트
                         .setProfileIconView((ImageView) nativeAdView.findViewById(R.id.profileIconView)) // 광고주(브랜드) 이름
                         .setProfileNameView((TextView) nativeAdView.findViewById(R.id.profileNameTextView)) // // 광고주 아이콘 (브랜드 로고)
                         .setMediaView((AdFitMediaView) nativeAdView.findViewById(R.id.mediaView)) // 광고 이미지 소재 또는 비디오 소재 (필수)
