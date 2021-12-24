@@ -3,8 +3,8 @@
 buildscript {
     ext.adfit_version = '3.8.5'
 
-    ext.kotlin_version = '1.5.0'
-    ext.play_service_version = '17.0.0' // 17.0.0부터 AndroidX 사용 필수
+    ext.kotlin_version = '1.6.10'
+    ext.play_service_version = '18.0.0' // 17.0.0부터 AndroidX 사용 필수
 
     repositories {
         google()
@@ -12,7 +12,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0'
+        classpath 'com.android.tools.build:gradle:7.0.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -24,7 +24,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
 
