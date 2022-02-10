@@ -2,7 +2,7 @@
 * 최신 버전의 Adfit SDK 사용을 권장합니다.
 * 최신 버전의 [Android Studio](https://developer.android.com/studio/) 사용을 권장합니다. Eclipse에 대한 기술 지원은 하지 않습니다.
 * 최신 버전의 [Kotlin](https://developer.android.com/kotlin/) 사용을 권장합니다.
-* Adfit SDK는 [Android 4.0(Ice Cream Sandwich, API Level 14)](https://developer.android.com/about/versions/android-4.0) 이상 기기에서 동작합니다.
+* Adfit SDK는 [Android 5.0(Lollipop, API Level 21)](https://developer.android.com/about/versions/android-5.0) 이상 기기에서 동작합니다.
 
 
 ### 1 단계 : 광고단위ID(Client ID) 발급받기
