@@ -42,34 +42,12 @@ Adfit SDK를 추가하는 방법은 다음과 같습니다.
 3. 설정 후, 툴바의 Sync Project with Gradle Files를 눌러 변경사항을 반영합니다.
 
 
-## 타겟 API 레벨 28 이상 대응하기
+## <del>타겟 API 레벨 28 이상 대응하기</del>
 
-앱의 targetSdkVersion 설정이 Android 9(API 레벨 28) 이상인 경우, 광고 노출 및 클릭이 정상적으로 동작하기 위해서는
-일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요합니다.
+<del>앱의 targetSdkVersion 설정이 Android 9(API 레벨 28) 이상인 경우, 광고 노출 및 클릭이 정상적으로 동작하기 위해서는
+일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요합니다.<del/>
 
-1. 프로젝트에 리소스 xml 디렉토리에 [`network_security_config.xml`](../app/src/main/res/xml/network_security_config.xml)을 추가합니다.
-    ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <network-security-config>
-        <base-config cleartextTrafficPermitted="true"/>
-    </network-security-config>
-    ```
-2. 생성한 파일을 [네트워크 보안 구성 파일로 설정](https://github.com/adfit/adfit-android-sdk/commit/030eabe94692df82f290800ef394bf48c62ddf55)합니다.
-앱 [`AndroidManifest.xml`](../app/src/main/AndroidManifest.xml) 파일에서 `<application>`의 `android:networkSecurityConfig` 속성으로 지정합니다.
-    ```xml
-    <?xml version="1.0" encoding="utf-8"?>
-    <manifest ... >
-        <application 
-            android:networkSecurityConfig="@xml/network_security_config"
-            ... >
-            ...
-        </application>
-    </manifest>
-    ```
-
-* 네트워크 보안 구성: https://developer.android.com/training/articles/security-config.html
-* 설정 commit: https://github.com/adfit/adfit-android-sdk/commit/030eabe94692df82f290800ef394bf48c62ddf55
-
+AdFit SDK v3.11.10 버전부터는 일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요하지 않습니다.
 
 ## 배너 광고 추가하기
 
