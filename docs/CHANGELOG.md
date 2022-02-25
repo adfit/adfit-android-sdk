@@ -1,5 +1,10 @@
 # 변경이력
 
+## v3.11.11
+* Google Play 정책 준수를 위한 개선
+  * Android ID 사용 부분 제거
+  * 버그 트래킹 용도로 사용 중인 Android ID를 광고 ID와 연계하여 광고 ID 초기화 기능을 무력화할 수 있다는 문제가 있어 해당 부분 제거 처리
+
 ## v3.11.10
 * Android 12(API Level 31) 대응
 * 최소 지원버전 Android 5.0(Lollipop, API Level 21)으로 상향
