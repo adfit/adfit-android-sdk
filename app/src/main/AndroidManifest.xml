@@ -16,6 +16,8 @@
         </activity>
         <activity android:name=".BannerSampleActivity" />
         <activity android:name=".BannerJavaSampleActivity" />
+        <activity android:name=".NativeAdSampleActivity" />
+        <activity android:name=".NativeAdJavaSampleActivity" />
         <activity android:name=".AboutActivity" />
     </application>
 </manifest>

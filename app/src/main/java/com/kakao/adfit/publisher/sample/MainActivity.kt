@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         val items = listOf(
             Item("Banner Sample (Kotlin)", BannerSampleActivity::class.java),
             Item("Banner Sample (Java)", BannerJavaSampleActivity::class.java),
+            Item("Native AD Sample (Test)", NativeAdSampleActivity::class.java),
+            Item("Native AD Sample (java, Test)", NativeAdJavaSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
         )
 
