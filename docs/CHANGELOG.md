@@ -53,9 +53,9 @@
 ## v3.0.6
 * 인앱 브라우져 내에서 새 창으로 호출 시, 이를 무시하는 오류 수정
 * WebView 생성 시, 크래시 발생하지 않도록 수정 (관련 이슈)
-* 광고 갱신 주기 Adfit 웹 설정을 통해 작동하도록 변경  
+* 광고 갱신 주기 AdFit 웹 설정을 통해 작동하도록 변경
   기존 API(BannerAdView#setRequestInterval())는 더 이상 작동하지 않습니다.
-* 광고 크기 단위 Adfit 웹 설정을 통해 작동하도록 변경  
+* 광고 크기 단위 AdFit 웹 설정을 통해 작동하도록 변경
   기존 API(BannerAdView#setAdUnitSize())는 더 이상 작동하지 않습니다.
 
 ## v3.0.1~5

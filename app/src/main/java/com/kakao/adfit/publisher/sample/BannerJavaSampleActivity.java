@@ -23,7 +23,7 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_banner_sample);
 
         adView = findViewById(R.id.adView);  // 배너 광고 뷰
-        adView.setClientId("input-your-clientId");  // 할당 받은 광고단위 ID 설정
+        adView.setClientId("발급받은 광고단위 ID");  // 광고단위 ID 설정
         adView.setAdListener(new AdListener() {  // 광고 수신 리스너 설정
 
             @Override
@@ -40,7 +40,6 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
             public void onAdClicked() {
                 toast("Banner is clicked");
             }
-
         });
 
         // lifecycle 사용 가능한 경우

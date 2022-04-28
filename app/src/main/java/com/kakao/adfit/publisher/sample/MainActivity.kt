@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
         val items = listOf(
             Item("Banner Sample (Kotlin)", BannerSampleActivity::class.java),
             Item("Banner Sample (Java)", BannerJavaSampleActivity::class.java),
-            Item("Native AD Sample (Test)", NativeAdSampleActivity::class.java),
-            Item("Native AD Sample (java, Test)", NativeAdJavaSampleActivity::class.java),
+            Item("Native AD Sample (Kotlin)", NativeAdSampleActivity::class.java),
+            Item("Native AD Sample (Java)", NativeAdJavaSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
         )
 
@@ -71,5 +71,5 @@ class MainActivity : AppCompatActivity() {
 
     class LayoutManager(context: Context) : LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
-    class ItemDecoration(context: Context) : DividerItemDecoration(context, DividerItemDecoration.VERTICAL)
+    class ItemDecoration(context: Context) : DividerItemDecoration(context, VERTICAL)
 }

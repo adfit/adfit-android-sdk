@@ -12,7 +12,7 @@
         android:layout_gravity="top|center_horizontal"
         android:layout_weight="1"
         android:gravity="bottom"
-        android:text="Adfit"
+        android:text="AdFit"
         android:textSize="35sp" />
 
     <View

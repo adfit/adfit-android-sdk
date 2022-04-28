@@ -17,7 +17,7 @@ class BannerSampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_banner_sample)
 
         val adView = adView!!  // 배너 광고 뷰
-        adView.setClientId("input-your-clientId")  // 할당 받은 광고단위 ID 설정
+        adView.setClientId("발급받은 광고단위 ID")  // 광고단위 ID 설정
         adView.setAdListener(object : AdListener {  // 광고 수신 리스너 설정
 
             override fun onAdLoaded() {
