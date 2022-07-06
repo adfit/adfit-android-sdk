@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,21 +13,18 @@ import androidx.lifecycle.Lifecycle;
 
 import com.kakao.adfit.ads.AdError;
 import com.kakao.adfit.ads.na.AdFitAdInfoIconPosition;
-import com.kakao.adfit.ads.na.AdFitMediaView;
+import com.kakao.adfit.ads.na.AdFitBizBoardAdTemplateLayout;
 import com.kakao.adfit.ads.na.AdFitNativeAdBinder;
-import com.kakao.adfit.ads.na.AdFitNativeAdLayout;
 import com.kakao.adfit.ads.na.AdFitNativeAdLoader;
 import com.kakao.adfit.ads.na.AdFitNativeAdRequest;
-import com.kakao.adfit.ads.na.AdFitNativeAdView;
-import com.kakao.adfit.ads.na.AdFitVideoAutoPlayPolicy;
 
 import org.jetbrains.annotations.NotNull;
 
-public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdFitNativeAdLoader.AdLoadListener {
+public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements AdFitNativeAdLoader.AdLoadListener {
 
     private final String adUnitId = "발급받은 광고단위 ID"; // FIXME: 발급받은 광고단위 ID를 입력해주세요.
 
-    private FrameLayout nativeAdFrameLayout;
+    private AdFitBizBoardAdTemplateLayout bizBoardAdTemplateLayout;
     private Button loadAdButton;
 
     private AdFitNativeAdLoader nativeAdLoader;
@@ -40,9 +34,10 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_native_ad_smaple);
+        setContentView(R.layout.activity_bizboard_ad_smaple);
 
-        nativeAdFrameLayout = findViewById(R.id.nativeAdFrameLayout); // 광고를 노출할 위치
+        bizBoardAdTemplateLayout = findViewById(R.id.bizBoardAdTemplateLayout); // 광고를 노출할 위치
+        bizBoardAdTemplateLayout.setVisibility(View.GONE);
 
         loadAdButton = findViewById(R.id.loadAdButton);
         loadAdButton.setOnClickListener(new View.OnClickListener() {
@@ -100,17 +95,6 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
                  * @see [AdFitAdInfoIconPosition.RIGHT_BOTTOM] 우하단
                  */
                 .setAdInfoIconPosition(AdFitAdInfoIconPosition.RIGHT_TOP) // 광고 정보 아이콘 위치 설정 (container view 내에서의 광고 아이콘 위치)
-
-                /*
-                 * 비디오 광고 자동 재생 정책을 설정합니다.
-                 *
-                 * 기본값: [AdFitVideoAutoPlayPolicy.WIFI_ONLY] WiFi 연결 상태에서만 자동재생
-                 *
-                 * @see [AdFitVideoAutoPlayPolicy.ALWAYS] 항상 자동재생
-                 * @see [AdFitVideoAutoPlayPolicy.WIFI_ONLY] WiFi 연결 상태에서만 자동재생
-                 * @see [AdFitVideoAutoPlayPolicy.NONE] 자동 재생하지 않음
-                 */
-                .setVideoAutoPlayPolicy(AdFitVideoAutoPlayPolicy.WIFI_ONLY) // 비디오 광고 자동 재생 정책 설정
                 .build();
 
         /*
@@ -145,30 +129,13 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
             return;
         }
 
-        // 이전에 노출 중인 광고가 있으면 해제
-        if (nativeAdBinder != null) {
-            nativeAdBinder.unbind();
-        }
-        nativeAdFrameLayout.removeAllViews();
-
-        View nativeAdView = getLayoutInflater().inflate(R.layout.item_native_ad, nativeAdFrameLayout, false);
-        nativeAdFrameLayout.addView(nativeAdView);
-
-        // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
-        AdFitNativeAdLayout nativeAdLayout =
-                new AdFitNativeAdLayout.Builder((AdFitNativeAdView) nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
-                        .setTitleView((TextView) nativeAdView.findViewById(R.id.titleTextView)) // 광고 타이틀 문구 (필수)
-                        .setProfileIconView((ImageView) nativeAdView.findViewById(R.id.profileIconView)) // 광고주(브랜드) 이름
-                        .setProfileNameView((TextView) nativeAdView.findViewById(R.id.profileNameTextView)) // // 광고주 아이콘 (브랜드 로고)
-                        .setMediaView((AdFitMediaView) nativeAdView.findViewById(R.id.mediaView)) // 광고 이미지 소재 또는 비디오 소재 (필수)
-                        .setCallToActionButton((Button) nativeAdView.findViewById(R.id.callToActionButton)) // 행동 유도 버튼 (ex. 알아보기, 바로가기 등)
-                        .build();
-
         // 광고 노출
         nativeAdBinder = binder;
-        binder.bind(nativeAdLayout);
+        binder.bind(bizBoardAdTemplateLayout);
 
-        // (샘플 구현용) 광고 요청 버튼 활성화
+        bizBoardAdTemplateLayout.setVisibility(View.VISIBLE);
+
+        // 광고 요청 버튼 활성화
         loadAdButton.setEnabled(true);
     }
 
@@ -197,7 +164,7 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
             // TODO: 보여지고 있는 광고가 있을 때의 처리
         }
 
-        // (샘플 구현용) 광고 요청 버튼 활성화
+        // 광고 요청 버튼 활성화
         loadAdButton.setEnabled(true);
     }
 }

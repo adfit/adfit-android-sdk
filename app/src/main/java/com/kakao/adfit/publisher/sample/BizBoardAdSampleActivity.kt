@@ -2,16 +2,17 @@ package com.kakao.adfit.publisher.sample
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import com.kakao.adfit.ads.AdError
 import com.kakao.adfit.ads.na.*
-import kotlinx.android.synthetic.main.activity_native_ad_smaple.*
-import kotlinx.android.synthetic.main.item_native_ad.view.*
+import kotlinx.android.synthetic.main.activity_bizboard_ad_smaple.*
+import kotlinx.android.synthetic.main.activity_native_ad_smaple.loadAdButton
 
-class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadListener {
+class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadListener {
 
     private val adUnitId: String = "발급받은 광고단위 ID" // FIXME: 발급받은 광고단위 ID를 입력해주세요.
 
@@ -21,7 +22,8 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_native_ad_smaple)
+        setContentView(R.layout.activity_bizboard_ad_smaple)
+        bizBoardAdTemplateLayout.visibility = View.GONE
         loadAdButton.setOnClickListener {
             loadNativeAd()
         }
@@ -71,17 +73,6 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
              * @see [AdFitAdInfoIconPosition.RIGHT_BOTTOM] 우하단
              */
             .setAdInfoIconPosition(AdFitAdInfoIconPosition.RIGHT_TOP) // 광고 정보 아이콘 위치 설정 (container view 내에서의 광고 아이콘 위치)
-
-            /**
-             * 비디오 광고 자동 재생 정책을 설정합니다.
-             *
-             * 기본값: [AdFitVideoAutoPlayPolicy.WIFI_ONLY] WiFi 연결 상태에서만 자동재생
-             *
-             * @see [AdFitVideoAutoPlayPolicy.ALWAYS] 항상 자동재생
-             * @see [AdFitVideoAutoPlayPolicy.WIFI_ONLY] WiFi 연결 상태에서만 자동재생
-             * @see [AdFitVideoAutoPlayPolicy.NONE] 자동 재생하지 않음
-             */
-            .setVideoAutoPlayPolicy(AdFitVideoAutoPlayPolicy.WIFI_ONLY) // 비디오 광고 자동 재생 정책 설정
             .build()
 
         /**
@@ -115,27 +106,11 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
             return
         }
 
-        // 이전에 노출 중인 광고가 있으면 해제
-        nativeAdBinder?.unbind()
-        nativeAdFrameLayout.removeAllViews()
-
-        val nativeAdView =
-            layoutInflater.inflate(R.layout.item_native_ad, nativeAdFrameLayout, false)
-        nativeAdFrameLayout.addView(nativeAdView)
-
-        // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
-        val nativeAdLayout: AdFitNativeAdLayout =
-            AdFitNativeAdLayout.Builder(nativeAdView.containerView) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
-                .setTitleView(nativeAdView.titleTextView) // 광고 타이틀 문구 (필수)
-                .setProfileIconView(nativeAdView.profileIconView) // 광고주(브랜드) 이름
-                .setProfileNameView(nativeAdView.profileNameTextView) // // 광고주 아이콘 (브랜드 로고)
-                .setMediaView(nativeAdView.mediaView) // 광고 이미지 소재 또는 비디오 소재 (필수)
-                .setCallToActionButton(nativeAdView.callToActionButton) // 행동 유도 버튼 (ex. 알아보기, 바로가기 등)
-                .build()
-
         // 광고 노출
         nativeAdBinder = binder
-        binder.bind(nativeAdLayout)
+        binder.bind(bizBoardAdTemplateLayout)
+
+        bizBoardAdTemplateLayout.visibility = View.VISIBLE
 
         // (샘플 구현용) 광고 요청 버튼 활성화
         loadAdButton.isEnabled = true

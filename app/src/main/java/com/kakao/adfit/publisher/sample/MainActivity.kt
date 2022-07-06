@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity() {
             Item("Banner Sample (Java)", BannerJavaSampleActivity::class.java),
             Item("Native AD Sample (Kotlin)", NativeAdSampleActivity::class.java),
             Item("Native AD Sample (Java)", NativeAdJavaSampleActivity::class.java),
+            Item("BizBoard AD Sample (Kotlin)", BizBoardAdSampleActivity::class.java),
+            Item("BizBoard AD Sample (Java)", BizBoardAdJavaSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
         )
 
