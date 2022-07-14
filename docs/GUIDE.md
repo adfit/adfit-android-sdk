@@ -59,7 +59,7 @@ AdFit SDK v3.11.10 버전부터는 일반 텍스트 트래픽을 허용하는 �
 [AdFit 플랫폼](https://adfit.kakao.com)에서 설정한 광고유형에 따라 아래 문서를 참고하시기 바랍니다.
 * [배너 광고 시작하기](BANNERAD.md)
 * [네이티브 광고 시작하기](NATIVEAD.md)
-* [비즈보드 광고 시작하기](BIZBOARD.md)
+* [비즈보드 광고 시작하기](BIZBOARDAD.md)
 
 
 ## FAQ
