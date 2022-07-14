@@ -1,7 +1,7 @@
 buildscript {
-    ext.adfit_version = '3.12.6'
+    ext.adfit_version = '3.12.7'
 
-    ext.kotlin_version = '1.6.21'
+    ext.kotlin_version = '1.7.10'
     ext.play_service_version = '18.0.1'
 
     repositories {

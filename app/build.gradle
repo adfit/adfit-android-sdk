@@ -31,7 +31,7 @@ dependencies {
     implementation "com.kakao.adfit:ads-base:$adfit_version"
 
     // optional :: 샘플 구현용으로 선택 사항
-    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
