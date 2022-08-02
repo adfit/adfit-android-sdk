@@ -74,17 +74,18 @@ nativeAdLoader.loadAd(request, object : AdFitNativeAdLoader.AdLoadListener {
 네이티브 광고 레이아웃은 서비스 컨텐츠와 어울리도록 구성되어야 하므로, 서비스에서 직접 광고 레이아웃을 구현하는 과정이 필요합니다.<br/>
 네이티브 광고 레이아웃 구성 샘플은 아래와 같습니다.<br/>
 
-<img src="https://t1.daumcdn.net/adfit_sdk/document-assets/ios/native-ad-components2.png" width="640" style="border:1px solid #aaa">
+<img src="https://t1.daumcdn.net/adfit_sdk/document-assets/ios/native-ad-components3.png" width="640" style="border:1px solid #aaa"/>
 
-| 번호 | 설명                     | UI 클래스                | AdFitNativeAdLayout |
-|-----|-------------------------|------------------------|---------------------|
-| -   | 광고 영역                 | AdFitNativeAdView       | containerView      |
-| 1   | 제목 텍스트                | TextView               | titleView           |
-| 2   | 행동유도버튼                | Button                 | callToActionButton |
-| 3   | 광고주(브랜드) 이름 텍스트    | TextView                | profileNameView    |
-| 4   | 광고주(브랜드) 아이콘 이미지   | ImageView              | profileIconView     |
-| 5   | 미디어 소재(이미지, 비디오 등) | AdFitMediaView         | mediaView           |
-| 6   | 광고 정보 아이콘 이미지       | -                      | -                   |
+| 번호 | 설명                       | UI 클래스                | AdFitNativeAdLayout |
+|-----|---------------------------|------------------------|---------------------|
+| -   | 광고 영역                   | AdFitNativeAdView      | containerView       |
+| 1   | 광고 제목                   | TextView               | titleView           |
+| 2   | 행동유도버튼                 | Button                 | callToActionButton  |
+| 3   | 광고주 이름 (브랜드명)         | TextView               | profileNameView     |
+| 4   | 광고주 아이콘 (브랜드 로고)     | ImageView              | profileIconView     |
+| 5   | 미디어 소재 (이미지, 비디오 등)  | AdFitMediaView         | mediaView           |
+| 6   | 광고 정보 아이콘              | -                      | -                   |
+| 7   | 광고 홍보문구                | TextView               | bodyView            |
 
 - 네이티브 광고는 위의 요소들로 구성됩니다.
 - 각 요소들은 위 표를 참고하여 대응하는 UI 클래스를 통해 표시되도록 구현해야 합니다.
@@ -103,11 +104,12 @@ SDK에서는 서비스에서 구현한 레이아웃의 각 요소를 구분할 �
 // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
 val nativeAdLayout: AdFitNativeAdLayout =
     AdFitNativeAdLayout.Builder(nativeAdView.containerView) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
-        .setTitleView(nativeAdView.titleTextView) // 광고 타이틀 문구 (필수)
-        .setProfileIconView(nativeAdView.profileIconView) // 광고주(브랜드) 이름
-        .setProfileNameView(nativeAdView.profileNameTextView) // // 광고주 아이콘 (브랜드 로고)
-        .setMediaView(nativeAdView.mediaView) // 광고 이미지 소재 또는 비디오 소재 (필수)
-        .setCallToActionButton(nativeAdView.callToActionButton) // 행동 유도 버튼 (ex. 알아보기, 바로가기 등)
+        .setTitleView(nativeAdView.titleTextView) // 광고 제목 (필수)
+        .setBodyView(nativeAdView.bodyTextView) // 광고 홍보문구
+        .setProfileIconView(nativeAdView.profileIconView) // 광고주 아이콘 (브랜드 로고)
+        .setProfileNameView(nativeAdView.profileNameTextView) // 광고주 이름 (브랜드명)
+        .setMediaView(nativeAdView.mediaView) // 광고 미디어 소재 (이미지, 비디오) (필수)
+        .setCallToActionButton(nativeAdView.callToActionButton) // 행동유도버튼 (알아보기, 바로가기 등)
         .build()
 ```
 
@@ -180,6 +182,13 @@ val nativeAdLayout: AdFitNativeAdLayout =
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp" />
+
+            <TextView
+                android:id="@+id/bodyTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                tools:text="AD Description" />
 
             <Button
                 android:id="@+id/callToActionButton"
