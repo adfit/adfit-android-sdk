@@ -1,16 +1,12 @@
-# OSS Notice | Adfit-Android-SDK #
+오픈소스 라이선스
+
+# OSS Notice | AdFit-Android-SDK #
 
 This application is Copyright © Kakao Corp. All rights reserved.
 
 The following sets forth attribution notices for third party software that may be contained in this application.
 
- **Android - platform - frameworks - support**
-
-https://android.googlesource.com/platform/frameworks/support
-
-Copyright 2014 The Android Open Source Project
-
-Apache License 2.0
+If you have any questions about these notices, please email us at [opensource@kakaocorp.com][opensource_kakaocorp.com]
 
  **Android - platform - frameworks - volley**
 
@@ -25,6 +21,24 @@ Apache License 2.0
 https://android.googlesource.com/platform/libcore/
 
 Copyright 2005-2008, The Android Open Source Project
+
+Apache License 2.0
+
+ **Apache Commons Collections**
+
+https://github.com/apache/commons-collections
+
+Copyright 2001-2016 The Apache Software Foundation
+
+Apache License 2.0
+
+ **DiskLruCache**
+
+https://github.com/JakeWharton/DiskLruCache/
+
+Copyright 2012 Jake Wharton
+
+Copyright 2011 The Android Open Source Project
 
 Apache License 2.0
 
@@ -43,6 +57,16 @@ https://github.com/jetbrains/kotlin
 Copyright 2010-2017 JetBrains s.r.o.
 
 Apache License 2.0
+
+ **Sentry Java SDK**
+
+https://github.com/getsentry/sentry-java
+
+Copyright 2016 Functional Software, Inc.
+
+Copyright 2012 Ken Cochrane and individual contributors.
+
+MIT License
 
 # Apache License 2.0 #
 
@@ -121,3 +145,20 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ``````````
+
+# MIT License #
+
+``````````
+MIT License
+
+Copyright (c)  
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+``````````
+
+
+[opensource_kakaocorp.com]: mailto:opensource@kakaocorp.com
