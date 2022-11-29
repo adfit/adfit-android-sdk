@@ -23,7 +23,7 @@
 AdFit SDK에서는 비즈보드 광고 소재에 적합한 템플릿 레이아웃으로 'AdFitBizBoardAdTemplateLayout'을 제공하고 있습니다. <br/>
 <br/>
 사용방법은 아래와 같이 너비는 `match_parent`로 높이는 `wrap_content`로 설정하시면 <br/>
-단말 화면 비율에 따라 "1029:222" 비율로 자동 조정됩니다. <br/>
+높이를 단말 화면비율에 따라 "1029:222" 비율에 맞춰 조정합니다. <br/>
 <br/>
 필요에 따라 좌우 여백(`marginHorizontal`)을 추가해서 사용하시면 됩니다. (여백 설정은 필수가 아닙니다.)
 
@@ -73,10 +73,24 @@ AdFit SDK에서는 비즈보드 광고 소재에 적합한 템플릿 레이아�
     app:adfit_backgroundCornerRadius="0dp" />
 ```
 
+### 높이 비율 조정하기
+
+비즈보드 광고 템플릿 레이아웃은 기본적으로 단말 화면비율에 따라 높이를 "1029:222" 비율에 맞춰 조정합니다. <br/>
+높이 비율을 조정하기 위해서는 아래와 같은 설정이 필요합니다. <br/>
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<com.kakao.adfit.ads.na.AdFitBizBoardAdTemplateLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:adfit_contentAspectRatio="1029:222" />
+```
+
 ### 최대 높이 제한하기
 
-비즈보드 광고 템플릿 레이아웃은 기본적으로 최대 높이는 없으며, 단말 화면 비율에 의해서 조정됩니다. <br/>
-비즈보드 광고 영역이 너무 커지는 것을 방지하기 위해 최대 높이 제한이 필요한 경우에는 아래와 같은 설정이 필요합니다. <br/>
+비즈보드 광고 템플릿 레이아웃은 기본적으로 최대 높이는 없으며, 단말 화면비율에 따라 조정됩니다. <br/>
+비즈보드 광고 영역이 너무 커지는 것을 방지하기 위해 최대 높이 제한하기 위해서는 아래와 같은 설정이 필요합니다. <br/>
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
