@@ -1,18 +1,10 @@
-# OSS Notice | AdFit-Android-SDK-Public-Sample #
+# OSS Notice | AdFit-Android-SDK #
 
 This application is Copyright © Kakao Corp. All rights reserved.
 
 The following sets forth attribution notices for third party software that may be contained in this application.
 
 If you have any questions about these notices, please email us at [opensource@kakaocorp.com][opensource_kakaocorp.com]
-
- **Android - platform - frameworks - support**
-
-https://android.googlesource.com/platform/frameworks/support
-
-Copyright 2014 The Android Open Source Project
-
-Apache License 2.0
 
  **Android - platform - frameworks - volley**
 
@@ -27,14 +19,6 @@ Apache License 2.0
 https://android.googlesource.com/platform/libcore/
 
 Copyright 2005-2008, The Android Open Source Project
-
-Apache License 2.0
-
- **Android Constraint Layout Library**
-
-https://developer.android.com/reference/android/support/constraint/packages
-
-Copyright 2017 The Android Open Source Project
 
 Apache License 2.0
 
