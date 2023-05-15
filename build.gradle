@@ -1,5 +1,5 @@
 buildscript {
-    ext.adfit_version = '3.12.15'
+    ext.adfit_version = '3.13.6'
 
     ext.kotlin_version = '1.7.21'
     ext.play_service_version = '18.0.1'
