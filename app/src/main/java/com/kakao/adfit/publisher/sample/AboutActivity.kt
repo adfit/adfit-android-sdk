@@ -1,9 +1,9 @@
 package com.kakao.adfit.publisher.sample
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.kakao.adfit.AdFitSdk
-import kotlinx.android.synthetic.main.activie_about.*
 
 class AboutActivity : AppCompatActivity() {
 
@@ -11,6 +11,8 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activie_about)
-        adfitVersionText.text = "Publisher SDK v${AdFitSdk.SDK_VERSION}"
+
+        val versionTextView = findViewById<TextView>(R.id.adfitVersionText)
+        versionTextView.text = "Publisher SDK v${AdFitSdk.SDK_VERSION}"
     }
 }

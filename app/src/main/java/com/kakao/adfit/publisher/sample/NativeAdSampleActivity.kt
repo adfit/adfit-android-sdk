@@ -2,18 +2,29 @@ package com.kakao.adfit.publisher.sample
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import com.kakao.adfit.ads.AdError
-import com.kakao.adfit.ads.na.*
-import kotlinx.android.synthetic.main.activity_native_ad_smaple.*
-import kotlinx.android.synthetic.main.item_native_ad.view.*
+import com.kakao.adfit.ads.na.AdFitAdInfoIconPosition
+import com.kakao.adfit.ads.na.AdFitNativeAdBinder
+import com.kakao.adfit.ads.na.AdFitNativeAdLayout
+import com.kakao.adfit.ads.na.AdFitNativeAdLoader
+import com.kakao.adfit.ads.na.AdFitNativeAdRequest
+import com.kakao.adfit.ads.na.AdFitNativeAdView
+import com.kakao.adfit.ads.na.AdFitVideoAutoPlayPolicy
 
 class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadListener {
 
     private val adUnitId: String = "발급받은 광고단위 ID" // FIXME: 발급받은 광고단위 ID를 입력해주세요.
+
+    private lateinit var nativeAdFrameLayout: FrameLayout
+    private lateinit var loadAdButton: Button
+
+    private var nativeAdLayout: AdFitNativeAdLayout? = null
 
     private var nativeAdLoader: AdFitNativeAdLoader? = null
     private var nativeAdBinder: AdFitNativeAdBinder? = null
@@ -22,6 +33,10 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_native_ad_smaple)
+
+        nativeAdFrameLayout = findViewById(R.id.nativeAdFrameLayout)
+
+        loadAdButton = findViewById(R.id.loadAdButton)
         loadAdButton.setOnClickListener {
             loadNativeAd()
         }
@@ -115,24 +130,25 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
             return
         }
 
-        // 이전에 노출 중인 광고가 있으면 해제
-        nativeAdBinder?.unbind()
-        nativeAdFrameLayout.removeAllViews()
+        var nativeAdLayout = nativeAdLayout
+        if (nativeAdLayout == null) {
+            val nativeAdView = layoutInflater.inflate(R.layout.item_native_ad, nativeAdFrameLayout, false)
+            nativeAdFrameLayout.addView(nativeAdView)
 
-        val nativeAdView =
-            layoutInflater.inflate(R.layout.item_native_ad, nativeAdFrameLayout, false)
-        nativeAdFrameLayout.addView(nativeAdView)
-
-        // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
-        val nativeAdLayout: AdFitNativeAdLayout =
-            AdFitNativeAdLayout.Builder(nativeAdView.containerView) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
-                .setTitleView(nativeAdView.titleTextView) // 광고 제목 (필수)
-                .setBodyView(nativeAdView.bodyTextView) // 광고 홍보문구
-                .setProfileIconView(nativeAdView.profileIconView) // 광고주 아이콘 (브랜드 로고)
-                .setProfileNameView(nativeAdView.profileNameTextView) // 광고주 이름 (브랜드명)
-                .setMediaView(nativeAdView.mediaView) // 광고 미디어 소재 (이미지, 비디오) (필수)
-                .setCallToActionButton(nativeAdView.callToActionButton) // 행동유도버튼 (알아보기, 바로가기 등)
+            nativeAdLayout = AdFitNativeAdLayout.Builder(nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
+                .setTitleView(nativeAdView.findViewById(R.id.titleTextView)) // 광고 제목 (필수)
+                .setBodyView(nativeAdView.findViewById(R.id.bodyTextView)) // 광고 홍보문구
+                .setProfileIconView(nativeAdView.findViewById(R.id.profileIconView)) // 광고주 아이콘 (브랜드 로고)
+                .setProfileNameView(nativeAdView.findViewById(R.id.profileNameTextView)) // 광고주 이름 (브랜드명)
+                .setMediaView(nativeAdView.findViewById(R.id.mediaView)) // 광고 미디어 소재 (이미지, 비디오) (필수)
+                .setCallToActionButton(nativeAdView.findViewById(R.id.callToActionButton)) // 행동유도버튼 (알아보기, 바로가기 등)
                 .build()
+
+            this.nativeAdLayout = nativeAdLayout
+        } else {
+            // 이전에 노출 중인 광고가 있으면 해제
+            this.nativeAdBinder?.unbind()
+        }
 
         // 광고 노출
         nativeAdBinder = binder
@@ -165,9 +181,11 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
             AdError.NO_AD.errorCode -> {
                 // 요청에는 성공했으나 노출 가능한 광고가 없는 경우
             }
+
             AdError.HTTP_FAILED.errorCode -> {
                 // 네트워크 오류로 광고 요청에 실패한 경우
             }
+
             else -> {
                 // 기타 오류로 광고 요청에 실패한 경우
             }

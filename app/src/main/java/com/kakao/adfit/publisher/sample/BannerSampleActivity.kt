@@ -7,18 +7,20 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import com.kakao.adfit.ads.AdListener
-import kotlinx.android.synthetic.main.activity_banner_sample.*
+import com.kakao.adfit.ads.ba.BannerAdView
 
 class BannerSampleActivity : AppCompatActivity() {
+
+    private lateinit var adView: BannerAdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_banner_sample)
 
-        val adView = adView!!  // 배너 광고 뷰
+        adView = findViewById(R.id.adView) // 배너 광고 뷰
         adView.setClientId("발급받은 광고단위 ID")  // 광고단위 ID 설정
-        adView.setAdListener(object : AdListener {  // 광고 수신 리스너 설정
+        adView.setAdListener(object : AdListener { // 광고 수신 리스너 설정
 
             override fun onAdLoaded() {
                 toast("Banner is loaded")
@@ -60,21 +62,21 @@ class BannerSampleActivity : AppCompatActivity() {
         super.onResume()
 
         // lifecycle 사용이 불가능한 경우
-        adView?.resume()
+        adView.resume()
     }
 
     override fun onPause() {
         super.onPause()
 
         // lifecycle 사용이 불가능한 경우
-        adView?.pause()
+        adView.pause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
 
         // lifecycle 사용이 불가능한 경우
-        adView?.destroy()
+        adView.destroy()
     }
 
     private fun toast(message: String) {

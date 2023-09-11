@@ -33,6 +33,8 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
     private FrameLayout nativeAdFrameLayout;
     private Button loadAdButton;
 
+    private AdFitNativeAdLayout nativeAdLayout ;
+
     private AdFitNativeAdLoader nativeAdLoader;
     private AdFitNativeAdBinder nativeAdBinder;
 
@@ -145,25 +147,24 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
             return;
         }
 
-        // 이전에 노출 중인 광고가 있으면 해제
-        if (nativeAdBinder != null) {
+        if (nativeAdLayout == null) {
+            View nativeAdView = getLayoutInflater().inflate(R.layout.item_native_ad, nativeAdFrameLayout, false);
+            nativeAdFrameLayout.addView(nativeAdView);
+
+            // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
+             nativeAdLayout =
+                new AdFitNativeAdLayout.Builder((AdFitNativeAdView) nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
+                    .setTitleView((TextView) nativeAdView.findViewById(R.id.titleTextView)) // 광고 제목 (필수)
+                    .setBodyView((TextView) nativeAdView.findViewById(R.id.bodyTextView)) // 광고 홍보문구
+                    .setProfileIconView((ImageView) nativeAdView.findViewById(R.id.profileIconView)) // 광고주 아이콘 (브랜드 로고)
+                    .setProfileNameView((TextView) nativeAdView.findViewById(R.id.profileNameTextView)) // 광고주 이름 (브랜드명)
+                    .setMediaView((AdFitMediaView) nativeAdView.findViewById(R.id.mediaView)) // 광고 미디어 소재 (이미지, 비디오) (필수)
+                    .setCallToActionButton((Button) nativeAdView.findViewById(R.id.callToActionButton)) // 행동유도버튼 (알아보기, 바로가기 등)
+                    .build();
+        } else if (nativeAdBinder != null) {
+            // 이전에 노출 중인 광고가 있으면 해제
             nativeAdBinder.unbind();
         }
-        nativeAdFrameLayout.removeAllViews();
-
-        View nativeAdView = getLayoutInflater().inflate(R.layout.item_native_ad, nativeAdFrameLayout, false);
-        nativeAdFrameLayout.addView(nativeAdView);
-
-        // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
-        AdFitNativeAdLayout nativeAdLayout =
-                new AdFitNativeAdLayout.Builder((AdFitNativeAdView) nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
-                        .setTitleView((TextView) nativeAdView.findViewById(R.id.titleTextView)) // 광고 제목 (필수)
-                        .setBodyView((TextView) nativeAdView.findViewById(R.id.bodyTextView)) // 광고 홍보문구
-                        .setProfileIconView((ImageView) nativeAdView.findViewById(R.id.profileIconView)) // 광고주 아이콘 (브랜드 로고)
-                        .setProfileNameView((TextView) nativeAdView.findViewById(R.id.profileNameTextView)) // 광고주 이름 (브랜드명)
-                        .setMediaView((AdFitMediaView) nativeAdView.findViewById(R.id.mediaView)) // 광고 미디어 소재 (이미지, 비디오) (필수)
-                        .setCallToActionButton((Button) nativeAdView.findViewById(R.id.callToActionButton)) // 행동유도버튼 (알아보기, 바로가기 등)
-                        .build();
 
         // 광고 노출
         nativeAdBinder = binder;

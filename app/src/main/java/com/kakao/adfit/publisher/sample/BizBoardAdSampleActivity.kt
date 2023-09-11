@@ -3,18 +3,25 @@ package com.kakao.adfit.publisher.sample
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import com.kakao.adfit.ads.AdError
-import com.kakao.adfit.ads.na.*
-import kotlinx.android.synthetic.main.activity_bizboard_ad_smaple.*
-import kotlinx.android.synthetic.main.activity_native_ad_smaple.loadAdButton
+import com.kakao.adfit.ads.na.AdFitAdInfoIconPosition
+import com.kakao.adfit.ads.na.AdFitBizBoardAdTemplateLayout
+import com.kakao.adfit.ads.na.AdFitNativeAdBinder
+import com.kakao.adfit.ads.na.AdFitNativeAdLoader
+import com.kakao.adfit.ads.na.AdFitNativeAdRequest
+import com.kakao.adfit.ads.na.AdFitNativeAdView
 
 class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadListener {
 
     private val adUnitId: String = "발급받은 광고단위 ID" // FIXME: 발급받은 광고단위 ID를 입력해주세요.
+
+    private lateinit var bizBoardAdTemplateLayout: AdFitBizBoardAdTemplateLayout
+    private lateinit var loadAdButton: Button
 
     private var nativeAdLoader: AdFitNativeAdLoader? = null
     private var nativeAdBinder: AdFitNativeAdBinder? = null
@@ -23,7 +30,11 @@ class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoad
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_bizboard_ad_smaple)
+
+        bizBoardAdTemplateLayout = findViewById(R.id.bizBoardAdTemplateLayout)
         bizBoardAdTemplateLayout.visibility = View.GONE
+
+        loadAdButton = findViewById(R.id.loadAdButton)
         loadAdButton.setOnClickListener {
             loadNativeAd()
         }
@@ -139,9 +150,11 @@ class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoad
             AdError.NO_AD.errorCode -> {
                 // 요청에는 성공했으나 노출 가능한 광고가 없는 경우
             }
+
             AdError.HTTP_FAILED.errorCode -> {
                 // 네트워크 오류로 광고 요청에 실패한 경우
             }
+
             else -> {
                 // 기타 오류로 광고 요청에 실패한 경우
             }
