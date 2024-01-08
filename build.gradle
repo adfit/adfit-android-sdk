@@ -1,7 +1,7 @@
 buildscript {
-    ext.adfit_version = '3.13.6'
+    ext.adfit_version = '3.15.2'
 
-    ext.kotlin_version = '1.7.21'
+    ext.kotlin_version = '1.9.20'
     ext.play_service_version = '18.0.1'
 
     repositories {
@@ -10,7 +10,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.4.0'
+        classpath 'com.android.tools.build:gradle:8.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }

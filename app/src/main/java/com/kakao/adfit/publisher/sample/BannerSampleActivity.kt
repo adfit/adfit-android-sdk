@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.LifecycleOwner
 import com.kakao.adfit.ads.AdListener
 import com.kakao.adfit.ads.ba.BannerAdView
 
@@ -37,21 +37,24 @@ class BannerSampleActivity : AppCompatActivity() {
 
         // lifecycle 사용 가능한 경우
         // 참조 :: https://developer.android.com/topic/libraries/architecture/lifecycle
-        lifecycle.addObserver(object : LifecycleObserver {
+        lifecycle.addObserver(object : LifecycleEventObserver {
 
-            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-            fun onResume() {
-                adView.resume()
-            }
+            override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+                when (event) {
+                    Lifecycle.Event.ON_RESUME -> {
+                        adView.resume()
+                    }
 
-            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-            fun onPause() {
-                adView.pause()
-            }
+                    Lifecycle.Event.ON_PAUSE -> {
+                        adView.pause()
+                    }
 
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-            fun onDestroy() {
-                adView.destroy()
+                    Lifecycle.Event.ON_DESTROY -> {
+                        adView.destroy()
+                    }
+
+                    else -> {}
+                }
             }
         })
 

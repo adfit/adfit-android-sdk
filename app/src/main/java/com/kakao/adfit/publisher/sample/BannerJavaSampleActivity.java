@@ -3,14 +3,13 @@ package com.kakao.adfit.publisher.sample;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
-
 import com.kakao.adfit.ads.AdListener;
 import com.kakao.adfit.ads.ba.BannerAdView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Lifecycle.Event;
+import androidx.lifecycle.LifecycleEventObserver;
 
 public class BannerJavaSampleActivity extends AppCompatActivity {
 
@@ -44,24 +43,17 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
 
         // lifecycle 사용 가능한 경우
         // 참조 :: https://developer.android.com/topic/libraries/architecture/lifecycle
-        getLifecycle().addObserver(new LifecycleObserver() {
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-            public void onResume() {
+        getLifecycle().addObserver((LifecycleEventObserver) (source, event) -> {
+            if (event == Event.ON_RESUME) {
                 if (adView != null) {
                     adView.resume();
                 }
-            }
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-            public void onPause() {
+            } else if (event == Event.ON_PAUSE) {
                 if (adView != null) {
                     adView.pause();
                 }
-            }
 
-            @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-            public void onDestroy() {
+            } else if (event == Event.ON_DESTROY) {
                 if (adView != null) {
                     adView.destroy();
                     adView = null;
