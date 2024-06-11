@@ -4,12 +4,12 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/AppTheme">
         <activity
-          android:name=".MainActivity"
-          android:exported="true">
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -21,6 +21,8 @@
         <activity android:name=".NativeAdJavaSampleActivity" />
         <activity android:name=".BizBoardAdSampleActivity" />
         <activity android:name=".BizBoardAdJavaSampleActivity" />
+        <activity android:name=".WebViewAdSampleActivity" />
+        <activity android:name=".WebViewAdJavaSampleActivity" />
         <activity android:name=".AboutActivity" />
     </application>
 </manifest>

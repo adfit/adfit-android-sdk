@@ -24,6 +24,8 @@ class MainActivity : AppCompatActivity() {
             Item("Native AD Sample (Java)", NativeAdJavaSampleActivity::class.java),
             Item("BizBoard AD Sample (Kotlin)", BizBoardAdSampleActivity::class.java),
             Item("BizBoard AD Sample (Java)", BizBoardAdJavaSampleActivity::class.java),
+            Item("WebView AD Sample (Kotlin)", WebViewAdSampleActivity::class.java),
+            Item("WebView AD Sample (Java)", WebViewAdJavaSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
         )
 
