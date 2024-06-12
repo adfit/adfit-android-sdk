@@ -53,8 +53,16 @@ class MainActivity : AppCompatActivity() {
 
 # 광고 송출하기
 
-설정을 마친 `WebView`를 통해 웹 페이지 내에서 AdFit 광고를 송출할 수 있습니다.  
-웹 페이지 내에서 AdFit Web SDK를 사용하여 AdFit 광고를 송출합니다.
+설정을 마친 `WebView`의 웹 페이지 내에서 AdFit 광고를 송출할 수 있습니다.  
+웹 페이지 내에서 아래와 같이 AdFit Web SDK를 사용하는 스크립트를 추가하여 AdFit 광고를 송출합니다.
+
+```javascript
+<ins class="kakao_ad_area" style="display:none;" data-ad-unit="광고단위 ID"></ins>
+<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+```
+
+자세한 사항은 AdFit Web SDK 가이드 문서를 참고 바랍니다.  
+- 가이드: https://ads-sdk-guide.dev.onkakao.net/web/
 
 # 비디오 광고 자동 재생 설정하기
 
