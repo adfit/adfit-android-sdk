@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 ```
 
 자세한 사항은 AdFit Web SDK 가이드 문서를 참고 바랍니다.  
-- 가이드: https://ads-sdk-guide.dev.onkakao.net/web/
+- 가이드: https://github.com/adfit/adfit-web-sdk
 
 # 비디오 광고 자동 재생 설정하기
 
