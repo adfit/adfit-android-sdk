@@ -12,6 +12,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Lifecycle;
 
 import com.kakao.adfit.ads.AdError;
@@ -43,6 +46,13 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_native_ad_smaple);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout), (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+            return WindowInsetsCompat.CONSUMED;
+        });
 
         nativeAdFrameLayout = findViewById(R.id.nativeAdFrameLayout); // 광고를 노출할 위치
 

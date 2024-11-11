@@ -8,6 +8,9 @@ import com.kakao.adfit.ads.ba.BannerAdView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.lifecycle.Lifecycle.Event;
 import androidx.lifecycle.LifecycleEventObserver;
 
@@ -20,6 +23,13 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_banner_sample);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout), (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+            return WindowInsetsCompat.CONSUMED;
+        });
 
         adView = findViewById(R.id.adView);  // 배너 광고 뷰
         adView.setClientId("발급받은 광고단위 ID");  // 광고단위 ID 설정

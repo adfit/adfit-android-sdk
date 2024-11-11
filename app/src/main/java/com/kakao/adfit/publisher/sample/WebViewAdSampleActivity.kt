@@ -6,6 +6,9 @@ import android.webkit.CookieManager
 import android.webkit.WebView
 import androidx.annotation.MainThread
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import com.kakao.adfit.AdFitSdk
 import com.kakao.adfit.ads.na.AdFitVideoAutoPlayPolicy
 
@@ -19,6 +22,13 @@ class WebViewAdSampleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_webview_ad)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout)) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(insets.left, insets.top, insets.right, insets.bottom)
+
+            WindowInsetsCompat.CONSUMED
+        }
 
         webView = findViewById(R.id.webView)
         initializeWebView(webView)

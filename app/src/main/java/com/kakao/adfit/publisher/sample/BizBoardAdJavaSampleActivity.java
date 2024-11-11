@@ -6,11 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Lifecycle;
-
 import com.kakao.adfit.ads.AdError;
 import com.kakao.adfit.ads.na.AdFitAdInfoIconPosition;
 import com.kakao.adfit.ads.na.AdFitBizBoardAdTemplateLayout;
@@ -19,6 +14,14 @@ import com.kakao.adfit.ads.na.AdFitNativeAdLoader;
 import com.kakao.adfit.ads.na.AdFitNativeAdRequest;
 
 import org.jetbrains.annotations.NotNull;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.Lifecycle;
 
 public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements AdFitNativeAdLoader.AdLoadListener {
 
@@ -36,16 +39,18 @@ public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements A
 
         setContentView(R.layout.activity_bizboard_ad_smaple);
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout), (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+            return WindowInsetsCompat.CONSUMED;
+        });
+
         bizBoardAdTemplateLayout = findViewById(R.id.bizBoardAdTemplateLayout); // 광고를 노출할 위치
         bizBoardAdTemplateLayout.setVisibility(View.GONE);
 
         loadAdButton = findViewById(R.id.loadAdButton);
-        loadAdButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadNativeAd();
-            }
-        });
+        loadAdButton.setOnClickListener(v -> loadNativeAd());
 
         // [AdFitNativeAdLoader] 생성
         nativeAdLoader = AdFitNativeAdLoader.create(this, adUnitId);

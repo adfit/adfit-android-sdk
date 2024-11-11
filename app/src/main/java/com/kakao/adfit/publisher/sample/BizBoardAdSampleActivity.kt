@@ -7,6 +7,9 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
 import com.kakao.adfit.ads.AdError
 import com.kakao.adfit.ads.na.AdFitAdInfoIconPosition
@@ -30,6 +33,13 @@ class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoad
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_bizboard_ad_smaple)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout)) { v, windowInsets ->
+            val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(insets.left, insets.top, insets.right, insets.bottom)
+
+            WindowInsetsCompat.CONSUMED
+        }
 
         bizBoardAdTemplateLayout = findViewById(R.id.bizBoardAdTemplateLayout)
         bizBoardAdTemplateLayout.visibility = View.GONE

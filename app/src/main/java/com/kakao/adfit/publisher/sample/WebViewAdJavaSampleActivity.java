@@ -12,6 +12,9 @@ import com.kakao.adfit.ads.na.AdFitVideoAutoPlayPolicy;
 import androidx.annotation.MainThread;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 public class WebViewAdJavaSampleActivity extends AppCompatActivity {
 
@@ -24,6 +27,13 @@ public class WebViewAdJavaSampleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_webview_ad);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout), (v, windowInsets) -> {
+            Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
+
+            return WindowInsetsCompat.CONSUMED;
+        });
 
         webView = findViewById(R.id.webView);  // 배너 광고 뷰
         initializeWebView(webView);
