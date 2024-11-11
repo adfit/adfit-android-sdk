@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.lifecycle.Lifecycle;
 
 public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements AdFitNativeAdLoader.AdLoadListener {
@@ -39,7 +40,8 @@ public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements A
 
         setContentView(R.layout.activity_bizboard_ad_smaple);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout), (v, windowInsets) -> {
+        new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(true);
+        ViewCompat.setOnApplyWindowInsetsListener(getWindow().getDecorView(), (v, windowInsets) -> {
             Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
 

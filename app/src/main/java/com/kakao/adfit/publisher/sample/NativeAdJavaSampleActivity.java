@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.WindowInsetsControllerCompat;
 import androidx.lifecycle.Lifecycle;
 
 import com.kakao.adfit.ads.AdError;
@@ -47,7 +48,8 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
 
         setContentView(R.layout.activity_native_ad_smaple);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout), (v, windowInsets) -> {
+        new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(true);
+        ViewCompat.setOnApplyWindowInsetsListener(getWindow().getDecorView(), (v, windowInsets) -> {
             Insets insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(insets.left, insets.top, insets.right, insets.bottom);
 

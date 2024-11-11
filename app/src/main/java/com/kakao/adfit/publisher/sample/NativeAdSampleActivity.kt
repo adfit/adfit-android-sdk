@@ -9,6 +9,7 @@ import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
 import com.kakao.adfit.ads.AdError
@@ -37,7 +38,8 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
 
         setContentView(R.layout.activity_native_ad_smaple)
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.layout)) { v, windowInsets ->
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+        ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, windowInsets ->
             val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.updatePadding(insets.left, insets.top, insets.right, insets.bottom)
 
