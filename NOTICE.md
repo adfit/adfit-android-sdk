@@ -6,14 +6,6 @@ The following sets forth attribution notices for third party software that may b
 
 If you have any questions about these notices, please email us at [opensource@kakaocorp.com][opensource_kakaocorp.com]
 
- **Android - platform - frameworks - volley**
-
-https://android.googlesource.com/platform/frameworks/volley
-
-Copyright 2011 The Android Open Source Project
-
-Apache License 2.0
-
  **Android - platform - libcore**
 
 https://android.googlesource.com/platform/libcore/
@@ -43,6 +35,22 @@ Apache License 2.0
 https://github.com/jetbrains/kotlin
 
 Copyright 2010-2017 JetBrains s.r.o.
+
+Apache License 2.0
+
+ **kotlinx.coroutines**
+
+https://github.com/kotlin/kotlinx.coroutines
+
+Copyright 2000-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.
+
+Apache License 2.0
+
+ **OkHttp**
+
+https://github.com/square/okhttp
+
+Copyright 2014 Square, Inc
 
 Apache License 2.0
 
@@ -139,7 +147,7 @@ limitations under the License.
 ``````````
 MIT License
 
-Copyright (c)  
+Copyright (c) <year> <copyright holders>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
