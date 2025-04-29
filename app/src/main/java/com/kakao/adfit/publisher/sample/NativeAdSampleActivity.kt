@@ -148,6 +148,7 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
             nativeAdFrameLayout.addView(nativeAdView)
 
             nativeAdLayout = AdFitNativeAdLayout.Builder(nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
+                .setContainerViewClickable(false) // 광고 영역 클릭 가능 여부 (기본값: false)
                 .setTitleView(nativeAdView.findViewById(R.id.titleTextView)) // 광고 제목 (필수)
                 .setBodyView(nativeAdView.findViewById(R.id.bodyTextView)) // 광고 홍보문구
                 .setProfileIconView(nativeAdView.findViewById(R.id.profileIconView)) // 광고주 아이콘 (브랜드 로고)

@@ -105,6 +105,7 @@ SDK에서는 서비스에서 구현한 레이아웃의 각 요소를 구분할 �
 // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
 val nativeAdLayout: AdFitNativeAdLayout =
     AdFitNativeAdLayout.Builder(nativeAdView.containerView) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
+        .setContainerViewClickable(false) // 광고 영역 클릭 가능 여부 (기본값: false)
         .setTitleView(nativeAdView.titleTextView) // 광고 제목 (필수)
         .setBodyView(nativeAdView.bodyTextView) // 광고 홍보문구
         .setProfileIconView(nativeAdView.profileIconView) // 광고주 아이콘 (브랜드 로고)
