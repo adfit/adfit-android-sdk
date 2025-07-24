@@ -138,6 +138,14 @@ public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements A
 
         // 광고 노출
         nativeAdBinder = binder;
+
+        // (필요한 경우) 광고 클릭 리스너 등록
+        if (false) {
+            binder.setOnAdClickListener((view) ->
+                    Toast.makeText(view.getContext(), "광고 클릭", Toast.LENGTH_SHORT).show()
+            );
+        }
+
         binder.bind(bizBoardAdTemplateLayout);
 
         bizBoardAdTemplateLayout.setVisibility(View.VISIBLE);

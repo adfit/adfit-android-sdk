@@ -131,6 +131,17 @@ class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoad
 
         // 광고 노출
         nativeAdBinder = binder
+
+        // (필요한 경우) 광고 클릭 리스너 등록
+        if ("false".toBoolean()) {
+            binder.onAdClickListener = object : AdFitNativeAdBinder.OnAdClickListener {
+
+                override fun onAdClicked(view: View) {
+                    Toast.makeText(view.context, "광고 클릭", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         binder.bind(bizBoardAdTemplateLayout)
 
         bizBoardAdTemplateLayout.visibility = View.VISIBLE

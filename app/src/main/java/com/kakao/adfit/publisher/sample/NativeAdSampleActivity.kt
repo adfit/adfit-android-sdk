@@ -2,6 +2,7 @@ package com.kakao.adfit.publisher.sample
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -165,6 +166,17 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
 
         // 광고 노출
         nativeAdBinder = binder
+
+        // (필요한 경우) 광고 클릭 리스너 등록
+        if ("false".toBoolean()) {
+            binder.onAdClickListener = object : AdFitNativeAdBinder.OnAdClickListener {
+
+                override fun onAdClicked(view: View) {
+                    Toast.makeText(view.context, "광고 클릭", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
         binder.bind(nativeAdLayout)
 
         // (샘플 구현용) 광고 요청 버튼 활성화
