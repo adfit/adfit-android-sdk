@@ -22,16 +22,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val items = listOf(
-            Item("Banner Sample (Kotlin)", BannerSampleActivity::class.java),
-            Item("Banner Sample (Java)", BannerJavaSampleActivity::class.java),
-            Item("Native AD Sample (Kotlin)", NativeAdSampleActivity::class.java),
-            Item("Native AD Sample (Java)", NativeAdJavaSampleActivity::class.java),
-            Item("BizBoard AD Sample (Kotlin)", BizBoardAdSampleActivity::class.java),
-            Item("BizBoard AD Sample (Java)", BizBoardAdJavaSampleActivity::class.java),
-            Item("WebView AD Sample (Kotlin)", WebViewAdSampleActivity::class.java),
-            Item("WebView AD Sample (Java)", WebViewAdJavaSampleActivity::class.java),
-            Item("팝업 광고 샘플", PopupAdSampleActivity::class.java),
-            Item("앱종료형 팝업 광고 샘플", AppExitTypePopupAdSampleActivity::class.java),
+            Item("배너 광고 샘플", BannerSampleActivity::class.java),
+            Item("네이티브 광고 샘플", NativeAdSampleActivity::class.java),
+            Item("비즈보드 광고 샘플", BizBoardAdSampleActivity::class.java),
+            Item("앱 전환 광고 샘플", AppTransitionTypePopupAdSampleActivity::class.java),
+            Item("앱 종료 광고 샘플", AppExitTypePopupAdSampleActivity::class.java),
+            Item("WebView 내 광고 샘플", WebViewAdSampleActivity::class.java),
+
+            Item("[Java] 배너 광고 샘플", BannerJavaSampleActivity::class.java),
+            Item("[Java] 네이티브 광고 샘플", NativeAdJavaSampleActivity::class.java),
+            Item("[Java] 비즈보드 광고 샘플", BizBoardAdJavaSampleActivity::class.java),
+            Item("[Java] WebView 내 광고 샘플", WebViewAdJavaSampleActivity::class.java),
+
             Item("About", AboutActivity::class.java)
         )
 

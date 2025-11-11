@@ -23,7 +23,7 @@
         <activity android:name=".BizBoardAdJavaSampleActivity" />
         <activity android:name=".WebViewAdSampleActivity" />
         <activity android:name=".WebViewAdJavaSampleActivity" />
-        <activity android:name=".PopupAdSampleActivity" />
+        <activity android:name=".AppTransitionTypePopupAdSampleActivity" />
         <activity android:name=".AppExitTypePopupAdSampleActivity" />
         <activity android:name=".AboutActivity" />
     </application>
