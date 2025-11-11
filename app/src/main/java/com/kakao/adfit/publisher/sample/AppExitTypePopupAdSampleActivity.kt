@@ -67,8 +67,6 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
             when (bundle.getString(AdFitPopupAdDialogFragment.BUNDLE_KEY_EVENT_TYPE)) {
                 AdFitPopupAdDialogFragment.EVENT_AD_CLICKED -> toast("광고 클릭")
                 AdFitPopupAdDialogFragment.EVENT_POPUP_CANCELED -> toast("팝업 취소")
-                AdFitPopupAdDialogFragment.EVENT_POPUP_DISMISSED -> toast("팝업 닫기")
-                AdFitPopupAdDialogFragment.EVENT_TODAY_DISMISSED -> toast("팝업 오늘 그만보기")
                 AdFitPopupAdDialogFragment.EVENT_EXIT_CONFIRMED -> {
                     toast("앱종료")
                     super.finish() // FIXME: 앱 종료 처리
@@ -87,10 +85,14 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
     }
 
     override fun finish() {
+        val isPopupAdShowing = supportFragmentManager.findFragmentByTag(AdFitPopupAdDialogFragment.TAG) == null
+        if (isPopupAdShowing) {
+            // 광고가 이미 노출 중인 경우
+            return
+        }
+
         val loadingStarted = loadPopupAd()
-        if (!loadingStarted && !popupAdLoader.isLoading &&
-            supportFragmentManager.findFragmentByTag(AdFitPopupAdDialogFragment.TAG) == null
-        ) {
+        if (!loadingStarted && !popupAdLoader.isLoading) {
             // 요청이 불가능한 경우, 종료 처리
             super.finish()
         }
