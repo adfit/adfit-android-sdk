@@ -30,6 +30,8 @@ class MainActivity : AppCompatActivity() {
             Item("BizBoard AD Sample (Java)", BizBoardAdJavaSampleActivity::class.java),
             Item("WebView AD Sample (Kotlin)", WebViewAdSampleActivity::class.java),
             Item("WebView AD Sample (Java)", WebViewAdJavaSampleActivity::class.java),
+            Item("팝업 광고 샘플", PopupAdSampleActivity::class.java),
+            Item("앱종료형 팝업 광고 샘플", AppExitTypePopupAdSampleActivity::class.java),
             Item("About", AboutActivity::class.java)
         )
 
