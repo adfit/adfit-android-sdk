@@ -22,17 +22,15 @@ import com.kakao.adfit.ads.na.AdFitNativeAdRequest
 import com.kakao.adfit.ads.na.AdFitNativeAdView
 import com.kakao.adfit.ads.na.AdFitVideoAutoPlayPolicy
 
-class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadListener {
+class NativeAdsSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdsLoadListener {
 
     private val adUnitId: String = "발급받은 광고단위 ID" // FIXME: 발급받은 광고단위 ID를 입력해주세요.
 
     private lateinit var nativeAdFrameLayout: FrameLayout
+    private lateinit var nativeAdLayout: AdFitNativeAdLayout
     private lateinit var loadAdButton: Button
 
-    private var nativeAdLayout: AdFitNativeAdLayout? = null
-
-    private var nativeAdLoader: AdFitNativeAdLoader? = null
-    private var nativeAdBinder: AdFitNativeAdBinder? = null
+    private lateinit var nativeAdLoader: AdFitNativeAdLoader
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +47,22 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
 
         nativeAdFrameLayout = findViewById(R.id.nativeAdFrameLayout)
 
+        val nativeAdView = layoutInflater.inflate(R.layout.item_native_ad, nativeAdFrameLayout, false)
+        nativeAdFrameLayout.addView(nativeAdView)
+
+        nativeAdLayout = AdFitNativeAdLayout.Builder(nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
+            .setContainerViewClickable(false) // 광고 영역 클릭 가능 여부 (기본값: false)
+            .setTitleView(nativeAdView.findViewById(R.id.titleTextView)) // 광고 제목 (필수)
+            .setBodyView(nativeAdView.findViewById(R.id.bodyTextView)) // 광고 홍보문구
+            .setProfileIconView(nativeAdView.findViewById(R.id.profileIconView)) // 광고주 아이콘 (브랜드 로고)
+            .setProfileNameView(nativeAdView.findViewById(R.id.profileNameTextView)) // 광고주 이름 (브랜드명)
+            .setMediaView(nativeAdView.findViewById(R.id.mediaView)) // 광고 미디어 소재 (이미지, 비디오) (필수)
+            .setCallToActionButton(nativeAdView.findViewById(R.id.callToActionButton)) // 행동유도버튼 (알아보기, 바로가기 등)
+            .build()
+
         loadAdButton = findViewById(R.id.loadAdButton)
         loadAdButton.setOnClickListener {
-            loadNativeAd()
+            loadNativeAd(3) // FIXME: 필요한 개수만큼 네이티브 광고 요청
         }
 
         // [AdFitNativeAdLoader] 생성
@@ -59,19 +70,14 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
     }
 
     override fun onDestroy() {
-        nativeAdBinder?.unbind() // 노출 중인 광고가 있으면 해제
-        nativeAdBinder = null
-
-        nativeAdLoader = null
-
         super.onDestroy()
     }
 
     /**
-     * 새로운 네이티브 광고를 요청합니다.
+     * [count]개의 네이티브 광고를 요청합니다.
      */
-    private fun loadNativeAd() {
-        if (nativeAdLoader == null) {
+    private fun loadNativeAd(count: Int) {
+        if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
             return
         }
 
@@ -113,90 +119,70 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
             .build()
 
         /**
-         * 새로운 네이티브 광고를 요청합니다.
+         * **여러 개**의 네이티브 광고를 한 번에 요청합니다.
          *
-         * 요청에 성공하여 새로운 광고를 전달받은 경우,
-         * [AdFitNativeAdLoader.AdLoadListener.onAdLoaded] 콜백을 통해 광고 소재를 전달받습니다.
+         * 요청이 성공하면 [AdFitNativeAdLoader.AdsLoadListener.onAdsLoaded]를 통해 결과 리스트를 받습니다.
+         * 이때 전달받은 광고의 개수는 요청한 [count]보다 적을 수 있습니다 (**부분 성공**).
          *
-         * 요청에 실패하거나 전달받은 광고가 없을 경우,
-         * [AdFitNativeAdLoader.AdLoadListener.onAdLoadError] 콜백을 통해 오류코드를 전달받습니다.
+         * 유효한 광고가 하나도 없거나 오류가 발생한 경우 [AdFitNativeAdLoader.AdsLoadListener.onAdLoadError]가 호출됩니다.
          *
-         * 동시에 하나의 요청만 처리할 수 있으며,
-         * 이전 요청이 진행 중이면 새로운 요청은 무시됩니다.
+         * **참고:**
+         * - 이미 로딩이 진행 중인 경우, 이 요청은 무시됩니다.
+         * - [count]는 1 이상이어야 합니다.
+         *
+         * @param request 광고 요청에 필요한 설정 정보
+         * @param count 요청할 광고의 최대 개수 (1 이상)
+         * @param listener 요청 결과를 전달받을 리스너 ([AdFitNativeAdLoader.AdsLoadListener])
+         * @return 요청이 정상적으로 시작되면 `true`, 시작되지 않으면 `false`
          */
-        nativeAdLoader?.loadAd(request, this)
+        nativeAdLoader.loadAds(request, count, this)
     }
 
     /**
-     * 광고 요청 성공 콜백
+     * 광고 로딩에 성공했을 때 호출됩니다.
      *
-     * 요청에 성공하여 소재를 응답받았을 때 호출됩니다.
+     * 1개 이상의 유효한 광고가 로드된 경우 호출됩니다.
      *
-     * @param binder 광고 소재 정보를 갖고 있는 [AdFitNativeAdBinder]
+     * @param binders 로드된 광고 데이터([AdFitNativeAdBinder])들의 리스트.
+     * (리스트의 크기 <= 요청한 개수)
      */
     @UiThread
-    override fun onAdLoaded(binder: AdFitNativeAdBinder) {
-        if (nativeAdLoader == null ||
-            lifecycle.currentState == Lifecycle.State.DESTROYED
-        ) {
+    override fun onAdsLoaded(binders: List<AdFitNativeAdBinder>) {
+        if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
             // [Activity]가 먼저 종료된 경우, 메모리 누수(Memory Leak) 및 오류를 방지를 위해 응답을 무시
             return
         }
 
-        var nativeAdLayout = nativeAdLayout
-        if (nativeAdLayout == null) {
-            val nativeAdView = layoutInflater.inflate(R.layout.item_native_ad, nativeAdFrameLayout, false)
-            nativeAdFrameLayout.addView(nativeAdView)
+        // 2. 응답받은 광고 리스트 반복 처리
+        binders.forEach { binder ->
+            // (선택사항) 광고 클릭 리스너 등록
+            if ("false".toBoolean()) {
+                binder.onAdClickListener = object : AdFitNativeAdBinder.OnAdClickListener {
 
-            nativeAdLayout = AdFitNativeAdLayout.Builder(nativeAdView.findViewById(R.id.containerView)) // 네이티브 광고 영역 (광고 아이콘이 배치 됩니다)
-                .setContainerViewClickable(false) // 광고 영역 클릭 가능 여부 (기본값: false)
-                .setTitleView(nativeAdView.findViewById(R.id.titleTextView)) // 광고 제목 (필수)
-                .setBodyView(nativeAdView.findViewById(R.id.bodyTextView)) // 광고 홍보문구
-                .setProfileIconView(nativeAdView.findViewById(R.id.profileIconView)) // 광고주 아이콘 (브랜드 로고)
-                .setProfileNameView(nativeAdView.findViewById(R.id.profileNameTextView)) // 광고주 이름 (브랜드명)
-                .setMediaView(nativeAdView.findViewById(R.id.mediaView)) // 광고 미디어 소재 (이미지, 비디오) (필수)
-                .setCallToActionButton(nativeAdView.findViewById(R.id.callToActionButton)) // 행동유도버튼 (알아보기, 바로가기 등)
-                .build()
-
-            this.nativeAdLayout = nativeAdLayout
-        } else {
-            // 이전에 노출 중인 광고가 있으면 해제
-            this.nativeAdBinder?.unbind()
-        }
-
-        // 광고 노출
-        nativeAdBinder = binder
-
-        // (필요한 경우) 광고 클릭 리스너 등록
-        if ("false".toBoolean()) {
-            binder.onAdClickListener = object : AdFitNativeAdBinder.OnAdClickListener {
-
-                override fun onAdClicked(view: View) {
-                    Toast.makeText(view.context, "광고 클릭", Toast.LENGTH_SHORT).show()
+                    override fun onAdClicked(view: View) {
+                        Toast.makeText(view.context, "광고 클릭", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
-        }
 
-        binder.bind(nativeAdLayout)
+            // 레이아웃에 데이터 바인딩
+            binder.bind(nativeAdLayout /* FIXME: 각각 다른 View에 데이터 바인딩해야 합니다. */)
+        }
 
         // (샘플 구현용) 광고 요청 버튼 활성화
         loadAdButton.isEnabled = true
     }
 
     /**
-     * 광고 요청 실패 콜백
+     * 광고 로딩에 실패했을 때 호출됩니다.
      *
-     * 요청에 실패하거나 전달 받은 광고가 없을 때 호출됩니다.
+     * 모든 광고 로딩에 실패하거나, 네트워크 오류 등이 발생한 경우 호출됩니다.
      *
-     * @param errorCode 광고 요청에서 발생한 오류코드
-     *
-     * @see [com.kakao.adfit.ads.AdError]
+     * @param errorCode 발생한 오류 코드 ([com.kakao.adfit.ads.AdError] 참조)
      */
     @UiThread
     override fun onAdLoadError(errorCode: Int) {
-        if (nativeAdLoader == null ||
-            lifecycle.currentState == Lifecycle.State.DESTROYED
-        ) {
+        if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
             // [Activity]가 먼저 종료된 경우, 오류를 방지를 위해 무시
             return
         }
@@ -214,12 +200,6 @@ class NativeAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoadLi
             else -> {
                 // 기타 오류로 광고 요청에 실패한 경우
             }
-        }
-
-        if (nativeAdBinder == null) {
-            // TODO: 보여지고 있는 광고가 없을 때의 처리
-        } else {
-            // TODO: 보여지고 있는 광고가 있을 때의 처리
         }
 
         // (샘플 구현용) 광고 요청 버튼 활성화

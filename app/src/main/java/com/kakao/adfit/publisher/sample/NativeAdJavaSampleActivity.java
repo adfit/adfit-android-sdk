@@ -46,7 +46,7 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_native_ad_smaple);
+        setContentView(R.layout.activity_native_ad_sample);
 
         new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(true);
         ViewCompat.setOnApplyWindowInsetsListener(getWindow().getDecorView(), (v, windowInsets) -> {

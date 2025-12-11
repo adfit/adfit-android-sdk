@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val items = listOf(
             Item("배너 광고 샘플", BannerSampleActivity::class.java),
             Item("네이티브 광고 샘플", NativeAdSampleActivity::class.java),
+            Item("네이티브 광고 (n개 요청) 샘플", NativeAdsSampleActivity::class.java),
             Item("비즈보드 광고 샘플", BizBoardAdSampleActivity::class.java),
             Item("앱 전환 광고 샘플", AppTransitionTypePopupAdSampleActivity::class.java),
             Item("앱 종료 광고 샘플", AppExitTypePopupAdSampleActivity::class.java),

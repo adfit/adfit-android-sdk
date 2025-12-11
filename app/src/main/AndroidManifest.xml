@@ -19,6 +19,7 @@
         <activity android:name=".BannerJavaSampleActivity" />
         <activity android:name=".NativeAdSampleActivity" />
         <activity android:name=".NativeAdJavaSampleActivity" />
+        <activity android:name=".NativeAdsSampleActivity" />
         <activity android:name=".BizBoardAdSampleActivity" />
         <activity android:name=".BizBoardAdJavaSampleActivity" />
         <activity android:name=".WebViewAdSampleActivity" />
