@@ -2,6 +2,7 @@ package com.kakao.adfit.publisher.sample
 
 import android.content.Context
 import android.content.res.Configuration
+import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -72,10 +73,15 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
                 AdFitPopupAdDialogFragment.EVENT_POPUP_CANCELED -> {
                     // TODO: 팝업을 취소한 경우에 대한 처리
                     toast("팝업 취소")
+                }
 
-//                    if (!isFinishing) {
-//                        super.finish() // FIXME: 앱 종료 처리
-//                    }
+                AdFitPopupAdDialogFragment.EVENT_BACK_PRESSED -> {
+                    // TODO: 백 버튼을 누르는 등 뒤로가기 이벤트에 대한 처리
+                    toast("뒤로가기")
+
+                    if (!isFinishing) {
+                        super.finish() // FIXME: 앱 종료 처리
+                    }
                 }
 
                 AdFitPopupAdDialogFragment.EVENT_EXIT_CONFIRMED -> {
@@ -201,7 +207,9 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
         /**
          * 응답 받은 광고([AdFitPopupAd])를 [AdFitPopupAdDialogFragment]를 통해 팝업 광고로 노출합니다.
          */
-        AdFitPopupAdDialogFragment(ad)
+        AdFitPopupAdDialogFragment.Builder(ad)
+            .setNavigationBarColor(color = Color.BLACK, isLight = false) // (선택사항) 네비게이션 바의 색상을 지정합니다.
+            .build()
             .show(supportFragmentManager, AdFitPopupAdDialogFragment.TAG)
     }
 

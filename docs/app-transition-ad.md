@@ -118,6 +118,10 @@ override fun onCreate(savedInstanceState: Bundle?) {
                 // TODO: 광고를 클릭한 경우에 대한 처리
             }
 
+            AdFitPopupAdDialogFragment.EVENT_BACK_PRESSED -> {
+                // TODO: 백 버튼을 누르는 등 뒤로가기 이벤트에 대한 처리
+            }
+
             AdFitPopupAdDialogFragment.EVENT_POPUP_CANCELED -> {
                 // TODO: 팝업을 취소한 경우에 대한 처리
             }

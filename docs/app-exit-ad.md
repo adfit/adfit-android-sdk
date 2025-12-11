@@ -122,6 +122,10 @@ override fun onCreate(savedInstanceState: Bundle?) {
                 // TODO: "취소"를 선택하거나 팝업을 취소한 경우에 대한 처리
             }
 
+            AdFitPopupAdDialogFragment.EVENT_BACK_PRESSED -> {
+                // TODO: 백 버튼을 누르는 등 뒤로가기 이벤트에 대한 처리
+            }
+
             AdFitPopupAdDialogFragment.EVENT_EXIT_CONFIRMED -> {
                 // TODO: "앱 종료"를 선택한 경우에 대한 처리
                 // FIXME: 실제 앱 종료를 위한 처리
