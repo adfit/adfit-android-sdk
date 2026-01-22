@@ -1,4 +1,4 @@
-# AdFit Android SDK Guide ![AdFit SDK](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fdevrepo.kakao.com%2Fnexus%2Fcontent%2Fgroups%2Fpublic%2Fcom%2Fkakao%2Fadfit%2Fads-base%2Fmaven-metadata.xml&query=%2Fmetadata%2Fversioning%2Flatest&label=AdFit%20SDK&color=brightgreen)
+# AdFit Android SDK Guide [![AdFit SDK](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fdevrepo.kakao.com%2Fnexus%2Fcontent%2Fgroups%2Fpublic%2Fcom%2Fkakao%2Fadfit%2Fads-base%2Fmaven-metadata.xml&query=%2Fmetadata%2Fversioning%2Flatest&label=AdFit%20SDK&color=brightgreen)](https://github.com/adfit/adfit-android-sdk/releases)
 
 [사이트/앱 운영정책](https://adfit.kakao.com/web/html/use_kakao.html)에 어긋나는 경우 적립금 지급이 거절 될 수 있으니 유의하시기 바랍니다.
 
