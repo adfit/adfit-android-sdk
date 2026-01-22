@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -25,10 +26,22 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
 
     private lateinit var popupAdLoader: AdFitPopupAdLoader
 
+    private val backPressedCallback = object : OnBackPressedCallback(true) {
+
+        override fun handleOnBackPressed() {
+            handleBackPress()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_popup_ad_smaple)
+
+        /**
+         * 뒤로가기 이벤트를 처리하기 위한 콜백 등록
+         */
+        onBackPressedDispatcher.addCallback(this, backPressedCallback)
 
         /**
          * 앱 종료 광고 요청을 위한 [AdFitPopupAdLoader] 생성
@@ -80,7 +93,7 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
                     toast("뒤로가기")
 
                     if (!isFinishing) {
-                        super.finish() // FIXME: 앱 종료 처리
+                        finish() // FIXME: 앱 종료 처리
                     }
                 }
 
@@ -89,7 +102,7 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
                     toast("앱 종료")
 
                     if (!isFinishing) {
-                        super.finish() // FIXME: 앱 종료 처리
+                        finish() // FIXME: 앱 종료 처리
                     }
                 }
             }
@@ -105,7 +118,12 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
         popupAdLoader.destroy()
     }
 
-    override fun finish() {
+    /**
+     * 뒤로가기 이벤트 처리
+     *
+     * 뒤로가기 시 팝업 광고를 요청하고, 요청할 수 없는 경우에는 앱을 즉시 종료합니다.
+     */
+    private fun handleBackPress() {
         // 이미 광고가 화면에 노출 중인지 확인
         val isPopupAdShowing = supportFragmentManager.findFragmentByTag(AdFitPopupAdDialogFragment.TAG) != null
         if (isPopupAdShowing) {
@@ -120,8 +138,8 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
         // 새로운 광고 요청 시도
         val loadingStarted = loadNewAd()
         if (!loadingStarted) {
-            // 요청이 시작되지 않은 경우, 즉시 앱 종료를 처리합니다.
-            super.finish()
+            // 요청할 수 없는 경우, 앱을 즉시 종료합니다.
+            finish()
         }
     }
 
@@ -247,7 +265,8 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
             }
         }
 
-        super.finish() // FIXME: 앱 종료 처리
+        // 요청에 실패한 경우, 앱을 즉시 종료합니다.
+        finish() // FIXME: 앱 종료 처리
     }
 
     private fun toast(message: String) {

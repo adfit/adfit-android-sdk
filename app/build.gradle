@@ -3,12 +3,12 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace 'com.kakao.adfit.publisher.sample'
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.kakao.adfit.publisher.sample"
         minSdkVersion 21
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode 1
         versionName "1.0"
     }
