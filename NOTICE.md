@@ -1,10 +1,18 @@
-# OSS Notice | AdFit-Android-SDK #
+# OSS Notice | AdFit-Android-SDK-Public #
 
 This application is Copyright © Kakao Corp. All rights reserved.
 
 The following sets forth attribution notices for third party software that may be contained in this application.
 
 If you have any questions about these notices, please email us at [opensource@kakaocorp.com][opensource_kakaocorp.com]
+
+ **Android - platform - frameworks - support**
+
+https://android.googlesource.com/platform/frameworks/support
+
+Copyright 2014 The Android Open Source Project
+
+Apache License 2.0
 
  **Android - platform - libcore**
 
@@ -18,7 +26,7 @@ Apache License 2.0
 
 https://github.com/apache/commons-collections
 
-Copyright 2001-2016 The Apache Software Foundation
+Copyright 2001-2026 The Apache Software Foundation
 
 Apache License 2.0
 
@@ -34,7 +42,7 @@ Apache License 2.0
 
 https://github.com/jetbrains/kotlin
 
-Copyright 2010-2017 JetBrains s.r.o.
+Copyright 2010-2024 JetBrains s.r.o. and Kotlin Programming Language contributors.
 
 Apache License 2.0
 
@@ -50,17 +58,25 @@ Apache License 2.0
 
 https://github.com/square/okhttp
 
-Copyright 2014 Square, Inc
+Copyright 2019 Square, Inc.
 
 Apache License 2.0
+
+ **Plus plugins**
+
+[https://github.com/fluttercommunity/plus\_plugins][https_github.com_fluttercommunity_plus_plugins]
+
+Copyright 2017 The Chromium Authors. All rights reserved
+
+BSD 3-Clause "New" or "Revised" License
 
  **Sentry Java SDK**
 
 https://github.com/getsentry/sentry-java
 
-Copyright 2016 Functional Software, Inc.
+Copyright (c) 2019 Sentry
 
-Copyright 2012 Ken Cochrane and individual contributors.
+Copyright (c) 2015 Salomon BRYS for Android ANRWatchDog
 
 MIT License
 
@@ -142,6 +158,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ``````````
 
+# BSD 3-Clause "New" or "Revised" License #
+
+``````````
+Copyright (c) <year> <owner> . All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+   1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+
+   2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+
+   3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+``````````
+
 # MIT License #
 
 ``````````
@@ -158,3 +190,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 [opensource_kakaocorp.com]: mailto:opensource@kakaocorp.com
+[https_github.com_fluttercommunity_plus_plugins]: https://github.com/fluttercommunity/plus_plugins
