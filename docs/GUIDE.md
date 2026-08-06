@@ -23,20 +23,50 @@ Kotlin과 Google Play Service SDK 설정 방법에 대해서는 아래 사이트
 
 AdFit SDK를 추가하는 방법은 다음과 같습니다.
 
-1. 먼저 최상위 [`build.gradle`](https://github.com/adfit/adfit-android-sdk/blob/master/build.gradle) 파일에 Maven repository를 추가합니다.
-    ```gradle
-    allprojects {
+> 빌드 스크립트는 사용 중인 DSL에 따라 **Kotlin DSL(`build.gradle.kts`)** 또는 **Groovy DSL(`build.gradle`)** 예시 중 하나를 선택해 적용하세요.
+
+1. 먼저 `settings.gradle(.kts)` 파일의 `dependencyResolutionManagement` 하위 `repositories` 항목에 Maven repository를 추가합니다.
+
+   Kotlin DSL — `settings.gradle.kts`
+    ```kotlin
+    dependencyResolutionManagement {
         repositories {
             google()
-            jcenter()
+            mavenCentral()
+            maven { url = uri("https://devrepo.kakao.com/nexus/content/groups/public/") }
+        }
+    }
+    ```
+
+   Groovy DSL — `settings.gradle`
+    ```gradle
+    dependencyResolutionManagement {
+        repositories {
+            google()
+            mavenCentral()
             maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
         }
     }
     ```
-2. App 모듈 [`build.gradle`](https://github.com/adfit/adfit-android-sdk/blob/master/app/build.gradle) 파일에 최신 버전의 AdFit SDK를 추가합니다.
+
+   > 최상위 `build.gradle(.kts)`의 `allprojects` 하위에서 저장소를 관리하는 기존 프로젝트라면, `settings`에 추가해도 무시되므로(`RepositoriesMode` 기본값 `PREFER_PROJECT`) 해당 `allprojects`의 `repositories` 항목에 추가하세요.
+
+2. App 모듈 `build.gradle(.kts)` 파일에 최신 버전의 AdFit SDK를 추가합니다.
+
+   Kotlin DSL — `build.gradle.kts`
+    ```kotlin
+    dependencies {
+        implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
+        implementation("com.google.android.gms:play-services-ads-identifier:$play_service_version")
+
+        implementation("com.kakao.adfit:ads-base:$adfit_version")
+    }
+    ```
+
+   Groovy DSL — `build.gradle`
     ```gradle
     dependencies {
-        implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+        implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
         implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
 
         implementation "com.kakao.adfit:ads-base:$adfit_version"
@@ -48,7 +78,7 @@ AdFit SDK를 추가하는 방법은 다음과 같습니다.
 ## <del>타겟 API 레벨 28 이상 대응하기</del>
 
 <del>앱의 targetSdkVersion 설정이 Android 9(API 레벨 28) 이상인 경우, 광고 노출 및 클릭이 정상적으로 동작하기 위해서는
-일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요합니다.<del/>
+일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요합니다.</del>
 
 AdFit SDK v3.11.10 버전부터는 일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요하지 않습니다.
 
