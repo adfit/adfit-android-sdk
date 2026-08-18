@@ -66,7 +66,7 @@ class WebViewAdSampleActivity : AppCompatActivity() {
                 AdFitSdk.videoAdAutoPlayPolicy = AdFitVideoAutoPlayPolicy.ALWAYS
             }
 
-            // 와아피이 연결 상태에서만 자동 재생 허용
+            // 와이파이 연결 상태에서만 자동 재생 허용
             "WifiOnly" -> {
                 AdFitSdk.videoAdAutoPlayPolicy = AdFitVideoAutoPlayPolicy.WIFI_ONLY
             }

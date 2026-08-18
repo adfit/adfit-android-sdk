@@ -67,7 +67,7 @@ public class WebViewAdJavaSampleActivity extends AppCompatActivity {
         // 비디오 광고 자동 재생 설정 (기본값: `WIFI_ONLY`)
         if (TextUtils.equals("Always", mode)) { // 항상 자동 재생 허용
             AdFitSdk.setVideoAdAutoPlayPolicy(AdFitVideoAutoPlayPolicy.ALWAYS);
-        } else if (TextUtils.equals("WifiOnly", mode)) { // 와아피이 연결 상태에서만 자동 재생 허용
+        } else if (TextUtils.equals("WifiOnly", mode)) { // 와이파이 연결 상태에서만 자동 재생 허용
             AdFitSdk.setVideoAdAutoPlayPolicy(AdFitVideoAutoPlayPolicy.WIFI_ONLY);
         } else if (TextUtils.equals("None", mode)) { // 자동 재생을 허용하지 않음
             AdFitSdk.setVideoAdAutoPlayPolicy(AdFitVideoAutoPlayPolicy.NONE);
