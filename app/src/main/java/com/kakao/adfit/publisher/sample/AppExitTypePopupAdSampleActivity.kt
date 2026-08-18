@@ -36,7 +36,7 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_popup_ad_smaple)
+        setContentView(R.layout.activity_popup_ad_sample)
 
         /**
          * 뒤로가기 이벤트를 처리하기 위한 콜백 등록

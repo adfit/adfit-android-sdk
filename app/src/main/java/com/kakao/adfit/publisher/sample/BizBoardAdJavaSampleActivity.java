@@ -38,7 +38,7 @@ public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements A
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_bizboard_ad_smaple);
+        setContentView(R.layout.activity_bizboard_ad_sample);
 
         new WindowInsetsControllerCompat(getWindow(), getWindow().getDecorView()).setAppearanceLightStatusBars(true);
         ViewCompat.setOnApplyWindowInsetsListener(getWindow().getDecorView(), (v, windowInsets) -> {

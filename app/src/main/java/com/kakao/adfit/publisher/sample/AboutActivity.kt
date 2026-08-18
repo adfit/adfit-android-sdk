@@ -14,7 +14,7 @@ class AboutActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activie_about)
+        setContentView(R.layout.activity_about)
 
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, windowInsets ->

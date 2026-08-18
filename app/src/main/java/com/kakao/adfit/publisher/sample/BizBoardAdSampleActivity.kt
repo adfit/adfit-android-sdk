@@ -33,7 +33,7 @@ class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoad
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_bizboard_ad_smaple)
+        setContentView(R.layout.activity_bizboard_ad_sample)
 
         WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
         ViewCompat.setOnApplyWindowInsetsListener(window.decorView) { v, windowInsets ->

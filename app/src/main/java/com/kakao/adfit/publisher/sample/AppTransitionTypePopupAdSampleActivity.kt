@@ -28,7 +28,7 @@ class AppTransitionTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAd
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_popup_ad_smaple)
+        setContentView(R.layout.activity_popup_ad_sample)
 
         /**
          * 앱 전환 광고 요청을 위한 [AdFitPopupAdLoader] 생성
