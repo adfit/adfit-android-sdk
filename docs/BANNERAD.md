@@ -38,7 +38,7 @@
 [`BannerSampleActivity.kt`](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/BannerSampleActivity.kt)
 ```kotlin
 val adView: BannerAdView
-adView.setClientId("발급받은 광고단위 ID")  // 광고단위 ID 설정
+adView.setAdUnitId("발급받은 광고단위 ID")  // 광고단위 ID 설정
 adView.setAdListener(object : AdListener {  // optional :: 광고 수신 리스너 설정
 
     override fun onAdLoaded() {

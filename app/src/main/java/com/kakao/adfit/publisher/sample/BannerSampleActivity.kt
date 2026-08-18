@@ -31,7 +31,7 @@ class BannerSampleActivity : AppCompatActivity() {
         }
 
         adView = findViewById(R.id.adView) // 배너 광고 뷰
-        adView.setClientId("발급받은 광고단위 ID")  // 광고단위 ID 설정
+        adView.setAdUnitId("발급받은 광고단위 ID")  // 광고단위 ID 설정
         adView.setAdListener(object : AdListener { // 광고 수신 리스너 설정
 
             override fun onAdLoaded() {
