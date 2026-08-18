@@ -71,11 +71,11 @@ class MainActivity : AppCompatActivity() {
 
 ```kotlin
 // 자동 재생하지 않음
-AdFitSdk.mediaAutoPlayPolicy = AdFitVideoAutoPlayPolicy.NONE
+AdFitSdk.videoAdAutoPlayPolicy = AdFitVideoAutoPlayPolicy.NONE
 
 // WiFi 연결 상태에서만 자동 재생
-AdFitSdk.mediaAutoPlayPolicy = AdFitVideoAutoPlayPolicy.WIFI_ONLY
+AdFitSdk.videoAdAutoPlayPolicy = AdFitVideoAutoPlayPolicy.WIFI_ONLY
 
 // 항상 자동 재생
-AdFitSdk.mediaAutoPlayPolicy = AdFitVideoAutoPlayPolicy.ALWAYS
+AdFitSdk.videoAdAutoPlayPolicy = AdFitVideoAutoPlayPolicy.ALWAYS
 ```
