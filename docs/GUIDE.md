@@ -1,6 +1,6 @@
 ## AdFit 시작하기
 
-* 최신 버전의 AdFit SDK 사용을 권장합니다.
+* 최신 버전의 AdFit SDK 사용을 권장합니다. [![AdFit SDK](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fdevrepo.kakao.com%2Fnexus%2Fcontent%2Fgroups%2Fpublic%2Fcom%2Fkakao%2Fadfit%2Fads-base%2Fmaven-metadata.xml&query=%2Fmetadata%2Fversioning%2Flatest&label=AdFit%20SDK&color=brightgreen)](https://github.com/adfit/adfit-android-sdk/releases)
 * 최신 버전의 [Android Studio](https://developer.android.com/studio/) 사용을 권장합니다. Eclipse에 대한 기술 지원은 하지 않습니다.
 * 최신 버전의 [Kotlin](https://developer.android.com/kotlin/) 사용을 권장합니다.
 * AdFit SDK는 [Android 5.0(Lollipop, API Level 21)](https://developer.android.com/about/versions/android-5.0) 이상 기기에서 동작합니다.
@@ -52,6 +52,8 @@ AdFit SDK를 추가하는 방법은 다음과 같습니다.
    > 최상위 `build.gradle(.kts)`의 `allprojects` 하위에서 저장소를 관리하는 기존 프로젝트라면, `settings`에 추가해도 무시되므로(`RepositoriesMode` 기본값 `PREFER_PROJECT`) 해당 `allprojects`의 `repositories` 항목에 추가하세요.
 
 2. App 모듈 `build.gradle(.kts)` 파일에 최신 버전의 AdFit SDK를 추가합니다.
+
+   > 최신 버전과 변경 내역은 [릴리즈](https://github.com/adfit/adfit-android-sdk/releases) 또는 [Change Log](CHANGELOG.md)에서 확인할 수 있습니다.
 
    Kotlin DSL — `build.gradle.kts`
     ```kotlin
