@@ -75,7 +75,7 @@ nativeAdLoader.loadAd(request, object : AdFitNativeAdLoader.AdLoadListener {
 네이티브 광고 레이아웃은 서비스 컨텐츠와 어울리도록 구성되어야 하므로, 서비스에서 직접 광고 레이아웃을 구현하는 과정이 필요합니다.<br/>
 네이티브 광고 레이아웃 구성 샘플은 아래와 같습니다.<br/>
 
-<img src="https://t1.daumcdn.net/adfit_sdk/document-assets/ios/native-ad-components3.png" width="640" style="border:1px solid #aaa"/>
+<img src="https://t1.kakaocdn.net/adfit_sdk/document-assets/ios/native-ad-components3.png" width="640" style="border:1px solid #aaa"/>
 
 | 번호 | 설명                       | UI 클래스                | AdFitNativeAdLayout |
 |-----|---------------------------|------------------------|---------------------|

@@ -57,8 +57,11 @@ class MainActivity : AppCompatActivity() {
 웹 페이지 내에서 아래와 같이 AdFit Web SDK를 사용하는 스크립트를 추가하여 AdFit 광고를 송출합니다.
 
 ```javascript
-<ins class="kakao_ad_area" style="display:none;" data-ad-unit="광고단위 ID"></ins>
-<script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async></script>
+<ins class="kakao_ad_area" style="display:none;width:100%;"
+ data-ad-unit    = "광고단위 ID"
+ data-ad-width   = "광고단위 가로 사이즈"
+ data-ad-height  = "광고단위 세로 사이즈"></ins>
+<script async type="text/javascript" charset="utf-8" src="https://t1.kakaocdn.net/kas/static/ba.min.js"></script>
 ```
 
 자세한 사항은 AdFit Web SDK 가이드 문서를 참고 바랍니다.  
