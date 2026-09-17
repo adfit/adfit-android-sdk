@@ -35,6 +35,12 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
 
         adView = findViewById(R.id.adView);  // 배너 광고 뷰
         adView.setAdUnitId("발급받은 광고단위 ID");  // 광고단위 ID 설정
+
+        // (개발/테스트 중인 경우) 테스트 모드 설정
+        // 테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.
+        if (false) {
+            adView.setTestMode(true);
+        }
         adView.setAdListener(new AdListener() {  // 광고 수신 리스너 설정
 
             @Override
@@ -45,6 +51,11 @@ public class BannerJavaSampleActivity extends AppCompatActivity {
             @Override
             public void onAdFailed(int errorCode) {
                 toast("Failed to load banner :: errorCode = " + errorCode);
+            }
+
+            @Override
+            public void onAdImpression() {
+                toast("Banner is impressed");
             }
 
             @Override

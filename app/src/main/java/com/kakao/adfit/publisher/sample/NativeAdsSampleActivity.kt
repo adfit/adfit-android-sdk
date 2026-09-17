@@ -2,7 +2,6 @@ package com.kakao.adfit.publisher.sample
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -116,6 +115,16 @@ class NativeAdsSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdsLoad
              * @see [AdFitVideoAutoPlayPolicy.NONE] 자동 재생하지 않음
              */
             .setVideoAutoPlayPolicy(AdFitVideoAutoPlayPolicy.WIFI_ONLY) // 비디오 광고 자동 재생 정책 설정
+
+            /**
+             * 테스트 모드를 설정합니다.
+             *
+             * 테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.
+             * 개발/테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
+             *
+             * 기본값: false
+             */
+            .setTestModeEnabled(false) // 테스트 모드 설정
             .build()
 
         /**
@@ -155,13 +164,17 @@ class NativeAdsSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdsLoad
 
         // 2. 응답받은 광고 리스트 반복 처리
         binders.forEach { binder ->
+            // (선택사항) 광고 노출 리스너 등록
+            if ("false".toBoolean()) {
+                binder.onAdImpressionListener = AdFitNativeAdBinder.OnAdImpressionListener { view ->
+                    Toast.makeText(view.context, "광고 노출", Toast.LENGTH_SHORT).show()
+                }
+            }
+
             // (선택사항) 광고 클릭 리스너 등록
             if ("false".toBoolean()) {
-                binder.onAdClickListener = object : AdFitNativeAdBinder.OnAdClickListener {
-
-                    override fun onAdClicked(view: View) {
-                        Toast.makeText(view.context, "광고 클릭", Toast.LENGTH_SHORT).show()
-                    }
+                binder.onAdClickListener = AdFitNativeAdBinder.OnAdClickListener { view ->
+                    Toast.makeText(view.context, "광고 클릭", Toast.LENGTH_SHORT).show()
                 }
             }
 

@@ -102,6 +102,16 @@ public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements A
                  * @see [AdFitAdInfoIconPosition.RIGHT_BOTTOM] 우하단
                  */
                 .setAdInfoIconPosition(AdFitAdInfoIconPosition.RIGHT_TOP) // 광고 정보 아이콘 위치 설정 (container view 내에서의 광고 아이콘 위치)
+
+                /*
+                 * 테스트 모드를 설정합니다.
+                 *
+                 * 테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.
+                 * 개발/테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
+                 *
+                 * 기본값: false
+                 */
+                .setTestModeEnabled(false) // 테스트 모드 설정
                 .build();
 
         /*
@@ -136,8 +146,12 @@ public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements A
             return;
         }
 
-        // 광고 노출
-        nativeAdBinder = binder;
+        // (필요한 경우) 광고 노출 리스너 등록
+        if (false) {
+            binder.setOnAdImpressionListener((view) ->
+                    Toast.makeText(view.getContext(), "광고 노출", Toast.LENGTH_SHORT).show()
+            );
+        }
 
         // (필요한 경우) 광고 클릭 리스너 등록
         if (false) {
@@ -146,6 +160,8 @@ public class BizBoardAdJavaSampleActivity extends AppCompatActivity implements A
             );
         }
 
+        // 광고 노출
+        nativeAdBinder = binder;
         binder.bind(bizBoardAdTemplateLayout);
 
         bizBoardAdTemplateLayout.setVisibility(View.VISIBLE);

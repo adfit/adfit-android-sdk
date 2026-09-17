@@ -24,6 +24,7 @@ val nativeAdLoader: AdFitNativeAdLoader = AdFitNativeAdLoader.create(activity, "
 val request = AdFitNativeAdRequest.Builder()
     .setAdInfoIconPosition(AdFitAdInfoIconPosition.RIGHT_TOP) // 광고 정보 아이콘 위치 설정
     .setVideoAutoPlayPolicy(AdFitVideoAutoPlayPolicy.WIFI_ONLY) // 비디오 광고 자동 재생 정책 설정
+    .setTestModeEnabled(false) // 테스트 모드 설정 (개발/테스트 중에만 true)
     .build()
 
 nativeAdLoader.loadAd(request, object : AdFitNativeAdLoader.AdLoadListener {
@@ -57,6 +58,8 @@ nativeAdLoader.loadAd(request, object : AdFitNativeAdLoader.AdLoadListener {
   | WIFI_ONLY                | WiFi 연결 상태에만 자동 재생 |
   | ALWAYS                   | 항상 자동 재생             |
 
+* `AdFitNativeAdRequest.Builder`의 `setTestModeEnabled()`로 테스트 모드를 설정할 수 있습니다. 기본값은 `false`입니다.<br/>
+  테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다. 개발/테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
 * 요청에 성공하여 새로운 광고를 응답 받은 경우, 응답 받은 광고 소재 정보를 `AdFitNativeAdBinder`를 통해 <br/>
   `AdLoadListener.onAdLoaded()`로 전달받을 수 있습니다. <br/>
 * 요청에 실패하거나 응답 받은 소재가 없는 경우, 오류 코드(`errorCode: Int`)를 <br/>

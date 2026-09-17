@@ -39,6 +39,7 @@
 ```kotlin
 val adView: BannerAdView
 adView.setAdUnitId("발급받은 광고단위 ID")  // 광고단위 ID 설정
+adView.setTestMode(true)  // optional :: 테스트 모드 설정 (개발/테스트 중에만 사용)
 adView.setAdListener(object : AdListener {  // optional :: 광고 수신 리스너 설정
 
     override fun onAdLoaded() {
@@ -47,6 +48,10 @@ adView.setAdListener(object : AdListener {  // optional :: 광고 수신 리스�
 
     override fun onAdFailed(errorCode: Int) {
         // 배너 광고 노출 실패 시 호출
+    }
+
+    override fun onAdImpression() {
+        // 배너 광고가 노출 조건을 충족했을 때 호출
     }
 
     override fun onAdClicked() {
@@ -87,6 +92,9 @@ adView.loadAd()  // 광고 요청
   | 그 외 | 기타 오류로 광고 요청에 실패한 경우           |
 * 광고 요청에 실패한 경우, 노출되고 있던 이전 광고가 있을 경우에는 이전 광고가 계속 노출됩니다.
 * `AdFitNativeAdLoader.load()`는 동시에 하나의 요청만 처리할 수 있으며, 이전 요청이 진행 중이면 새로운 호출은 무시됩니다.
+* `BannerAdView.setTestMode(enabled: Boolean)`으로 테스트 모드를 설정할 수 있습니다. 기본값은 `false`입니다.<br/>
+  테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.<br/>
+  개발/테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
 * 광고 갱신 주기는 [AdFit 플랫폼](https://adfit.kakao.com)에서 설정 가능합니다.
 * `Activity`(또는 `Fragment`)의 [`Lifecycle`](https://developer.android.com/guide/components/activities/activity-lifecycle#lc)에 따라 <br/>
 `BannerAdView`의 `pause`/`resume`/`destroy` API를 호출하지 않을 경우, **광고 수신에 불이익을 받을 수 있습니다.**

@@ -125,6 +125,16 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
                  * @see [AdFitVideoAutoPlayPolicy.NONE] 자동 재생하지 않음
                  */
                 .setVideoAutoPlayPolicy(AdFitVideoAutoPlayPolicy.WIFI_ONLY) // 비디오 광고 자동 재생 정책 설정
+
+                /*
+                 * 테스트 모드를 설정합니다.
+                 *
+                 * 테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.
+                 * 개발/테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
+                 *
+                 * 기본값: false
+                 */
+                .setTestModeEnabled(false) // 테스트 모드 설정
                 .build();
 
         /*
@@ -179,8 +189,12 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
             nativeAdBinder.unbind();
         }
 
-        // 광고 노출
-        nativeAdBinder = binder;
+        // (필요한 경우) 광고 노출 리스너 등록
+        if (false) {
+            binder.setOnAdImpressionListener((view) ->
+                    Toast.makeText(view.getContext(), "광고 노출", Toast.LENGTH_SHORT).show()
+            );
+        }
 
         // (필요한 경우) 광고 클릭 리스너 등록
         if (false) {
@@ -189,6 +203,8 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
             );
         }
 
+        // 광고 노출
+        nativeAdBinder = binder;
         binder.bind(nativeAdLayout);
 
         // (샘플 구현용) 광고 요청 버튼 활성화
