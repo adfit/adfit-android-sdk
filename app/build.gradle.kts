@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    val adfitVersion = "3.23.1"
+    val adfitVersion = "3.23.3"
     val kotlinVersion = "2.0.21"
     val playServiceVersion = "18.0.1"
 
