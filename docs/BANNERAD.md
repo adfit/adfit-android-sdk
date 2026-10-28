@@ -60,38 +60,39 @@ adView.setAdListener(object : AdListener {  // optional :: 광고 수신 리스�
 })
 
 // Activity(또는 Fragment)의 lifecycle에 따라 호출
-lifecycle.addObserver(object : LifecycleObserver {
+lifecycle.addObserver(object : LifecycleEventObserver {
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-    fun onResume() {
-        adView.resume()
-    }
+    override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
+        when (event) {
+            Lifecycle.Event.ON_RESUME -> {
+                adView.resume()
+            }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-    fun onPause() {
-        adView.pause()
-    }
+            Lifecycle.Event.ON_PAUSE -> {
+                adView.pause()
+            }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onDestroy() {
-        adView.destroy()
+            Lifecycle.Event.ON_DESTROY -> {
+                adView.destroy()
+            }
+
+            else -> {}
+        }
     }
 })
 
 adView.loadAd()  // 광고 요청
 ```
 
-* 모든 API는 메인 스레드(UI 스레드)에서 호출하시기 바랍니다.
 * 광고 요청에 성공한 경우, 응답받은 광고가 `BannerAdView`에 노출됩니다.
 * 광고 요청에 실패한 경우, 오류 코드를 `AdListener.onAdFailed(errorCode: Int)`로 전달받을 수 있습니다.<br/>
   | Code | 발생 상황                              |
   |------|-------------------------------------|
-  | 202  | 네트워크 오류로 광고 요청에 실패한 경우        |
-  | 301  | 요청에는 성공했으나 배너 유형에 맞는 광고가 없는 경우 |
+  | 202  | 네트워크 또는 서버 오류로 광고 요청에 실패한 경우 |
+  | 301  | 광고단위 ID와 광고 유형이 맞지 않거나, 유효하지 않은 광고 응답을 받은 경우 |
   | 302  | 요청에는 성공했으나 노출 가능한 광고가 없는 경우 |
   | 그 외 | 기타 오류로 광고 요청에 실패한 경우           |
 * 광고 요청에 실패한 경우, 노출되고 있던 이전 광고가 있을 경우에는 이전 광고가 계속 노출됩니다.
-* `AdFitNativeAdLoader.load()`는 동시에 하나의 요청만 처리할 수 있으며, 이전 요청이 진행 중이면 새로운 호출은 무시됩니다.
 * `BannerAdView.setTestMode(enabled: Boolean)`으로 테스트 모드를 설정할 수 있습니다. 기본값은 `false`입니다.<br/>
   테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.<br/>
   개발/테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
