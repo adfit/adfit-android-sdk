@@ -1,9 +1,10 @@
 ## AdFit 시작하기
 
 * 최신 버전의 AdFit SDK 사용을 권장합니다. [![AdFit SDK](https://img.shields.io/badge/dynamic/xml?url=https%3A%2F%2Fdevrepo.kakao.com%2Fnexus%2Fcontent%2Fgroups%2Fpublic%2Fcom%2Fkakao%2Fadfit%2Fads-base%2Fmaven-metadata.xml&query=%2Fmetadata%2Fversioning%2Flatest&label=AdFit%20SDK&color=brightgreen)](https://github.com/adfit/adfit-android-sdk/releases)
-* 최신 버전의 [Android Studio](https://developer.android.com/studio/) 사용을 권장합니다. Eclipse에 대한 기술 지원은 하지 않습니다.
+* 최신 버전의 [Android Studio](https://developer.android.com/studio/) 사용을 권장합니다.
 * 최신 버전의 [Kotlin](https://developer.android.com/kotlin/) 사용을 권장합니다.
 * AdFit SDK는 [Android 5.0(Lollipop, API Level 21)](https://developer.android.com/about/versions/android-5.0) 이상 기기에서 동작합니다.
+* AdFit SDK의 API는 메인 스레드(UI 스레드)에서 호출하시기 바랍니다. 앱으로 전달되는 콜백(광고 수신 결과, 노출·클릭 이벤트 등)도 메인 스레드에서 호출됩니다.
 
 
 ### 광고단위 ID 발급받기
@@ -77,14 +78,6 @@ AdFit SDK를 추가하는 방법은 다음과 같습니다.
 3. 설정 후, 툴바의 Sync Project with Gradle Files를 눌러 변경사항을 반영합니다.
 
 
-## <del>타겟 API 레벨 28 이상 대응하기</del>
-
-<del>앱의 targetSdkVersion 설정이 Android 9(API 레벨 28) 이상인 경우, 광고 노출 및 클릭이 정상적으로 동작하기 위해서는
-일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요합니다.</del>
-
-AdFit SDK v3.11.10 버전부터는 일반 텍스트 트래픽을 허용하는 네트워크 보안 설정이 필요하지 않습니다.
-
-
 ## 광고 추가하기
 
 앱에 광고를 노출하기 위해서는 광고유형에 따라 앱 화면에 광고를 추가하는 과정이 필요합니다.<br/>
@@ -119,8 +112,8 @@ AdFit은 유효 광고의 100% 노출을 보장하지 않습니다. 유효 광�
 
 code | 발생 상황
 -----|--------------
-202  | 광고 요청에 실패한 경우 발생하는 에러 (보통 일시적인 네트워크 오류)
-301  | 유효하지 않은 광고 응답을 수신한 경우 발생하는 에러
+202  | 네트워크 또는 서버 오류로 광고 요청에 실패한 경우 발생하는 에러
+301  | 광고단위 ID와 광고 유형이 맞지 않거나, 유효하지 않은 광고 응답을 받은 경우 발생하는 에러
 302  | 보여줄 광고가 없는 경우 발생하는 에러 (NO_AD)
-501  | 광고 로딩에 실패한 경우 발생하는 에러
+501  | WebView 로딩 실패 등 배너 광고 렌더링에 실패한 경우 발생하는 에러
 601  | SDK 내부에서 발생한 에러
