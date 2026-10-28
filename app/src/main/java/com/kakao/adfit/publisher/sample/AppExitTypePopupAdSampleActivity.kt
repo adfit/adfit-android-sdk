@@ -65,7 +65,7 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
              * 광고 노출 빈도 제한 등으로 인해 새로운 팝업 광고를 요청할 수 없는 경우,
              * 테스트를 위해 광고 요청 제한 초기화
              *
-             * 테스트 목적으로만 제공되며, 디버그 빌드([BuildConfig.DEBUG]가 `true`인 상태)에서만 작동합니다.
+             * 테스트 목적으로만 제공되며, 앱이 디버그 가능(debuggable) 상태로 빌드됐을 때만 작동합니다.
              */
             popupAdLoader.clearRequestPoliciesForTest()
         }
@@ -183,7 +183,7 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
 
         // 이미 다른 광고를 로딩 중인지 확인
         if (popupAdLoader.isLoading) {
-            // AdFitPopupAdLoader.load()는 동시에 하나의 요청만 처리할 수 있으며, 이전 요청이 완료되기 전까지 새로운 요청은 처리되지 않습니다.
+            // AdFitPopupAdLoader.loadAd()는 동시에 하나의 요청만 처리할 수 있으며, 이전 요청이 완료되기 전까지 새로운 요청은 처리되지 않습니다.
             // 광고가 이미 로딩 중이므로, 새로운 요청을 중단합니다.
             return false
         }
