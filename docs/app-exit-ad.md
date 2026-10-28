@@ -24,7 +24,7 @@
 val popupAdLoader = AdFitPopupAdLoader.create(context, "발급받은 광고단위 ID")
 ```
 
-`AdFitPopupAdLoader`가 준비되면, **사용자가 뒤로 가기 버튼을 누르는 등 `Activity`의 `finish()` 메서드가 호출되는 시점**에 `loadAd()` 메서드를 호출하여 광고를 요청합니다.
+`AdFitPopupAdLoader`가 준비되면, **사용자가 뒤로 가기 버튼을 누르는 등 앱을 종료하려고 할 때, `Activity`를 종료(`finish()`)하기 전**에 `loadAd()` 메서드를 호출하여 광고를 요청합니다.
 
 ```kotlin
 // 앱 종료 광고 요청 시작
@@ -57,12 +57,13 @@ popupAdLoader.loadAd(
 ### 광고 요청 결과 처리
 
 `loadAd()`는 비동기로 동작하며, 결과는 `AdFitPopupAdLoader.OnAdLoadListener`의 콜백 메서드를 통해 전달됩니다.
+* 요청 불가: 요청이 제한됐거나(`isBlockedByRequestPolicy`) 이미 로딩 중(`isLoading`)이면 `loadAd()`가 `false`를 반환하며, 콜백은 호출되지 않습니다.
 * 요청 성공: 광고를 성공적으로 수신하면, `AdFitPopupAd` 객체와 함께 `onAdLoaded()` 콜백이 호출됩니다.
 * 요청 실패: 요청에 실패하거나 표시할 광고가 없으면, 오류 코드(`errorCode`)와 함께 `onAdLoadError()` 콜백이 호출됩니다. <br/>
   | Code | 발생 상황                              |
   |------|--------------------------------------|
-  | 202  | 네트워크 오류로 광고 요청에 실패한 경우       |
-  | 301  | 요청에는 성공했으나 앱 종료 광고 유형에 맞는 소재가 없는 경우 |
+  | 202  | 네트워크 또는 서버 오류로 광고 요청에 실패한 경우 |
+  | 301  | 광고단위 ID와 광고 유형이 맞지 않거나, 유효하지 않은 광고 응답을 받은 경우 |
   | 302  | 요청에는 성공했으나 노출 가능한 광고가 없는 경우 |
   | 그 외 | 기타 오류로 광고 요청에 실패한 경우           |
 
@@ -142,34 +143,30 @@ override fun onCreate(savedInstanceState: Bundle?) {
 | 이벤트 타입 상수              | 설명                                                                       |
 | :------------------------ | :------------------------------------------------------------------------ |
 | EVENT_AD_CLICKED          | 사용자가 팝업 내의 광고 소재(이미지, 텍스트 등)를 클릭했을 때 발생합니다.                  |
-| EVENT_POPUP_CANCELED      | 사용자가 팝업의 '취소' 버튼을 누르거나 '뒤로 가기' 버튼을 눌러 팝업을 취소했을 때 발생합니다.  |
+| EVENT_POPUP_CANCELED      | 사용자가 '취소' 버튼이나 팝업 바깥 영역을 눌러 닫았을 때, 또는 팝업을 표시할 수 없을 때 발생합니다. |
+| EVENT_BACK_PRESSED        | 사용자가 '뒤로 가기' 버튼을 눌러 팝업을 닫았을 때 발생합니다.                              |
 | EVENT_EXIT_CONFIRMED      | 사용자가 팝업의 '앱 종료' 버튼을 눌러 팝업을 닫았을 때 발생합니다.                       |
 
 
 ## 테스트를 위한 광고 요청 제한 초기화
 
-앱 종료 광고는 사용자의 피로도 감소와 경험 품질 유지를 위해 내부적인 빈도 제한(Frequency Capping)과 같은 요청 제한 정책을 가지고 있습니다.
-이 정책이 활성화되면 일정 시간 동안 새로운 광고가 요청되지 않습니다.
+앱 종료 광고는 사용자 피로도를 줄이기 위해 빈도 제한(Frequency Capping) 같은 요청 제한 정책을 적용합니다.
+요청이 제한되면 일정 시간 동안 새 광고를 요청할 수 없습니다.
 
-
-개발 및 테스트 단계에서는 이러한 제한 없이 광고 요청 성공/실패 흐름을 반복적으로 확인해야 할 때가 많습니다.
-`AdFitPopupAdLoader.clearRequestPoliciesForTest()`는 이러한 요청 제한 정책을 강제로 초기화하여, 즉시 광고를 다시 요청할 수 있는 상태로 만들어 줍니다.
+개발 및 테스트 중에는 광고 요청 흐름을 반복해서 확인해야 하는 경우가 많습니다.
+이때 `AdFitPopupAdLoader.clearRequestPoliciesForTest()`를 호출하면 요청 제한이 초기화되어 다시 광고를 요청할 수 있습니다.
 
 ### 사용 예시
 
-아래 코드는 `resetButton`을 클릭했을 때 `clearRequestPoliciesForTest()`를 호출하여 광고 요청 제한을 해제하는 예시입니다.
+아래는 `resetButton`을 눌렀을 때 요청 제한을 초기화하는 예시입니다.
 ```kotlin
 val resetButton = findViewById<Button>(R.id.resetButton)
 resetButton.setOnClickListener {
-    /**
-     * 빈도 제한 등으로 인해 광고 요청이 불가능한 상태일 때,
-     * 테스트를 위해 이러한 제한 정책을 초기화합니다.
-     */
     popupAdLoader.clearRequestPoliciesForTest()
 }
 ```
 
-### 주요 특징 및 주의사항
+### 주의사항
 
-* **테스트용 기능:** 이 메서드는 오직 테스트 목적으로만 제공됩니다. 프로덕션(릴리즈) 환경에서는 동작하지 않도록 설계되어 있습니다.
-* 디버그 빌드에서만 동작: `clearRequestPoliciesForTest()`는 앱이 **디버그 빌드(`BuildConfig.DEBUG`가 `true`인 상태)일 때만 작동합니다.**<br />릴리즈 빌드에서는 호출하더라도 아무런 동작을 하지 않습니다.
+* 테스트 전용 기능입니다.
+* 앱이 디버그 가능(debuggable) 상태로 빌드됐을 때만 동작하며, 릴리즈 빌드에서는 호출해도 아무 동작도 하지 않습니다.
