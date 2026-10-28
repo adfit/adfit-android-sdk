@@ -47,7 +47,7 @@ nativeAdLoader.loadAd(request, object : AdFitNativeAdLoader.AdLoadListener {
   | LEFT_TOP                | 왼쪽 상단          |
   | RIGHT_TOP               | 오른쪽 상단 (기본값) |
   | LEFT_BOTTOM             | 왼쪽 하단          |
-  | RIGHT_BOTTOM            | 오른쪽 상단         |
+  | RIGHT_BOTTOM            | 오른쪽 하단         |
 
 * `AdFitNativeAdRequest.Builder`의 `setVideoAutoPlayPolicy()`로 비디오 광고 자동 재생 정책을 설정할 수 있습니다.<br/>
   기본값은 `WIFI_ONLY`(WiFi 연결 상태에만 자동 재생)입니다.<br/>
@@ -66,11 +66,11 @@ nativeAdLoader.loadAd(request, object : AdFitNativeAdLoader.AdLoadListener {
   `AdLoadListener.onAdLoadError()`로 전달받을 수 있습니다. <br/>
   | Code | 발생 상황                              |
   |------|--------------------------------------|
-  | 202  | 네트워크 오류로 광고 요청에 실패한 경우       |
-  | 301  | 요청에는 성공했으나 네이티브 유형에 맞는 광고가 없는 경우 |
+  | 202  | 네트워크 또는 서버 오류로 광고 요청에 실패한 경우 |
+  | 301  | 광고단위 ID와 광고 유형이 맞지 않거나, 유효하지 않은 광고 응답을 받은 경우 |
   | 302  | 요청에는 성공했으나 노출 가능한 광고가 없는 경우 |
   | 그 외 | 기타 오류로 광고 요청에 실패한 경우           |
-* `AdFitNativeAdLoader.load()`는 동시에 하나의 요청만 처리할 수 있으며, 이전 요청이 진행 중이면 새로운 호출은 무시됩니다.
+* `loadAd()`는 동시에 하나의 요청만 처리하며, 이전 요청이 진행 중이면 새 요청을 무시하고 `false`를 반환합니다. 진행 여부는 `isLoading`으로 확인할 수 있습니다.
 
 
 ## 네이티브 광고 레이아웃 구성
@@ -95,14 +95,13 @@ nativeAdLoader.loadAd(request, object : AdFitNativeAdLoader.AdLoadListener {
 - 각 요소들은 위 표를 참고하여 대응하는 UI 클래스를 통해 표시되도록 구현해야 합니다.
 - "제목 텍스트"와 "미디어 소재" 요소는 필수입니다.
 - "광고 정보 아이콘 이미지"는 "광고 영역" 내에 `AdFitNativeAdRequest`에 설정한 위치에 표시됩니다.
-- 사용자가 광고임을 명확히 인지할 수 있도록 "광고", "AD", "Sponsored" 등의 텍스트를 별도로 표시해주셔야 합니다.
 - "광고 영역"은 `AdFitNativeAdView`, "미디어 소재"는 `AdFitMediaView`를 사용하셔야 합니다.
 
 
 ## 네이티브 광고 레이아웃을 SDK로 전달
 
 SDK에서는 서비스에서 구현한 레이아웃의 각 요소를 구분할 수 있도록 `AdFitNativeAdLayout`을 통해 광고 레이아웃을 전달받습니다.<br/>
-`AdFitNativeAdLayout`은 `AdFitNativeAdLayout.Budiler`를 통해 생성 가능합니다.<br/>
+`AdFitNativeAdLayout`은 `AdFitNativeAdLayout.Builder`를 통해 생성 가능합니다.<br/>
 
 ```kotlin
 // 광고 SDK에 넘겨줄 [AdFitNativeAdLayout] 정보 구성
@@ -203,6 +202,25 @@ val nativeAdLayout: AdFitNativeAdLayout =
         </LinearLayout>
     </com.kakao.adfit.ads.na.AdFitNativeAdView>
 </FrameLayout>
+```
+
+
+## 광고 노출 및 클릭 이벤트 수신
+
+`AdFitNativeAdBinder`에 리스너를 설정하여 광고 노출과 클릭 이벤트를 전달받을 수 있습니다.<br/>
+리스너는 `bind()` 호출 전에 설정하는 것을 권장합니다.
+
+[`NativeAdSampleActivity.kt`](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/NativeAdSampleActivity.kt)
+```kotlin
+// 광고 노출 이벤트
+nativeAdBinder.onAdImpressionListener = AdFitNativeAdBinder.OnAdImpressionListener { view ->
+    // TODO: 광고가 노출되었을 때의 처리
+}
+
+// 광고 클릭 이벤트
+nativeAdBinder.onAdClickListener = AdFitNativeAdBinder.OnAdClickListener { view ->
+    // TODO: 광고가 클릭되었을 때의 처리
+}
 ```
 
 

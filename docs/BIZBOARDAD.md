@@ -131,3 +131,4 @@ nativeAdBinder.unbind()
 * `bind()` 호출 시, `AdFitBizBoardAdTemplateLayout`에 광고 소재를 적용합니다.
 * `bind()` 호출 시부터 `AdFitBizBoardAdTemplateLayout`의 노출 상태를 측정하며, `unbind()`가 호출되면 측정을 중단합니다.
 * `unbind()` 호출은 필수 사항이 아닙니다.
+* 비즈보드 광고도 같은 `AdFitNativeAdBinder`를 사용하므로, 노출·클릭 이벤트(`onAdImpressionListener`·`onAdClickListener`)를 똑같이 전달받을 수 있습니다. 자세한 내용은 [광고 노출 및 클릭 이벤트 수신](NATIVEAD.md#광고-노출-및-클릭-이벤트-수신)을 참조 부탁드립니다.
