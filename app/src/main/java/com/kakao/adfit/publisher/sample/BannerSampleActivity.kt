@@ -86,21 +86,21 @@ class BannerSampleActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        // lifecycle 사용이 불가능한 경우
+        // lifecycle 사용이 불가능한 경우의 예시입니다. lifecycle을 사용하는 경우에는 이 처리가 필요하지 않습니다.
         adView.resume()
     }
 
     override fun onPause() {
         super.onPause()
 
-        // lifecycle 사용이 불가능한 경우
+        // lifecycle 사용이 불가능한 경우의 예시입니다. lifecycle을 사용하는 경우에는 이 처리가 필요하지 않습니다.
         adView.pause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
 
-        // lifecycle 사용이 불가능한 경우
+        // lifecycle 사용이 불가능한 경우의 예시입니다. lifecycle을 사용하는 경우에는 이 처리가 필요하지 않습니다.
         adView.destroy()
     }
 
