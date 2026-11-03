@@ -14,6 +14,7 @@
 
 네이티브 광고를 요청하기 위해서는 `AdFitNativeAdLoader`와 `AdFitNativeAdRequest`를 통해 가능합니다.
 
+[`NativeAdSampleActivity.kt`](../app/src/main/java/com/kakao/adfit/publisher/sample/NativeAdSampleActivity.kt)
 ```kotlin
 // AdFitNativeAdLoader 생성
 val nativeAdLoader: AdFitNativeAdLoader = AdFitNativeAdLoader.create(activity, "발급받은 광고단위 ID")
@@ -120,6 +121,7 @@ val nativeAdLayout: AdFitNativeAdLayout =
 
 ### 네이티브 광고 샘플 layout.xml
 
+[`item_native_ad.xml`](../app/src/main/res/layout/item_native_ad.xml)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -210,7 +212,7 @@ val nativeAdLayout: AdFitNativeAdLayout =
 `AdFitNativeAdBinder`에 리스너를 설정하여 광고 노출과 클릭 이벤트를 전달받을 수 있습니다.<br/>
 리스너는 `bind()` 호출 전에 설정하는 것을 권장합니다.
 
-[`NativeAdSampleActivity.kt`](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/NativeAdSampleActivity.kt)
+[`NativeAdSampleActivity.kt`](../app/src/main/java/com/kakao/adfit/publisher/sample/NativeAdSampleActivity.kt)
 ```kotlin
 // 광고 노출 이벤트
 nativeAdBinder.onAdImpressionListener = AdFitNativeAdBinder.OnAdImpressionListener { view ->
@@ -242,3 +244,4 @@ nativeAdBinder.unbind()
 * `bind()` 호출 시, `AdFitNativeAdLayout`에 광고 소재(텍스트, 이미지, 비디오 등의 리소스)를 적용합니다.
 * `bind()` 호출 시부터 `AdFitNativeAdLayout`의 노출 상태를 측정하며, `unbind()`가 호출되면 측정을 중단합니다.
 * `unbind()` 호출은 필수 사항이 아닙니다.
+* Java 코드는 [`NativeAdJavaSampleActivity.java`](../app/src/main/java/com/kakao/adfit/publisher/sample/NativeAdJavaSampleActivity.java) 파일을 참조하시기 바랍니다.

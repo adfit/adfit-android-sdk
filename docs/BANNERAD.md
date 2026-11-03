@@ -15,7 +15,7 @@
 배너 광고를 노출하기 위해서는 앱 화면에 `BannerAdView` 추가가 필요합니다.
 배너 광고를 노출할 위치에 아래와 같이 `BannerAdView`를 추가합니다.
 
-[`activity_banner_sample.xml`](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/res/layout/activity_banner_sample.xml)
+[`activity_banner_sample.xml`](../app/src/main/res/layout/activity_banner_sample.xml)
 ```xml
 <com.kakao.adfit.ads.ba.BannerAdView
     android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
 배너 광고를 요청하기 위해서는 `BannerAdView` 설정이 필요합니다.
 `BannerAdView`를 설정하고 광고를 요청하는 코드는 다음과 같습니다.
 
-[`BannerSampleActivity.kt`](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/BannerSampleActivity.kt)
+[`BannerSampleActivity.kt`](../app/src/main/java/com/kakao/adfit/publisher/sample/BannerSampleActivity.kt)
 ```kotlin
 val adView: BannerAdView
 adView.setAdUnitId("발급받은 광고단위 ID")  // 광고단위 ID 설정
@@ -101,4 +101,4 @@ adView.loadAd()  // 광고 요청
 `BannerAdView`의 `pause`/`resume`/`destroy` API를 호출하지 않을 경우, **광고 수신에 불이익을 받을 수 있습니다.**
 * [Lifecycle 라이브러리](https://developer.android.com/topic/libraries/architecture/lifecycle) 사용이 불가능한 경우,
 각 이벤트 시점에 맞는 메소드(ex. `onResume()`)를 직접 오버라이드하여 호출합니다.
-* Java 코드는 [`BannerJavaSampleActivity.java`](https://github.com/adfit/adfit-android-sdk/blob/master/app/src/main/java/com/kakao/adfit/publisher/sample/BannerJavaSampleActivity.java) 파일을 참조하시기 바랍니다.
+* Java 코드는 [`BannerJavaSampleActivity.java`](../app/src/main/java/com/kakao/adfit/publisher/sample/BannerJavaSampleActivity.java) 파일을 참조하시기 바랍니다.

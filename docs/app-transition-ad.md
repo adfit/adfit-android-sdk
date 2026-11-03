@@ -19,6 +19,7 @@
 
 먼저, `Activity`의 `onCreate()` 등 적절한 시점에서 `AdFitPopupAdLoader` 인스턴스를 생성합니다.<br />이 인스턴스는 광고를 요청하고 관리하는 역할을 합니다.
 
+[`AppTransitionTypePopupAdSampleActivity.kt`](../app/src/main/java/com/kakao/adfit/publisher/sample/AppTransitionTypePopupAdSampleActivity.kt)
 ```kotlin
 // 팝업 광고를 요청하고 관리하는 AdFitPopupAdLoader를 생성합니다.
 val popupAdLoader = AdFitPopupAdLoader.create(context, "발급받은 광고단위 ID")

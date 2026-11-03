@@ -27,6 +27,7 @@ AdFit SDK에서는 비즈보드 광고 소재에 적합한 템플릿 레이아�
 <br/>
 필요에 따라 좌우 여백(`marginHorizontal`)을 추가해서 사용하시면 됩니다. (여백 설정은 필수가 아닙니다.)
 
+[`activity_bizboard_ad_sample.xml`](../app/src/main/res/layout/activity_bizboard_ad_sample.xml)
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <com.kakao.adfit.ads.na.AdFitBizBoardAdTemplateLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -117,6 +118,7 @@ AdFit SDK에서는 비즈보드 광고 소재에 적합한 템플릿 레이아�
 
 응답 받은 `AdFitNativeAdBinder`를 `AdFitBizBoardAdTemplateLayout`에 적용하여 비즈보드 광고를 노출할 수 있습니다.
 
+[`BizBoardAdSampleActivity.kt`](../app/src/main/java/com/kakao/adfit/publisher/sample/BizBoardAdSampleActivity.kt)
 ```kotlin
 val nativeAdBinder: AdFitNativeAdBinder
 val bizBoardAdTemplateLayout: AdFitBizBoardAdTemplateLayout
@@ -132,3 +134,4 @@ nativeAdBinder.unbind()
 * `bind()` 호출 시부터 `AdFitBizBoardAdTemplateLayout`의 노출 상태를 측정하며, `unbind()`가 호출되면 측정을 중단합니다.
 * `unbind()` 호출은 필수 사항이 아닙니다.
 * 비즈보드 광고도 같은 `AdFitNativeAdBinder`를 사용하므로, 노출·클릭 이벤트(`onAdImpressionListener`·`onAdClickListener`)를 똑같이 전달받을 수 있습니다. 자세한 내용은 [광고 노출 및 클릭 이벤트 수신](NATIVEAD.md#광고-노출-및-클릭-이벤트-수신)을 참조 부탁드립니다.
+* Java 코드는 [`BizBoardAdJavaSampleActivity.java`](../app/src/main/java/com/kakao/adfit/publisher/sample/BizBoardAdJavaSampleActivity.java) 파일을 참조하시기 바랍니다.

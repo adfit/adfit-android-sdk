@@ -13,6 +13,7 @@ AdFit 광고 송출을 위해서는 우선 AdFit Android SDK 연동이 필요합
 광고를 송출하려는 `WebView`를 Main Thread 상에서 아래와 같은 설정과 함께
 `AdFitSdk.register(webView: WebView)`를 호출하여 광고 송출에 필요한 설정을 합니다.
 
+[`WebViewAdSampleActivity.kt`](../app/src/main/java/com/kakao/adfit/publisher/sample/WebViewAdSampleActivity.kt)
 ```kotlin
 import android.webkit.CookieManager
 import android.webkit.WebView
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
     }
 }
 ```
+
+* Java 코드는 [`WebViewAdJavaSampleActivity.java`](../app/src/main/java/com/kakao/adfit/publisher/sample/WebViewAdJavaSampleActivity.java) 파일을 참조하시기 바랍니다.
 
 # 광고 송출하기
 
