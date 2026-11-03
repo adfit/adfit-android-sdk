@@ -225,7 +225,7 @@ public class NativeAdJavaSampleActivity extends AppCompatActivity implements AdF
         if (errorCode == AdError.NO_AD.getErrorCode()) {
             // 요청에는 성공했으나 노출 가능한 광고가 없는 경우
         } else if (errorCode == AdError.HTTP_FAILED.getErrorCode()) {
-            // 네트워크 오류로 광고 요청에 실패한 경우
+            // 네트워크 또는 서버 오류로 광고 요청에 실패한 경우
         } else {
             // 기타 오류로 광고 요청에 실패한 경우
         }

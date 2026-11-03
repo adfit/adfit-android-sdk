@@ -207,7 +207,7 @@ class NativeAdsSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdsLoad
             }
 
             AdError.HTTP_FAILED.errorCode -> {
-                // 네트워크 오류로 광고 요청에 실패한 경우
+                // 네트워크 또는 서버 오류로 광고 요청에 실패한 경우
             }
 
             else -> {
