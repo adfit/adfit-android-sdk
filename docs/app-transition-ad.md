@@ -29,7 +29,9 @@ val popupAdLoader = AdFitPopupAdLoader.create(context, "발급받은 광고단�
 ```kotlin
 // 앱 전환 광고 요청 시작
 popupAdLoader.loadAd(
-    AdFitPopupAdRequest.build(AdFitPopupAd.Type.Transition /* 팝업 광고 타입: 앱 전환 */),
+    AdFitPopupAdRequest.build(AdFitPopupAd.Type.Transition /* 팝업 광고 타입: 앱 전환 */) {
+        setTestModeEnabled(false) // 테스트 모드 설정 (개발 및 테스트 중에만 true)
+    },
     object : AdFitPopupAdLoader.OnAdLoadListener /* 광고 요청 결과를 전달받기 위한 콜백 인터페이스 */ {
 
         override fun onAdLoaded(ad: AdFitPopupAd) {
@@ -44,6 +46,9 @@ popupAdLoader.loadAd(
     }
 )
 ```
+
+* `AdFitPopupAdRequest.Builder`의 `setTestModeEnabled()`로 테스트 모드를 설정할 수 있습니다. 기본값은 `false`입니다.<br/>
+  테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다. 개발 및 테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
 
 ### 광고 요청 전 확인 사항
 
