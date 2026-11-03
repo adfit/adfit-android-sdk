@@ -101,11 +101,11 @@ class BizBoardAdSampleActivity : AppCompatActivity(), AdFitNativeAdLoader.AdLoad
              * 테스트 모드를 설정합니다.
              *
              * 테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.
-             * 개발/테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
+             * 개발 및 테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
              *
              * 기본값: false
              */
-            .setTestModeEnabled(false) // 테스트 모드 설정
+            .setTestModeEnabled(false) // 테스트 모드 설정 (개발 및 테스트 중에만 true)
             .build()
 
         /**

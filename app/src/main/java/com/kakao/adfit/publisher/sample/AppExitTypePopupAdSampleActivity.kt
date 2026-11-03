@@ -198,7 +198,12 @@ class AppExitTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAdLoader
 
         // 새로운 광고 요청
         return popupAdLoader.loadAd(
-            AdFitPopupAdRequest.build(AdFitPopupAd.Type.Exit /* 팝업 광고 타입: 앱 종료 */),
+            AdFitPopupAdRequest.build(AdFitPopupAd.Type.Exit /* 팝업 광고 타입: 앱 종료 */) {
+                // 테스트 모드 설정 (기본값: false)
+                // 테스트 모드로 요청한 광고는 과금 및 노출 지표에서 제외됩니다.
+                // 개발 및 테스트 중에만 사용하고, 배포 시에는 반드시 해제해야 합니다.
+                setTestModeEnabled(false)
+            },
             this /* 광고 요청 결과를 전달받기 위한 콜백 인터페이스 */
         )
     }
