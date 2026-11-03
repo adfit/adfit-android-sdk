@@ -124,7 +124,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
             }
 
             AdFitPopupAdDialogFragment.EVENT_POPUP_CANCELED -> {
-                // TODO: 팝업을 취소한 경우에 대한 처리
+                // TODO: 팝업이 취소된 경우에 대한 처리
             }
 
             AdFitPopupAdDialogFragment.EVENT_POPUP_DISMISSED -> {
@@ -147,7 +147,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 | :------------------------ | :-------------------------------------------------------- |
 | EVENT_AD_CLICKED          | 사용자가 팝업 내의 광고 소재(이미지, 텍스트 등)를 클릭했을 때 발생합니다.  |
 | EVENT_BACK_PRESSED        | 사용자가 '뒤로 가기' 버튼을 눌러 팝업을 닫았을 때 발생합니다.            |
-| EVENT_POPUP_CANCELED      | 가로 모드 등으로 팝업을 표시할 수 없어 닫혔을 때 발생합니다.             |
+| EVENT_POPUP_CANCELED      | 팝업이 취소되었을 때 발생합니다. (예: 가로 모드 등으로 팝업을 표시할 수 없는 경우) |
 | EVENT_POPUP_DISMISSED     | 사용자가 '닫기' 버튼이나 팝업 바깥 영역을 눌러 팝업을 닫았을 때 발생합니다. |
 | EVENT_TODAY_DISMISSED     | 사용자가 '오늘 그만보기' 버튼을 눌러 팝업을 닫았을 때 발생합니다.         |
 

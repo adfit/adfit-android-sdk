@@ -76,7 +76,7 @@ class AppTransitionTypePopupAdSampleActivity : AppCompatActivity(), AdFitPopupAd
                 }
 
                 AdFitPopupAdDialogFragment.EVENT_POPUP_CANCELED -> {
-                    // TODO: 팝업을 취소한 경우에 대한 처리
+                    // TODO: 팝업이 취소된 경우에 대한 처리
                     toast("팝업 취소")
                 }
 
