@@ -121,3 +121,20 @@ code | 발생 상황
 302  | 요청에는 성공했으나 노출 가능한 광고가 없는 경우 발생하는 에러 (NO_AD)
 501  | WebView 로딩 실패 등 배너 광고 렌더링에 실패한 경우 발생하는 에러
 601  | SDK 내부에서 발생한 에러
+
+### Q4. ProGuard(R8)를 적용할 때 별도 설정이 필요한가요?
+
+필요하지 않습니다. AdFit SDK에는 Consumer ProGuard Rules가 포함되어 있어,
+앱에서 R8(`minifyEnabled`/`isMinifyEnabled`)을 적용하면 자동으로 함께 반영됩니다.
+앱의 `proguard-rules.pro`에 AdFit 관련 규칙을 추가하지 않으셔도 됩니다.
+
+### Q5. 앱 매니페스트에 권한을 추가해야 하나요?
+
+필요하지 않습니다. AdFit SDK에 필요한 아래 권한은 SDK의 매니페스트에 포함되어 있어, 빌드 시 앱의 매니페스트에 자동으로 병합됩니다.
+* `android.permission.INTERNET`
+* `android.permission.ACCESS_NETWORK_STATE`
+* `com.google.android.gms.permission.AD_ID` (광고 ID)
+
+> 위 권한은 SDK 버전에 따라 추가되거나 삭제될 수 있습니다.
+
+AdFit SDK를 사용하면 앱 매니페스트에 `AD_ID` 권한이 포함되므로, Google Play Console에서 광고 ID 사용 여부를 선언할 때 이 점을 반영하시기 바랍니다.
