@@ -37,9 +37,11 @@ dependencies {
     val kotlinVersion = "2.0.21"
     val playServiceVersion = "18.0.1"
 
-    // required :: AdFit SDK 연동을 위해서는 필수 사항
+    // recommended :: AdFit SDK 추가 시 함께 추가되는 의존성으로, 최신 버전 사용을 권장
     implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
     implementation("com.google.android.gms:play-services-ads-identifier:$playServiceVersion")
+
+    // required :: AdFit SDK
     implementation("com.kakao.adfit:ads-base:$adfitVersion")
 
     // optional :: 샘플 구현용으로 선택 사항

@@ -16,12 +16,6 @@
 
 ### 프로젝트에 AdFit SDK 추가하기
 
-AdFit SDK를 사용하기 위해서는 Kotlin과 Google Play Service SDK에 대한 설정이 필요합니다.
-Kotlin과 Google Play Service SDK 설정 방법에 대해서는 아래 사이트와 샘플 프로젝트를 참고 부탁드립니다.
-* Kotlin 설정 방법: [https://kotlinlang.org/docs/tutorials/kotlin-android.html](https://kotlinlang.org/docs/tutorials/kotlin-android.html)
-* 기존 앱에 Kotlin 설정 방법: [https://developer.android.com/kotlin/add-kotlin](https://developer.android.com/kotlin/add-kotlin)
-* Google Play Service SDK 설정 방법: [https://developers.google.com/android/guides/setup](https://developers.google.com/android/guides/setup)
-
 AdFit SDK를 추가하는 방법은 다음과 같습니다.
 
 > 빌드 스크립트는 사용 중인 DSL에 따라 **Kotlin DSL(`build.gradle.kts`)** 또는 **Groovy DSL(`build.gradle`)** 예시 중 하나를 선택해 적용하세요.
@@ -56,12 +50,20 @@ AdFit SDK를 추가하는 방법은 다음과 같습니다.
 
    > 최신 버전과 변경 내역은 [릴리즈](https://github.com/adfit/adfit-android-sdk/releases) 또는 [Change Log](CHANGELOG.md)에서 확인할 수 있습니다.
 
+   AdFit SDK를 추가하면 Kotlin 표준 라이브러리(`kotlin-stdlib`)와 Google Play 서비스 광고 ID 라이브러리(`play-services-ads-identifier`)도 함께 추가됩니다.
+   최신 버전 사용을 권장하며, 아래 예시처럼 버전을 지정해 추가할 수 있습니다. 버전과 설정 방법은 아래 문서를 참고하시기 바랍니다.
+   * Kotlin 설정 방법: [https://kotlinlang.org/docs/tutorials/kotlin-android.html](https://kotlinlang.org/docs/tutorials/kotlin-android.html)
+   * 기존 앱에 Kotlin 설정 방법: [https://developer.android.com/kotlin/add-kotlin](https://developer.android.com/kotlin/add-kotlin)
+   * Google Play Service SDK 설정 방법: [https://developers.google.com/android/guides/setup](https://developers.google.com/android/guides/setup)
+
    Kotlin DSL — `build.gradle.kts`
     ```kotlin
     dependencies {
+        // recommended :: AdFit SDK 추가 시 함께 추가되는 의존성으로, 최신 버전 사용을 권장
         implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version")
         implementation("com.google.android.gms:play-services-ads-identifier:$play_service_version")
 
+        // required :: AdFit SDK
         implementation("com.kakao.adfit:ads-base:$adfit_version")
     }
     ```
@@ -69,9 +71,11 @@ AdFit SDK를 추가하는 방법은 다음과 같습니다.
    Groovy DSL — `build.gradle`
     ```gradle
     dependencies {
+        // recommended :: AdFit SDK 추가 시 함께 추가되는 의존성으로, 최신 버전 사용을 권장
         implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
         implementation "com.google.android.gms:play-services-ads-identifier:$play_service_version"
 
+        // required :: AdFit SDK
         implementation "com.kakao.adfit:ads-base:$adfit_version"
     }
     ```
