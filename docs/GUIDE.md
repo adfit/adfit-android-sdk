@@ -50,7 +50,7 @@ AdFit SDK를 추가하는 방법은 다음과 같습니다.
 
    > 최신 버전과 변경 내역은 [릴리즈](https://github.com/adfit/adfit-android-sdk/releases) 또는 [Change Log](CHANGELOG.md)에서 확인할 수 있습니다.
 
-   AdFit SDK를 추가하면 Kotlin 표준 라이브러리(`kotlin-stdlib`)와 Google Play 서비스 광고 ID 라이브러리(`play-services-ads-identifier`)도 함께 추가됩니다.
+   AdFit SDK를 추가하면 Kotlin 표준 라이브러리(`kotlin-stdlib`)와 Google Play 서비스 광고 ID 라이브러리(`play-services-ads-identifier`) 등 SDK가 사용하는 라이브러리도 함께 추가됩니다.
    최신 버전 사용을 권장하며, 아래 예시처럼 버전을 지정해 추가할 수 있습니다. 버전과 설정 방법은 아래 문서를 참고하시기 바랍니다.
    * Kotlin 설정 방법: [https://kotlinlang.org/docs/tutorials/kotlin-android.html](https://kotlinlang.org/docs/tutorials/kotlin-android.html)
    * 기존 앱에 Kotlin 설정 방법: [https://developer.android.com/kotlin/add-kotlin](https://developer.android.com/kotlin/add-kotlin)
